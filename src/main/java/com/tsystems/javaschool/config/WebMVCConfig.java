@@ -49,7 +49,7 @@ public class WebMVCConfig implements WebMvcConfigurer, ApplicationContextAware {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/view/thymeleaf/");
+        templateResolver.setPrefix("/WEB-INF/pages/");
         templateResolver.setSuffix(".html");
         templateResolver.setCacheable(false);
         templateResolver.setTemplateMode(TemplateMode.HTML);
@@ -66,10 +66,10 @@ public class WebMVCConfig implements WebMvcConfigurer, ApplicationContextAware {
         registry.addViewController("/").setViewName("index");
     }
 
-    @Override
+   /* @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**", "/webjars/**")
                 .addResourceLocations("/resources/", "/webjars/");
-    }
+    }*/
 
 }
