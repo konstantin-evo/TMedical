@@ -17,4 +17,7 @@ public class Patient {
 
     @OneToMany(mappedBy = "patient_id")
     private List<Insurance> Insurances;
+
+    @OneToMany(mappedBy = "patient_id")
+    private List<Treatment> Treatments;
 }
