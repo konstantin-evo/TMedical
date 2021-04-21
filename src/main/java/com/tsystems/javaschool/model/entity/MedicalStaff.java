@@ -23,9 +23,9 @@ public class MedicalStaff {
     @Column(name = "is_deleted", columnDefinition = "boolean default false")
     private boolean is_deleted;
 
-    @Column(name = "USERNAME")
+    @Column(name = "USERNAME", nullable = false)
     private String username;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 }
