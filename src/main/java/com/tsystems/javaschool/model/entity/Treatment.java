@@ -44,4 +44,7 @@ public class Treatment {
     @OneToOne
     @JoinColumn(name = "doctor_id", nullable = false)
     private MedicalStaff doctor;
+
+    @OneToMany(mappedBy = "treatment")
+    private List<Therapy> Therapies;
 }
