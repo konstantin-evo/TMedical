@@ -1,6 +1,10 @@
 package com.tsystems.javaschool.model.entity;
 
 import com.tsystems.javaschool.model.entity.enums.Gender;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -8,6 +12,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "user")
+@Getter @Setter @NoArgsConstructor @EqualsAndHashCode
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

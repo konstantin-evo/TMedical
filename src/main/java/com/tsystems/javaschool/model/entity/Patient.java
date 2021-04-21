@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "patient")
+@Getter @Setter @NoArgsConstructor @EqualsAndHashCode
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

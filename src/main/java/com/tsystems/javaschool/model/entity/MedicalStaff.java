@@ -1,10 +1,16 @@
 package com.tsystems.javaschool.model.entity;
 
 import com.tsystems.javaschool.model.entity.enums.Role;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "med_stuff")
+@Getter @Setter @NoArgsConstructor @EqualsAndHashCode
 public class MedicalStaff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
