@@ -46,5 +46,5 @@ public class Treatment {
     private MedicalStaff doctor;
 
     @OneToMany(mappedBy = "treatment")
-    private List<Therapy> Therapies;
+    private List<Therapy> therapies;
 }

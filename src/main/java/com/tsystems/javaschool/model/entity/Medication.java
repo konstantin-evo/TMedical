@@ -24,5 +24,5 @@ public class Medication {
     private String name;
 
     @OneToMany(mappedBy = "medication")
-    private List<Therapy> Therapies;
+    private List<Therapy> therapies;
 }

@@ -37,12 +37,12 @@ public class Therapy {
     @Min(0)
     private int number;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "treat_id")
     private Treatment treatment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medication")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "medication_id")
     private Medication medication;
 
     @OneToMany(mappedBy = "therapy")
