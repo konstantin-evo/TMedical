@@ -13,9 +13,9 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "patient_id")
+    @OneToMany(mappedBy = "id_user")
     private List<Insurance> Insurances;
 
-    @OneToMany(mappedBy = "patient_id")
+    @OneToMany(mappedBy = "id_user")
     private List<Treatment> Treatments;
 }

@@ -40,4 +40,7 @@ public class Therapy {
     @JoinColumn(name = "treat_id")
     private Treatment treatment;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "medication")
+    private Medication medication;
 }
