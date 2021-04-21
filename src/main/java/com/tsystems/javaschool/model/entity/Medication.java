@@ -1,6 +1,6 @@
 package com.tsystems.javaschool.model.entity;
 
-import com.tsystems.javaschool.model.entity.enums.Treatment;
+import com.tsystems.javaschool.model.entity.enums.TreatmentType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +17,7 @@ public class Medication {
 
     @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Treatment type;
+    private TreatmentType type;
 
     @Column(name = "name", nullable = false)
     @Size(min = 1, max = 25)

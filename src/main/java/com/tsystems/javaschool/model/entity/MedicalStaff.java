@@ -32,4 +32,7 @@ public class MedicalStaff {
 
     @OneToMany(mappedBy = "doctor_id")
     private List<Treatment> Treatments;
+
+    @OneToMany(mappedBy = "nurse")
+    private List<TherapyCase> TherapyCases;
 }

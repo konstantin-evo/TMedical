@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "therapy")
@@ -43,4 +44,7 @@ public class Therapy {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medication")
     private Medication medication;
+
+    @OneToMany(mappedBy = "therapy")
+    private List<TherapyCase> TherapyCases;
 }
