@@ -30,9 +30,13 @@ public class MedicalStaff {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "doctor_id")
-    private List<Treatment> Treatments;
+    @OneToMany(mappedBy = "doctor")
+    private List<Treatment> treatments;
 
     @OneToMany(mappedBy = "nurse")
-    private List<TherapyCase> TherapyCases;
+    private List<TherapyCase> therapyCases;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_user")
+    private User user;
 }

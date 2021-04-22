@@ -28,7 +28,7 @@ public class Insurance {
     @Column(name = "end_date", nullable = false)
     private LocalDate end_date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_id")
-    private Patient patient_id;
+    private Patient patient;
 }

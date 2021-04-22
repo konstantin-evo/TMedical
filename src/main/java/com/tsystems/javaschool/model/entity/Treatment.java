@@ -37,12 +37,12 @@ public class Treatment {
     @Column(name = "end_date", nullable = false)
     private LocalDate end_date;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
-    @OneToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "doctor_id")
     private MedicalStaff doctor;
 
     @OneToMany(mappedBy = "treatment")

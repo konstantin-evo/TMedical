@@ -13,9 +13,14 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "id_user")
-    private List<Insurance> Insurances;
+    @OneToMany(mappedBy = "patient")
+    private List<Insurance> insurances;
 
-    @OneToMany(mappedBy = "id_user")
-    private List<Treatment> Treatments;
+    @OneToMany(mappedBy = "patient")
+    private List<Treatment> treatments;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_user")
+    private User user;
+
 }

@@ -26,8 +26,8 @@ public class TherapyCase {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Column(name = "time", nullable = false)
-    private Clock time;
+//    @Column(name = "time", nullable = false)
+//    private Clock time;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nurse_id", nullable = false)

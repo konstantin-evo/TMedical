@@ -45,11 +45,10 @@ public class User {
     @Size(min = 1, max = 45)
     private String email;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "user")
     private Patient patient;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "user")
     private MedicalStaff med_staff;
+
 }
