@@ -43,7 +43,7 @@ public class Treatment {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "doctor_id")
-    private MedicalStaff doctor;
+    private UserEntity doctor;
 
     @OneToMany(mappedBy = "treatment")
     private List<Therapy> therapies;

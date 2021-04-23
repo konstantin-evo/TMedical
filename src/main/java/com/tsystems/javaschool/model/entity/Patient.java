@@ -21,6 +21,6 @@ public class Patient {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_user")
-    private User user;
+    private UserEntity user;
 
 }

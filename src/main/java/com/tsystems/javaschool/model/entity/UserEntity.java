@@ -1,6 +1,8 @@
 package com.tsystems.javaschool.model.entity;
 
 import com.tsystems.javaschool.model.entity.enums.Gender;
+import com.tsystems.javaschool.model.entity.enums.Role;
+import com.tsystems.javaschool.model.entity.enums.TreatmentType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +11,12 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
 @Getter @Setter @NoArgsConstructor @EqualsAndHashCode
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -45,10 +48,24 @@ public class User {
     @Size(min = 1, max = 45)
     private String email;
 
+    @Column(name = "password")
+    @Size(min = 1, max = 45)
+    private String password;
+
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(name = "enabled", columnDefinition = "boolean default true")
+    private boolean enabled;
+
     @OneToOne(mappedBy = "user")
     private Patient patient;
 
-    @OneToOne(mappedBy = "user")
-    private MedicalStaff med_staff;
+    @OneToMany(mappedBy = "doctor")
+    private List<Treatment> treatments;
+
+    @OneToMany(mappedBy = "nurse")
+    private List<TherapyCase> therapyCases;
 
 }
