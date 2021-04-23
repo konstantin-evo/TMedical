@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.Clock;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "therapy_case")
@@ -26,8 +27,8 @@ public class TherapyCase {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-//    @Column(name = "time", nullable = false)
-//    private Clock time;
+    @Column(name = "time", nullable = false)
+    private LocalTime time;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nurse_id", nullable = false)
