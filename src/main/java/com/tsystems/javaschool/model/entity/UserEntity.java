@@ -59,6 +59,10 @@ public class UserEntity {
     @Column(name = "enabled", columnDefinition = "boolean default true")
     private boolean enabled;
 
+    public String getEmail() {
+        return email;
+    }
+
     @OneToOne(mappedBy = "user")
     private Patient patient;
 
