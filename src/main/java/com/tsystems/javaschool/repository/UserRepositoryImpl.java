@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.repository;
 
+import com.tsystems.javaschool.dao.interfaces.UserRepository;
 import com.tsystems.javaschool.model.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
