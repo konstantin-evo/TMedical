@@ -1,4 +1,4 @@
-package com.tsystems.javaschool.repository;
+package com.tsystems.javaschool.dao.interfaces;
 
 import com.tsystems.javaschool.model.entity.UserEntity;
 
@@ -18,10 +18,9 @@ public interface UserRepository {
 
     /**
      * Find by email user entity.
-     * @param email the login
+     * @param email the email
      * @return the user entity
      */
-
     UserEntity findByEmail(String email);
 
     /**
@@ -47,5 +46,4 @@ public interface UserRepository {
      * @return the list
      */
     Collection<UserEntity> findRolesByEmail(String email);
-
 }
