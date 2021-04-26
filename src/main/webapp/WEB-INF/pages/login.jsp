@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,6 +38,29 @@
 <body class="text-center">
 
 <main class="form-signin">
+    <div class="container container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h1>Log In</h1>
+                <form action="<c:url value="/login"/>" method="post">
+                    <div class="form-group">
+                        <label for="login" class="control-label">Login
+                            <input id="login" type="text" placeholder="Enter login" name="username"/>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password
+                            <input id="password" type="password" placeholder="Enter password" name="password"/>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn-lg btn-success btn-block" value="Log in!"/>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
     <form>
         <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
