@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.List;
 
+@Repository
 public class TherapyRepositoryImpl implements TherapyRepository {
     private SessionFactory session;
 

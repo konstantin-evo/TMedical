@@ -1,7 +1,6 @@
 package com.tsystems.javaschool.dao.interfaces;
 
 import com.tsystems.javaschool.model.entity.Patient;
-import com.tsystems.javaschool.model.entity.UserEntity;
 
 import java.time.LocalDate;
 import java.util.List;
