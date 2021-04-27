@@ -47,7 +47,7 @@ public class TreatmentRepositoryImpl implements TreatmentRepository {
     public Collection<Treatment> findTreatmentByDoctorId(int doctor_id) {
         Query query = (Query) session.getCurrentSession()
                 .createQuery("FROM Treatment AS t WHERE t.doctor = :doctor_id")
-                .setParameter("doctor_id", doctor_id).getSingleResult();
+                .setParameter("doctor_id", doctor_id);
 
         return query.list();
     }

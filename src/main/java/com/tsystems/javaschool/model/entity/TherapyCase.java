@@ -35,6 +35,6 @@ public class TherapyCase {
     private UserEntity nurse;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "case_id", nullable = false)
+    @JoinColumn(name = "therapy_id", nullable = false)
     private Therapy therapy;
 }

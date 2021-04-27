@@ -26,6 +26,7 @@ public class MedicamentationRepositoryImpl implements MedicamentationRepository 
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Medication> findMedicationByType(String type) {
         return (List<Medication>) session.getCurrentSession()
                 .createQuery("FROM Medication AS m WHERE m.type = :type")
@@ -33,6 +34,7 @@ public class MedicamentationRepositoryImpl implements MedicamentationRepository 
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Medication findMedicationByTherapy(Therapy therapy) {
         return (Medication) session.getCurrentSession()
                 .createQuery("FROM Medication AS m JOIN Therapy AS t ON m.id = t.medication.id WHERE t.id = :therapy")
@@ -40,6 +42,7 @@ public class MedicamentationRepositoryImpl implements MedicamentationRepository 
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Medication findMedicationByName(String name) {
         return (Medication) session.getCurrentSession()
                 .createQuery("FROM Medication AS m WHERE m.name = :name")
