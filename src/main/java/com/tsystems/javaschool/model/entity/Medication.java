@@ -19,7 +19,7 @@ public class Medication {
     @Enumerated(EnumType.STRING)
     private TreatmentType type;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique=true)
     @Size(min = 1, max = 25)
     private String name;
 
