@@ -1,6 +1,5 @@
 package com.tsystems.javaschool.dao;
 
-import com.tsystems.javaschool.model.entity.Treatment;
 import com.tsystems.javaschool.model.entity.UserEntity;
 import com.tsystems.javaschool.dao.interfaces.UserRepository;
 import org.hibernate.SessionFactory;
@@ -8,13 +7,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import java.util.Collection;
 import java.util.List;
 
 @Repository
