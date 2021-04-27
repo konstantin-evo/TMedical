@@ -20,14 +20,14 @@ public interface TreatmentRepository {
      * @param patient_id the email
      * @return the List<Treatment> entities
      */
-    Collection<Treatment> findByUserId(int patient_id);
+    Collection<Treatment> findTreatmentByPatientId(int patient_id);
 
     /**
      * Find Treatment by doctor id.
      * @param doctor_id the email
      * @return the List<Treatment> entities
      */
-    Collection<Treatment> findByDoctorId(int doctor_id);
+    Collection<Treatment> findTreatmentByDoctorId(int doctor_id);
 
     /**
      * Add treatment entity.
@@ -41,6 +41,5 @@ public interface TreatmentRepository {
      * @param treatment the treatment entity
      * @return the treatment entity
      */
-    void update(Treatment treatment);
 
 }

@@ -32,27 +32,31 @@ public class TreatmentRepositoryImpl implements TreatmentRepository {
     @Override
     public Treatment findById(int id) {
         return (Treatment) session.getCurrentSession()
-                .createQuery("FROM Treatment WHERE id = :id")
+                .createQuery("FROM Treatment AS t WHERE t.id = :id")
                 .setParameter("id", id).getSingleResult();
     }
 
     @Override
-    public Collection<Treatment> findByUserId(int patient_id) {
-        return null;
+    public Collection<Treatment> findTreatmentByPatientId(int patient_id) {
+        Query query = (Query) session.getCurrentSession()
+                .createQuery("FROM Treatment AS t WHERE t.patient = :patient_id")
+                .setParameter("patient_id", patient_id).getSingleResult();
+
+        return query.list();
     }
 
     @Override
-    public Collection<Treatment> findByDoctorId(int doctor_id) {
-        return null;
+    public Collection<Treatment> findTreatmentByDoctorId(int doctor_id) {
+        Query query = (Query) session.getCurrentSession()
+                .createQuery("FROM Treatment AS t WHERE t.doctor = :doctor_id")
+                .setParameter("doctor_id", doctor_id).getSingleResult();
+
+        return query.list();
     }
 
     @Override
     public void add(Treatment treatment) {
-
+        session.getCurrentSession().save(treatment);
     }
 
-    @Override
-    public void update(Treatment treatment) {
-
-    }
 }
