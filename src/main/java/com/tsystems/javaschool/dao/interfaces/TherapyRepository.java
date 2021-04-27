@@ -1,7 +1,6 @@
 package com.tsystems.javaschool.dao.interfaces;
 
 import com.tsystems.javaschool.model.entity.Therapy;
-import com.tsystems.javaschool.model.entity.Treatment;
 
 import java.util.Collection;
 

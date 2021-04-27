@@ -19,7 +19,7 @@ public class Insurance {
     @Column(name = "insurance_name", nullable = false)
     private String name;
 
-    @Column(name = "insurance_number", nullable = false)
+    @Column(name = "insurance_number", nullable = false, unique=true)
     private String number;
 
     @Column(name = "start_date", nullable = false)

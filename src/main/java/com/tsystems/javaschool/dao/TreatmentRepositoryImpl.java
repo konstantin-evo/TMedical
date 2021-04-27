@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.List;
 
 @Repository
-@Transactional
 public class TreatmentRepositoryImpl implements TreatmentRepository {
 
     private SessionFactory session;
