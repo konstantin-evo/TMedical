@@ -25,8 +25,7 @@ public class TreatmentRepositoryImpl implements TreatmentRepository {
     @Override
     public List<Treatment> findAll() {
         Query query = session.getCurrentSession().createQuery("from Treatment");
-        List list = query.list();
-        return list;
+        return query.list();
     }
 
     @Override
@@ -40,7 +39,7 @@ public class TreatmentRepositoryImpl implements TreatmentRepository {
     public Collection<Treatment> findTreatmentByPatientId(int patient_id) {
         Query query = (Query) session.getCurrentSession()
                 .createQuery("FROM Treatment AS t WHERE t.patient = :patient_id")
-                .setParameter("patient_id", patient_id).getSingleResult();
+                .setParameter("patient_id", patient_id);
 
         return query.list();
     }
