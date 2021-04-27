@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PatientRepository {
 
-    List<UserEntity> findAllPatient();
+    List<Patient> findAllPatient();
 
     /**
      * Find Patient by id.
