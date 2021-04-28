@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Index</title>
+</head>
+<body>
+
+<div th:each="patient : ${patient}">
+  <a th:href="@{/patient/{id}(id=${patient.getId()})}" th:text="${patient.getName()}">user</a>
+</div>
+
+</body>
+</html>
