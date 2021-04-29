@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tsystems.javaschool.model.entity.UserEntity;
 import com.tsystems.javaschool.dao.interfaces.UserRepository;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -21,26 +22,23 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRepository.getRole());
+        return Arrays.asList(authority);
+    }
 
     @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserEntity userEntity = new UserEntity();
-        try {
-            userEntity = userRepository.findByEmail(email);
-        } catch (Exception e) {
-            log.error("Error getting user by email", e);
+    public UserDetails loadUserByUsername(String email)
+            throws UsernameNotFoundException {
+        UserEntity user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("Could not find user");
         }
 
-        if (userEntity.getEmail() == null) {
-            throw new UsernameNotFoundException("Not found: " + email);
-        }
-        return new User(
-                userEntity.getEmail(),
-                userEntity.getPassword(),
-                mapRolesToAuthorities(userEntity)
-        );
+        return new MyUserDetails(user);
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(UserEntity userEntity) {

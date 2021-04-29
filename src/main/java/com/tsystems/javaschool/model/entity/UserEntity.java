@@ -55,7 +55,6 @@ public class UserEntity {
     @Column(name = "enabled", columnDefinition = "boolean default true")
     private boolean enabled;
 
-
     @OneToOne(mappedBy = "user")
     private Patient patient;
 
