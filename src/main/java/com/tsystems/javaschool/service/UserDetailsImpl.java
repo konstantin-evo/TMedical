@@ -1,4 +1,4 @@
-package com.tsystems.javaschool.service.implementation;
+package com.tsystems.javaschool.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ public class UserDetailsImpl implements UserDetailsService {
         try {
             userEntity = userRepository.findByEmail(email);
         } catch (Exception e) {
-            log.error("Error getting user by login", e);
+            log.error("Error getting user by email", e);
         }
 
         if (userEntity.getEmail() == null) {

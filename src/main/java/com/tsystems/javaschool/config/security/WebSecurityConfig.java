@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -54,21 +55,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                .and()
+                    .csrf()
+                    .ignoringAntMatchers("/admin/**")
+                .and()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/routes/{id}/**", "/routes/{id}").hasAnyRole("NURCE", "DOCTOR")
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .and().formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .successHandler(successHandler())
-                .and().logout()
-                .invalidateHttpSession(true)
-                .permitAll()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/");
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/patient").hasAnyRole("NURCE", "DOCTOR")
+                    .antMatchers("/checkout/**").hasAuthority("CUSTOMER")
+                    .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .usernameParameter("email")
+                    .loginProcessingUrl("/authenticate-user")
+                    .defaultSuccessUrl("/patient/index")
+                    .permitAll()
+                .and()
+                    .logout()
+                    .permitAll()
+                    .logoutUrl("/logout")
+                    .invalidateHttpSession(true)
+                .and()
+                    .exceptionHandling()
+                    .accessDeniedPage("/access-denied");
     }
 
 }
