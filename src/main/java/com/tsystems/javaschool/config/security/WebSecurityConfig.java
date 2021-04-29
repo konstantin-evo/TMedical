@@ -1,6 +1,7 @@
 package com.tsystems.javaschool.config.security;
 
 import com.tsystems.javaschool.config.handler.LoginSuccess;
+import com.tsystems.javaschool.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -28,6 +28,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("userDetailsImpl")
     private UserDetailsService userDetailsService;
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsImpl();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -63,8 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                     .antMatchers("/").permitAll()
-                    .antMatchers("/patient").hasAnyRole("NURCE", "DOCTOR")
-                    .antMatchers("/checkout/**").hasAuthority("CUSTOMER")
+                    .antMatchers("/patient/**").permitAll()
+                    //.antMatchers("/patient").hasAnyRole("NURSE", "DOCTOR")
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .and()
                 .formLogin()
