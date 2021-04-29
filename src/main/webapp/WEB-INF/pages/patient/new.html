@@ -100,7 +100,43 @@
               </div>
             </div>
 
-          <button class="w-75 btn btn-primary btn-lg" type="submit" style="margin-left: auto; margin-right: auto">Confirm</button>
+            <div class="text-center">
+              <h4 >Insurance Company</h4>
+              <p class="lead" style="margin-top: 0px">Please complete patient insurance information if available.</p>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="insurance" class="form-label">Name</label>
+              <select class="form-select" id="insurance" required>
+                <option value="">Choose...</option>
+                <option>Alliance</option>
+                <option>Alpha Insurance</option>
+                <option>Reso Guarantee</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select an insurance company.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="iNumber" class="form-label">Number</label>
+              <input type="text" class="form-control" id="iNumber" placeholder="">
+              <div class="invalid-feedback">
+                Please enter a insurance number.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="istartdate" class="form-label">Start Date</label>
+              <input type="date" id="istartdate" class="form-control" required/>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="ienddate" class="form-label">End Date</label>
+              <input type="date" id="ienddate" class="form-control" required/>
+            </div>
+
+          <button class="w-50 btn btn-primary btn-lg" type="submit" style="margin-left: auto; margin-right: auto">Confirm</button>
         </form>
       </div>
     </div>
@@ -113,7 +149,7 @@
 
 
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="form-validation.js"></script>
+
 </body>
 </html>
