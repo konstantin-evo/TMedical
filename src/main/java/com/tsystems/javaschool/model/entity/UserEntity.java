@@ -2,11 +2,7 @@ package com.tsystems.javaschool.model.entity;
 
 import com.tsystems.javaschool.model.entity.enums.Gender;
 import com.tsystems.javaschool.model.entity.enums.Role;
-import com.tsystems.javaschool.model.entity.enums.TreatmentType;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -59,9 +55,6 @@ public class UserEntity {
     @Column(name = "enabled", columnDefinition = "boolean default true")
     private boolean enabled;
 
-    public String getEmail() {
-        return email;
-    }
 
     @OneToOne(mappedBy = "user")
     private Patient patient;

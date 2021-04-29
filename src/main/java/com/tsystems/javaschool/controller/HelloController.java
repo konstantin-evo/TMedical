@@ -21,7 +21,6 @@ public class HelloController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
-
         return "login";
     }
 
@@ -31,6 +30,5 @@ public class HelloController {
         List<UserEntity> allPatient = userRepository.findAll();
         return allPatient;
     }
-
 
 }
