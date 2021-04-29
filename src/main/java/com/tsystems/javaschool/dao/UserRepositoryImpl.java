@@ -59,4 +59,10 @@ public class UserRepositoryImpl implements UserRepository {
 
         return query.list();
     }
+
+    @Override
+    public String getRole() {
+        return String.valueOf(session.getCurrentSession()
+                .createQuery("SELECT role FROM UserEntity"));
+    }
 }

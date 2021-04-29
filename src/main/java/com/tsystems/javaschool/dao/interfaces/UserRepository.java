@@ -46,4 +46,6 @@ public interface UserRepository {
      * @return the list
      */
     Collection<UserEntity> findRolesByEmail(String email);
+
+    String getRole();
 }
