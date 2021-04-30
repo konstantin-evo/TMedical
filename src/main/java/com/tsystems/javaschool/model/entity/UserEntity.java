@@ -45,7 +45,7 @@ public class UserEntity {
     private String email;
 
     @Column(name = "password")
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 360)
     private String password;
 
     @Column(name = "role", nullable = false)
@@ -55,7 +55,8 @@ public class UserEntity {
     @Column(name = "enabled", columnDefinition = "boolean default true")
     private boolean enabled;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id")
     private Patient patient;
 
     @OneToMany(mappedBy = "doctor")

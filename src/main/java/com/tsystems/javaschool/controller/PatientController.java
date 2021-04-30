@@ -18,7 +18,7 @@ public class PatientController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping()
+    @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("patient", userRepository.findAll());
         return "patient/index";
@@ -29,6 +29,12 @@ public class PatientController {
         model.addAttribute("patient", userRepository.findById(id));
         return "patient/show";
     }
+
+//    @GetMapping("/{id}")
+//    public String doctor(@PathVariable("id") int id, Model model) {
+//        model.addAttribute("patient", userRepository.findPatientByDoctor(id));
+//        return "patient/doctor";
+//    }
 
     @GetMapping("/new")
     public String newPatient(@ModelAttribute("patient") UserEntity user) {
