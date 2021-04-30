@@ -20,15 +20,14 @@ public class TherapyCase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "role", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TherapyStatus status;
-
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
     @Column(name = "time", nullable = false)
     private LocalTime time;
+
+    @Column(name = "status", nullable = false)
+    private TherapyStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nurse_id", nullable = false)
