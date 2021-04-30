@@ -1,11 +1,7 @@
-package com.tsystems.javaschool.service.interfaces;
+package com.tsystems.javaschool.service.api;
 
-import com.tsystems.javaschool.dao.interfaces.UserRepository;
 import com.tsystems.javaschool.model.entity.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import java.util.List;
 
 public interface UserDetailService extends UserDetailsService {
 
