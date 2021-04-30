@@ -1,15 +1,13 @@
 package com.tsystems.javaschool.service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import com.tsystems.javaschool.model.entity.UserEntity;
 import com.tsystems.javaschool.dao.interfaces.UserRepository;
 
@@ -19,9 +17,9 @@ import java.util.Collections;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetailsService {
 
+    @Autowired
     private UserRepository userRepository;
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -37,7 +35,6 @@ public class UserDetailsImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("Could not find user");
         }
-
         return new MyUserDetails(user);
     }
 
