@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -37,7 +38,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public UserEntity findByEmail(String email) {
         return (UserEntity) session.getCurrentSession()
-                .createQuery("FROM UserEntity WHERE UserEntity.email = :email")
+                .createQuery("FROM UserEntity AS u WHERE u.email = :email")
                 .setParameter("email", email).getSingleResult();
     }
 
@@ -55,7 +56,16 @@ public class UserRepositoryImpl implements UserRepository {
     public List<UserEntity> findRolesByEmail(String email) {
         Query query = (Query) session.getCurrentSession()
                 .createQuery("SELECT role FROM UserEntity WHERE UserEntity.email = :email")
-                .setParameter("email", email).getSingleResult();
+                .setParameter("email", email);
+
+        return query.list();
+    }
+
+    @Override
+    public List<UserEntity> findPatientByDoctor(int id) {
+        Query query = (Query) session.getCurrentSession()
+                .createQuery("FROM UserEntity AS up JOIN Patient AS p ON p.user.id = up.id JOIN Treatment AS tr ON tr.patient.id = p.id JOIN UserEntity AS ud ON tr.doctor.id = ud.id WHERE ud.id = :id")
+                .setParameter("id", id);
 
         return query.list();
     }
@@ -65,4 +75,6 @@ public class UserRepositoryImpl implements UserRepository {
         return String.valueOf(session.getCurrentSession()
                 .createQuery("SELECT role FROM UserEntity"));
     }
+
+
 }

@@ -47,5 +47,7 @@ public interface UserRepository {
      */
     Collection<UserEntity> findRolesByEmail(String email);
 
+    List<UserEntity> findPatientByDoctor(int id);
+
     String getRole();
 }
