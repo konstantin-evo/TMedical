@@ -1,7 +1,7 @@
 package com.tsystems.javaschool.config.security;
 
 import com.tsystems.javaschool.config.handler.LoginSuccess;
-import com.tsystems.javaschool.service.UserDetailsImpl;
+import com.tsystems.javaschool.service.implementation.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
