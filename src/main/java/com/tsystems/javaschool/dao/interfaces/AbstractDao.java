@@ -12,8 +12,4 @@ public interface AbstractDao<Entity, ID> {
 
     Entity update(Entity entity);
 
-    Entity delete(Entity entity);
-
-    Entity deleteById(ID entityId);
-
 }

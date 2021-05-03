@@ -48,16 +48,4 @@ public abstract class AbstractDaoImpl<Entity, ID> implements AbstractDao<Entity,
       return entity;
    }
 
-   @Override
-   public Entity delete(Entity entity) {
-      session.getCurrentSession().remove(entity);
-      return entity;
-   }
-
-   @Override
-   public Entity deleteById(ID entityId){
-      Entity entity = findById(entityId);
-      delete(entity);
-      return entity;
-   }
 }
