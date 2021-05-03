@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.tsystems.javaschool.model.entity.UserEntity;
-import com.tsystems.javaschool.dao.interfaces.UserRepository;
+import com.tsystems.javaschool.dao.api.UserRepository;
 
 import java.util.Arrays;
 import java.util.Collection;

@@ -1,6 +1,6 @@
 package com.tsystems.javaschool.dao;
 
-import com.tsystems.javaschool.dao.interfaces.MedicamentationRepository;
+import com.tsystems.javaschool.dao.api.MedicamentationRepository;
 import com.tsystems.javaschool.model.entity.Medication;
 import com.tsystems.javaschool.model.entity.Therapy;
 import org.hibernate.SessionFactory;

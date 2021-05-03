@@ -1,6 +1,5 @@
-package com.tsystems.javaschool.dao.interfaces;
+package com.tsystems.javaschool.dao.api;
 
-import com.tsystems.javaschool.model.entity.Medication;
 import com.tsystems.javaschool.model.entity.TherapyCase;
 
 import java.time.LocalDate;

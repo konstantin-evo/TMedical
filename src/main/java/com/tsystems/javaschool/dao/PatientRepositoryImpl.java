@@ -1,8 +1,7 @@
 package com.tsystems.javaschool.dao;
 
-import com.tsystems.javaschool.dao.interfaces.PatientRepository;
+import com.tsystems.javaschool.dao.api.PatientRepository;
 import com.tsystems.javaschool.model.entity.Patient;
-import com.tsystems.javaschool.model.entity.UserEntity;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

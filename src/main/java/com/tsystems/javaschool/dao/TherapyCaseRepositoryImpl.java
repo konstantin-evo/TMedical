@@ -1,6 +1,6 @@
 package com.tsystems.javaschool.dao;
 
-import com.tsystems.javaschool.dao.interfaces.TherapyCaseRepository;
+import com.tsystems.javaschool.dao.api.TherapyCaseRepository;
 import com.tsystems.javaschool.model.entity.TherapyCase;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

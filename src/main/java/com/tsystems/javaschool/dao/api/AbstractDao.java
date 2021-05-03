@@ -1,4 +1,4 @@
-package com.tsystems.javaschool.dao.interfaces;
+package com.tsystems.javaschool.dao.api;
 
 import java.util.List;
 

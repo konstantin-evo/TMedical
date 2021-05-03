@@ -1,7 +1,6 @@
-package com.tsystems.javaschool.dao.interfaces;
+package com.tsystems.javaschool.dao.api;
 
 import com.tsystems.javaschool.model.entity.Insurance;
-import com.tsystems.javaschool.model.entity.Patient;
 
 import java.util.List;
 

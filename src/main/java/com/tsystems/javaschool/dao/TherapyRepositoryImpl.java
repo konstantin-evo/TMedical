@@ -1,17 +1,13 @@
 package com.tsystems.javaschool.dao;
 
-import com.tsystems.javaschool.dao.interfaces.TherapyRepository;
+import com.tsystems.javaschool.dao.api.TherapyRepository;
 import com.tsystems.javaschool.model.entity.Therapy;
-import com.tsystems.javaschool.model.entity.Treatment;
-import com.tsystems.javaschool.dao.interfaces.TreatmentRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.List;
 
 @Repository
 public class TherapyRepositoryImpl implements TherapyRepository {

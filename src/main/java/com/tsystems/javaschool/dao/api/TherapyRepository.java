@@ -1,4 +1,4 @@
-package com.tsystems.javaschool.dao.interfaces;
+package com.tsystems.javaschool.dao.api;
 
 import com.tsystems.javaschool.model.entity.Therapy;
 

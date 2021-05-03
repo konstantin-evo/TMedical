@@ -1,7 +1,7 @@
 package com.tsystems.javaschool.dao;
 
 import com.tsystems.javaschool.model.entity.UserEntity;
-import com.tsystems.javaschool.dao.interfaces.UserRepository;
+import com.tsystems.javaschool.dao.api.UserRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

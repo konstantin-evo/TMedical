@@ -1,8 +1,7 @@
 package com.tsystems.javaschool.dao;
 
-import com.tsystems.javaschool.dao.interfaces.InsuranceRepository;
+import com.tsystems.javaschool.dao.api.InsuranceRepository;
 import com.tsystems.javaschool.model.entity.Insurance;
-import com.tsystems.javaschool.model.entity.Patient;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
