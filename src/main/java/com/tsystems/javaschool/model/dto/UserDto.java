@@ -18,8 +18,6 @@ public class UserDto implements Serializable {
     private Gender gender;
     private String address;
     private String email;
-    private String insurance_name;
-    private String insurance_number;
-    private LocalDate start_date;
-    private LocalDate end_date;
+
+    private InsuranceDTO insurance;
 }
