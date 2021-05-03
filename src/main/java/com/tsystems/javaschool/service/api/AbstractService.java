@@ -11,10 +11,6 @@ public interface AbstractService<Entity, DTO, ID> {
 
     DTO update(DTO dto);
 
-    DTO delete(DTO dto);
-
-    DTO deleteById(ID entityId);
-
     DTO convertToDTO(Entity entity);
 
     List<DTO> convertToDTO(List<Entity> entities);
