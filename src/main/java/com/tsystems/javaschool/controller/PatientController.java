@@ -43,7 +43,7 @@ public class PatientController {
 
     @PostMapping()
     public String addPatient(@ModelAttribute("patient") UserEntity user) {
-        userRepository.add(user);
+        userRepository.save(user);
         return "redirect:/patient";
     }
 }
