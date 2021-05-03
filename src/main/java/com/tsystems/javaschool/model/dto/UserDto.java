@@ -1,4 +1,4 @@
-package com.tsystems.javaschool.model.dto.user;
+package com.tsystems.javaschool.model.dto;
 
 import com.tsystems.javaschool.model.entity.enums.Gender;
 import lombok.Data;

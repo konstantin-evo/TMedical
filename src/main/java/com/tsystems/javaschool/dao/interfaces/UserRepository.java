@@ -5,7 +5,7 @@ import com.tsystems.javaschool.model.entity.UserEntity;
 import java.util.Collection;
 import java.util.List;
 
-public interface UserRepository {
+public interface UserRepository extends AbstractDao<UserEntity, Integer> {
 
     List<UserEntity> findAll();
 
@@ -14,7 +14,7 @@ public interface UserRepository {
      * @param id the id
      * @return the user entity
      */
-    UserEntity findById(int id);
+    UserEntity findById(Integer id);
 
     /**
      * Find by email user entity.
@@ -29,7 +29,7 @@ public interface UserRepository {
      * @param user the user entity
      * @return the user entity
      */
-    void add(UserEntity user);
+    UserEntity save(UserEntity user);
 
     /**
      * Update user entity.
@@ -37,7 +37,7 @@ public interface UserRepository {
      * @param user the user entity
      * @return the user entity
      */
-    void update(UserEntity user);
+    UserEntity update(UserEntity user);
 
     /**
      * Find roles by user email list.
