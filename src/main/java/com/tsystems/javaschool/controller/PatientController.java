@@ -1,7 +1,6 @@
 package com.tsystems.javaschool.controller;
 
 import com.tsystems.javaschool.dao.interfaces.UserRepository;
-import com.tsystems.javaschool.model.dto.user.UserDto;
 import com.tsystems.javaschool.model.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
