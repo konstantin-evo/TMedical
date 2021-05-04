@@ -23,19 +23,6 @@ public class PatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
-    public List<Patient> findAllPatient() {
-        Query query = session.getCurrentSession().createQuery("from Patient");
-        return query.list();
-    }
-
-    @Override
-    public Patient findPatientById(int id) {
-        return (Patient) session.getCurrentSession()
-                .createQuery("FROM Patient WHERE Patient.id = :id")
-                .setParameter("id", id).getSingleResult();
-    }
-
-    @Override
     public Patient findPatientByInsurance(String number) {
         return (Patient) session.getCurrentSession()
                 .createQuery("FROM Patient AS p JOIN Insurance AS i ON p.id = i.patient.id WHERE i.number = :number")
@@ -56,8 +43,27 @@ public class PatientRepositoryImpl implements PatientRepository {
                 .setParameter("dbirth", dbirth);
     }
 
+
     @Override
-    public void add(Patient patient) {
-            session.getCurrentSession().save(patient);
+    public Patient findById(Integer id) {
+        return (Patient) session.getCurrentSession()
+                .createQuery("FROM Patient WHERE Patient.id = :id")
+                .setParameter("id", id).getSingleResult();
+    }
+
+    @Override
+    public List<Patient> findAll() {
+        Query query = session.getCurrentSession().createQuery("from Patient");
+        return query.list();
+    }
+
+    @Override
+    public Patient save(Patient patient) {
+        return (Patient) session.getCurrentSession().save(patient);
+    }
+
+    @Override
+    public Patient update(Patient patient) {
+        return (Patient) session.getCurrentSession().merge(patient);
     }
 }
