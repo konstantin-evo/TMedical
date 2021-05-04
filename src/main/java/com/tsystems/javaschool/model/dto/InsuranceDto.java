@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-public class InsuranceDTO {
+public class InsuranceDto {
     private String insurance_name;
     private String insurance_number;
     private LocalDate start_date;

@@ -19,5 +19,5 @@ public class UserDto implements Serializable {
     private String address;
     private String email;
 
-    private InsuranceDTO insurance;
+    private InsuranceDto insurance;
 }
