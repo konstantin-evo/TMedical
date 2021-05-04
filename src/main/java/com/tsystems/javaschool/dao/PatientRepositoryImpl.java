@@ -66,4 +66,11 @@ public class PatientRepositoryImpl implements PatientRepository {
     public Patient update(Patient patient) {
         return (Patient) session.getCurrentSession().merge(patient);
     }
+
+    @Override
+    public Patient findPatientByUser(int id) {
+        return (Patient) session.getCurrentSession()
+                .createQuery("FROM Patient AS p JOIN UserEntity AS u ON p.user.id = u.id WHERE u.id = :id")
+                .setParameter("id", id).getSingleResult();
+    }
 }
