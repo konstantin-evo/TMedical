@@ -34,4 +34,5 @@ public interface UserDetailService extends UserDetailsService {
      */
     UserEntity getCurrentUser();
 
+    String getRole();
 }
