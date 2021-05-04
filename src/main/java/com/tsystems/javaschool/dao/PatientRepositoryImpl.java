@@ -43,7 +43,6 @@ public class PatientRepositoryImpl implements PatientRepository {
                 .setParameter("dbirth", dbirth);
     }
 
-
     @Override
     public Patient findById(Integer id) {
         return (Patient) session.getCurrentSession()
