@@ -28,6 +28,6 @@ public interface PatientRepository extends AbstractRepository<Patient, Integer> 
      */
     List<Patient> findPatientByBirthday(LocalDate dbirth);
 
-
+    Patient findPatientByUser(int id);
 
 }
