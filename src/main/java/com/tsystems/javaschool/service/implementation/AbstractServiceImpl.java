@@ -1,6 +1,6 @@
 package com.tsystems.javaschool.service.implementation;
 
-import com.tsystems.javaschool.dao.api.AbstractDao;
+import com.tsystems.javaschool.dao.api.AbstractRepository;
 import com.tsystems.javaschool.service.api.AbstractService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public abstract class AbstractServiceImpl<Entity, DAO extends AbstractDao<Entity, ID>, DTO, ID> implements AbstractService<Entity, DTO, ID> {
+public abstract class AbstractServiceImpl<Entity, DAO extends AbstractRepository<Entity, ID>, DTO, ID> implements AbstractService<Entity, DTO, ID> {
 
     @Getter(value = AccessLevel.PROTECTED)
     @Setter(value = AccessLevel.PROTECTED)

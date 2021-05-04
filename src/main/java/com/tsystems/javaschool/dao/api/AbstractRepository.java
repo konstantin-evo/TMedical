@@ -2,7 +2,7 @@ package com.tsystems.javaschool.dao.api;
 
 import java.util.List;
 
-public interface AbstractDao<Entity, ID> {
+public interface AbstractRepository<Entity, ID> {
 
     Entity findById(ID id);
 

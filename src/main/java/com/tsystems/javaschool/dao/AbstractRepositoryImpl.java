@@ -1,12 +1,12 @@
 package com.tsystems.javaschool.dao;
 
-import com.tsystems.javaschool.dao.api.AbstractDao;
+import com.tsystems.javaschool.dao.api.AbstractRepository;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public abstract class AbstractDaoImpl<Entity, ID> implements AbstractDao<Entity, ID> {
+public abstract class AbstractRepositoryImpl<Entity, ID> implements AbstractRepository<Entity, ID> {
 
    private final Class<Entity> entityClass;
 
@@ -18,7 +18,7 @@ public abstract class AbstractDaoImpl<Entity, ID> implements AbstractDao<Entity,
    }
 
 
-   public AbstractDaoImpl(Class<Entity> clazz) {
+   public AbstractRepositoryImpl(Class<Entity> clazz) {
       this.entityClass = clazz;
    }
 

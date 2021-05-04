@@ -5,7 +5,7 @@ import com.tsystems.javaschool.model.entity.UserEntity;
 import java.util.Collection;
 import java.util.List;
 
-public interface UserRepository extends AbstractDao<UserEntity, Integer> {
+public interface UserRepository extends AbstractRepository<UserEntity, Integer> {
 
     List<UserEntity> findAll();
 
