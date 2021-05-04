@@ -5,16 +5,7 @@ import com.tsystems.javaschool.model.entity.Patient;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface PatientRepository {
-
-    List<Patient> findAllPatient();
-
-    /**
-     * Find Patient by id.
-     * @param id the patient id
-     * @return the Patient entities
-     */
-    Patient findPatientById(int id);
+public interface PatientRepository extends AbstractDao<Patient, Integer> {
 
     /**
      * Find Patient by Insurance number
@@ -37,10 +28,4 @@ public interface PatientRepository {
      */
     List<Patient> findPatientByBirthday(LocalDate dbirth);
 
-    /**
-     * Add Patient entity.
-     * @param patient the patient entity
-     * @return the patient entity
-     */
-    void add(Patient patient);
 }
