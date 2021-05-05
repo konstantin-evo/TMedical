@@ -18,6 +18,4 @@ public class UserDto implements Serializable {
     private Gender gender;
     private String address;
     private String email;
-
-    private InsuranceDto insurance;
 }

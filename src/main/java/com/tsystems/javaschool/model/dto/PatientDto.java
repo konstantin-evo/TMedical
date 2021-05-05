@@ -10,4 +10,5 @@ import java.io.Serializable;
 public class PatientDto implements Serializable {
     private int id;
     private UserDto userDto;
+    private InsuranceDto insurance;
 }
