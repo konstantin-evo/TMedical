@@ -3,6 +3,7 @@ package com.tsystems.javaschool.dao;
 import com.tsystems.javaschool.dao.api.InsuranceRepository;
 import com.tsystems.javaschool.model.entity.Insurance;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +26,25 @@ public class InsuranceRepositoryImpl implements InsuranceRepository {
     }
 
     @Override
-    public void add(Insurance insurance) {
-        session.getCurrentSession().save(insurance);
+    public Insurance save(Insurance insurance) {
+        return (Insurance) session.getCurrentSession().save(insurance);
+    }
+
+    @Override
+    public Insurance findById(Integer id) {
+        return (Insurance) session.getCurrentSession()
+                .createQuery("FROM Insurance WHERE Insurance.id = :id")
+                .setParameter("id", id).getSingleResult();
+    }
+
+    @Override
+    public List<Insurance> findAll() {
+        Query query = session.getCurrentSession().createQuery("FROM Insurance ");
+        return query.list();
+    }
+
+    @Override
+    public Insurance update(Insurance insurance) {
+        return (Insurance) session.getCurrentSession().merge(insurance);
     }
 }
