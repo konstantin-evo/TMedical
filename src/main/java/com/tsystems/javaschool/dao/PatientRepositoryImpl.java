@@ -44,6 +44,13 @@ public class PatientRepositoryImpl implements PatientRepository {
     }
 
     @Override
+    public List<Patient> findPatientByDoctor(int id) {
+        return (List<Patient>) session.getCurrentSession()
+                .createQuery("FROM Patient AS p JOIN Treatment AS tr ON p.id = tr.patient.id WHERE tr.doctor = :id")
+                .setParameter("id", id);
+    }
+
+    @Override
     public Patient findById(Integer id) {
         return (Patient) session.getCurrentSession()
                 .createQuery("FROM Patient WHERE Patient.id = :id")
