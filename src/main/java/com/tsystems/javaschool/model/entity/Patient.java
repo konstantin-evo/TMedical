@@ -19,7 +19,8 @@ public class Patient {
     @OneToMany(mappedBy = "patient")
     private List<Treatment> treatments;
 
-    @OneToOne(mappedBy = "patient")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_user")
     private UserEntity user;
 
 }

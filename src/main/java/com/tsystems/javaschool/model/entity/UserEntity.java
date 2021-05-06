@@ -55,8 +55,7 @@ public class UserEntity {
     @Column(name = "enabled", columnDefinition = "boolean default true")
     private boolean enabled;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id")
+    @OneToOne(mappedBy = "user")
     private Patient patient;
 
     @OneToMany(mappedBy = "doctor")
