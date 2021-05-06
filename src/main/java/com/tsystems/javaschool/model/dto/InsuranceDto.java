@@ -8,8 +8,8 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 public class InsuranceDto {
-    private String insurance_name;
-    private String insurance_number;
-    private LocalDate start_date;
-    private LocalDate end_date;
+    private String insuranceName;
+    private String insuranceNumber;
+    private LocalDate startDate;
+    private LocalDate endDate;
 }
