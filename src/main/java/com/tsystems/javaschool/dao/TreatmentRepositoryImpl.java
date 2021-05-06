@@ -21,16 +21,26 @@ public class TreatmentRepositoryImpl implements TreatmentRepository {
     }
 
     @Override
+    public Treatment findById(Integer id) {
+        return (Treatment) session.getCurrentSession()
+                .createQuery("FROM Treatment AS t WHERE t.id = :id")
+                .setParameter("id", id).getSingleResult();
+    }
+
+    @Override
     public List<Treatment> findAll() {
         Query query = session.getCurrentSession().createQuery("from Treatment");
         return query.list();
     }
 
     @Override
-    public Treatment findById(int id) {
-        return (Treatment) session.getCurrentSession()
-                .createQuery("FROM Treatment AS t WHERE t.id = :id")
-                .setParameter("id", id).getSingleResult();
+    public Treatment save(Treatment treatment) {
+        return (Treatment) session.getCurrentSession().save(treatment);
+    }
+
+    @Override
+    public Treatment update(Treatment treatment) {
+        return (Treatment) session.getCurrentSession().merge(treatment);
     }
 
     @Override
@@ -47,13 +57,7 @@ public class TreatmentRepositoryImpl implements TreatmentRepository {
         Query query = (Query) session.getCurrentSession()
                 .createQuery("FROM Treatment AS t WHERE t.doctor = :doctor_id")
                 .setParameter("doctor_id", doctor_id);
-
         return query.list();
-    }
-
-    @Override
-    public void add(Treatment treatment) {
-        session.getCurrentSession().save(treatment);
     }
 
 }
