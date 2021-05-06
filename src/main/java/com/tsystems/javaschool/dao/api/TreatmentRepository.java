@@ -5,15 +5,8 @@ import com.tsystems.javaschool.model.entity.Treatment;
 import java.util.Collection;
 import java.util.List;
 
-public interface TreatmentRepository {
+public interface TreatmentRepository extends AbstractRepository<Treatment, Integer> {
     List<Treatment> findAll();
-
-    /**
-     * Find by id Treatment entity.
-     * @param id the id
-     * @return the Treatment
-     */
-    Treatment findById(int id);
 
     /**
      * Find Treatment by user id.
@@ -28,18 +21,4 @@ public interface TreatmentRepository {
      * @return the List<Treatment> entities
      */
     Collection<Treatment> findTreatmentByDoctorId(int doctor_id);
-
-    /**
-     * Add treatment entity.
-     * @param treatment the treatment entity
-     * @return the treatment entity
-     */
-    void add(Treatment treatment);
-
-    /**
-     * Update treatment entity.
-     * @param treatment the treatment entity
-     * @return the treatment entity
-     */
-
 }
