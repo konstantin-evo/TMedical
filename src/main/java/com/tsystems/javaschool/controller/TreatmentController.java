@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/treatment")
 public class TreatmentController {
@@ -26,8 +29,13 @@ public class TreatmentController {
         return new TreatmentDto();
     }
 
+    @ModelAttribute("treatmentList")
+    public List<TreatmentDto> treatmentsDto() {
+        return treatmentService.findAll();
+    }
+
     @GetMapping("/all")
-    public String index() {
+    public String index(@ModelAttribute("treatmentList") @Valid List<TreatmentDto> treatments) {
         return "treatment/all-treatments";
     }
 }
