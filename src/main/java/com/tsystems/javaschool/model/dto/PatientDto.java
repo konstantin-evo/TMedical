@@ -12,4 +12,5 @@ public class PatientDto implements Serializable {
     private int id;
     private UserDto userDto;
     private List<InsuranceDto> insurances;
+    private List<TreatmentDto> treatments;
 }
