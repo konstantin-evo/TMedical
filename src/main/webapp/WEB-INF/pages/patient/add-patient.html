@@ -44,7 +44,7 @@
     <div class="row g-5"> <!-- Начало данных -->
       <div class="col-md-12" style="width: 50%; margin-left: auto; margin-right: auto">
 
-        <form th:action="@{/patient/addPatient}" th:object="${patient}" method="post" class="needs-validation" novalidate>
+        <form th:action="@{/patient/add-patient}" th:object="${patient}" method="post" class="needs-validation" novalidate>
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
@@ -100,40 +100,43 @@
               </div>
             </div>
 
-            <div class="text-center">
-              <h4 >Insurance Company</h4>
-              <p class="lead" style="margin-top: 0px">Please complete patient insurance information if available.</p>
-            </div>
+<!--            <div class="text-center">-->
+<!--              <h4 >Insurance Company</h4>-->
+<!--              <p class="lead" style="margin-top: 0px">Please complete patient insurance information if available.</p>-->
+<!--            </div>-->
 
-            <div class="col-sm-6">
-              <label for="insurance" class="form-label">Name</label>
-              <select th:field="*{insurance.insurance_name}" class="form-select" id="insurance" required>
-                <option th:value="'1'" th:text="Insurance1"></option>
-                <option th:value="'2'" th:text="Insurance2"></option>
-                <option th:value="'3'" th:text="Insurance3"></option>
-              </select>
-              <div class="invalid-feedback">
-                Please select an insurance company.
-              </div>
-            </div>
+<!--            <div class="col-sm-6">-->
+<!--              <label for="insurance" class="form-label">Name</label>-->
+<!--              <select class="form-select" id="insurance" required>-->
+<!--                <option th:value="'1'" th:text="Insurance1"></option>-->
+<!--                <option th:value="'2'" th:text="Insurance2"></option>-->
+<!--                <option th:value="'3'" th:text="Insurance3"></option>-->
+<!--                <option th:each="insurance : ${patient.insurances}"-->
+<!--                        th:value="${insurance.name}"-->
+<!--                        th:text="${insurance.name}"></option>-->
+<!--              </select>-->
+<!--              <div class="invalid-feedback">-->
+<!--                Please select an insurance company.-->
+<!--              </div>-->
+<!--            </div>-->
 
-            <div class="col-sm-6">
-              <label for="iNumber" class="form-label">Number</label>
-              <input type="text" th:field="*{insurance.insurance_number}" class="form-control" id="iNumber" placeholder="">
-              <div class="invalid-feedback">
-                Please enter a insurance number.
-              </div>
-            </div>
+<!--            <div class="col-sm-6">-->
+<!--              <label for="iNumber" class="form-label">Number</label>-->
+<!--              <input type="text" th:field="*{insurance.insurance_number}" class="form-control" id="iNumber" placeholder="">-->
+<!--              <div class="invalid-feedback">-->
+<!--                Please enter a insurance number.-->
+<!--              </div>-->
+<!--            </div>-->
 
-            <div class="col-sm-6">
-              <label for="istartdate" class="form-label">Start Date</label>
-              <input type="date" th:field="*{insurance.start_date}" id="istartdate" class="form-control" required/>
-            </div>
+<!--            <div class="col-sm-6">-->
+<!--              <label for="istartdate" class="form-label">Start Date</label>-->
+<!--              <input type="date" th:field="*{insurance.start_date}" id="istartdate" class="form-control" required/>-->
+<!--            </div>-->
 
-            <div class="col-sm-6">
-              <label for="ienddate" class="form-label">End Date</label>
-              <input type="date" th:field="*{insurance.end_date}" id="ienddate" class="form-control" required/>
-            </div>
+<!--            <div class="col-sm-6">-->
+<!--              <label for="ienddate" class="form-label">End Date</label>-->
+<!--              <input type="date" th:field="*{insurance.end_date}" id="ienddate" class="form-control" required/>-->
+<!--            </div>-->
 
           <button class="w-50 btn btn-primary btn-lg" type="submit" style="margin-left: auto; margin-right: auto">
             Confirm
