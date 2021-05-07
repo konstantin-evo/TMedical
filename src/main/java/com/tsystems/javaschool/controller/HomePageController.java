@@ -15,7 +15,7 @@ public class HomePageController {
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("DOCTOR"))) {
             return "redirect:/patient/index";
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("NURSE"))) {
-            return "redirect:/tratment/info";
+            return "redirect:/treatment/info";
         } else {
             throw new NoSuchRoleException("Invalid user role");
         }
