@@ -70,6 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/").permitAll()
                     .antMatchers("/patient/**").permitAll()
                     //.antMatchers("/patient").hasAnyRole("NURSE", "DOCTOR")
+                    .antMatchers("/treatment/**").hasRole("DOCTOR")
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .and()
                 .formLogin()
