@@ -8,11 +8,14 @@ import com.tsystems.javaschool.model.dto.UserDto;
 import com.tsystems.javaschool.model.entity.Insurance;
 import com.tsystems.javaschool.model.entity.Patient;
 import com.tsystems.javaschool.model.entity.Treatment;
+import com.tsystems.javaschool.model.entity.UserEntity;
+import com.tsystems.javaschool.model.entity.enums.Role;
 import com.tsystems.javaschool.service.api.PatientService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,9 +33,9 @@ public class PatientServiceImpl extends AbstractServiceImpl<Patient, PatientRepo
 
         UserDto user = new UserDto();
         user.setSurname(patientEntity.getUser().getSurname());
-        user.setFirst_name(patientEntity.getUser().getFirst_name());
-        user.setMiddle_name(patientEntity.getUser().getMiddle_name());
-        user.setDbirth(patientEntity.getUser().getDbirth());
+        user.setFirst_name(patientEntity.getUser().getFirstName());
+        user.setMiddle_name(patientEntity.getUser().getMiddleName());
+        user.setDbirth(String.valueOf(patientEntity.getUser().getDbirth()));
         user.setGender(patientEntity.getUser().getGender());
         user.setAddress(patientEntity.getUser().getAddress());
         user.setEmail(patientEntity.getUser().getEmail());
@@ -71,6 +74,26 @@ public class PatientServiceImpl extends AbstractServiceImpl<Patient, PatientRepo
     @Override
     public List<PatientDto> convertToDTO(List<Patient> entities) {
         return entities.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public Patient convertToEntity(PatientDto dto) {
+
+        Patient patient = new Patient();
+
+        UserEntity user = new UserEntity();
+        user.setFirstName(dto.getUserDto().getFirst_name());
+        user.setSurname(dto.getUserDto().getSurname());
+        user.setMiddleName(dto.getUserDto().getMiddle_name());
+        user.setGender(dto.getUserDto().getGender());
+        user.setAddress(dto.getUserDto().getAddress());
+        user.setEmail(dto.getUserDto().getEmail());
+        user.setRole(Role.valueOf("OTHER"));
+        user.setDbirth(LocalDate.parse(dto.getUserDto().getDbirth()));
+
+        patient.setUser(user);
+
+        return patient;
     }
 
 }
