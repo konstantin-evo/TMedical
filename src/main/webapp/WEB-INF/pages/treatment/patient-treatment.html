@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.82.0">
+    <title>Treatment list</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{../resources/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{../resources/css/patient.css}"/>
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+</head>
+<body class="bg-light">
+
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" th:src="@{../resources/img/logo.svg}" alt="" width="72" height="57">
+            <h2>Treatment list</h2>
+            <p class="lead">Information about patients being treated</p>
+        </div>
+
+        <form action="#" th:action="@{/treatment/all-treatments}" th:object="${treatmentList}" method="post">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <!--        <th scope="col">#</th>-->
+                    <th scope="col">Patient name</th>
+                    <th scope="col">Date of Birth</th>
+                    <th scope="col">Doctor</th>
+                    <th scope="col">Diagnosis</th>
+                    <th scope="col">Start of treatment</th>
+                    <th scope="col">End of treatment</th>
+                    <th scope="col">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="treatment: ${treatmentList}">
+                    <td th:text="${treatment.patientDto.userDto.first_name}">N/A</td>
+                    <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
+                    <td th:text="${treatment.doctor}">N/A</td>
+                    <td th:text="${treatment.diagnosis}">N/A</td>
+                    <td th:text="${treatment.startDate}">N/A</td>
+                    <td th:text="${treatment.endDate}">N/A</td>
+                    <td th:text="${treatment.status}">N/A</td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; T-Medical</p>
+    </footer>
+</div>
+
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="form-validation.js"></script>
+
+</body>
+</html>
