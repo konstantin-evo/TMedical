@@ -41,53 +41,33 @@
       <p class="lead">Information about patients being treated</p>
     </div>
 
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Patient name</th>
-        <th scope="col">Date of Birth</th>
-        <th scope="col">Doctor</th>
-        <th scope="col">Diagnosis</th>
-        <th scope="col">Start of treatment</th>
-        <th scope="col">End of treatment</th>
-        <th scope="col">Status</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>18.06.1992</td>
-        <td>Ivanov I.I.</td>
-        <td>common cold</td>
-        <td>01.04.2021</td>
-        <td> </td>
-        <td>Is being treated</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Konstantin</td>
-        <td>12.01.2001</td>
-        <td>Ivanov I.I.</td>
-        <td>Migraine</td>
-        <td>15.04.2021</td>
-        <td> </td>
-        <td>Is being treated</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Olga</td>
-        <td>08.02.1994</td>
-        <td>Ivanov I.I.</td>
-        <td>Stomach ache</td>
-        <td>01.04.2021</td>
-        <td>20.04.2021</td>
-        <td>Treatment over</td>
-      </tr>
-      </tbody>
-    </table>
-
+      <form action="#" th:action="@{/patient/index}" th:object="${patientList}" method="post">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+    <!--        <th scope="col">#</th>-->
+            <th scope="col">Patient name</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Doctor</th>
+            <th scope="col">Diagnosis</th>
+            <th scope="col">Start of treatment</th>
+            <th scope="col">End of treatment</th>
+            <th scope="col">Status</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr th:each="patient: ${patientList}">
+              <td th:text="${patient.userDto.first_name}">N/A</td>
+                <td th:text="${patient.userDto.dbirth}">N/A</td>
+                <td th:text="${patient.userDto.dbirth}">N/A</td>
+                <td th:text="${patient.treatments.diagnosis}">N/A</td>
+                <td th:text="${patient.treatments.startDate}">N/A</td>
+                <td th:text="${patient.treatments.endDate}">N/A</td>
+                <td th:text="${patient.treatments.status}">N/A</td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
   </main>
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
