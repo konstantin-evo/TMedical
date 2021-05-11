@@ -21,14 +21,10 @@ import java.util.List;
 public class PatientController {
 
     private final PatientService patientService;
-    private final UserService userService;
-    private final InsuranceService insuranceService;
 
     @Autowired
     public PatientController(PatientService patientService, InsuranceService insuranceService,UserService userService) {
         this.patientService = patientService;
-        this.insuranceService = insuranceService;
-        this.userService = userService;
     }
 
     @ModelAttribute("patient")
@@ -38,11 +34,7 @@ public class PatientController {
 
     @PostMapping(value = "/add-patient")
     public String addPatient(@ModelAttribute("patient") @Valid PatientDto patient) {
-//        userService.save(patient.getUserDto());
         patientService.save(patient);
-//        for (InsuranceDto insuranceDto : patient.getInsurances()) {
-//            insuranceService.save(insuranceDto);
-//        }
         return "redirect:patient/index";
     }
 
