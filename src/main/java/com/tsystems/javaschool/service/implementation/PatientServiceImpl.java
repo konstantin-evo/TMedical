@@ -8,13 +8,11 @@ import com.tsystems.javaschool.model.dto.UserDto;
 import com.tsystems.javaschool.model.entity.Insurance;
 import com.tsystems.javaschool.model.entity.Patient;
 import com.tsystems.javaschool.model.entity.Treatment;
-import com.tsystems.javaschool.model.entity.enums.Gender;
 import com.tsystems.javaschool.service.api.PatientService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
