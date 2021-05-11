@@ -3,6 +3,7 @@ package com.tsystems.javaschool.model.entity;
 import com.tsystems.javaschool.model.entity.enums.Gender;
 import com.tsystems.javaschool.model.entity.enums.Role;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -23,13 +24,14 @@ public class UserEntity {
 
     @Column(name = "first_name", nullable = false)
     @Size(min = 1, max = 45)
-    private String first_name;
+    private String firstName;
 
     @Column(name = "middle_name")
     @Size(min = 1, max = 45)
-    private String middle_name;
+    private String middleName;
 
     @Column(name = "dbirth", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dbirth;
 
     @Column(name = "sex", nullable = false)
