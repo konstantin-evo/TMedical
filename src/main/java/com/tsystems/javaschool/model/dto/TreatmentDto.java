@@ -10,8 +10,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class TreatmentDto implements Serializable {
     private PatientDto patientDto;
-    String diagnosis;
-    LocalDate startDate;
-    LocalDate endDate;
-    String status;
+    private String doctor;
+    private String diagnosis;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String status;
 }
