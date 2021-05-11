@@ -36,17 +36,17 @@ public class PatientController {
         return new PatientDto();
     }
 
-    @PostMapping(value = "/addPatient")
+    @PostMapping(value = "/add-patient")
     public String addPatient(@ModelAttribute("patient") @Valid PatientDto patient) {
-        userService.save(patient.getUserDto());
+//        userService.save(patient.getUserDto());
         patientService.save(patient);
-        for (InsuranceDto insuranceDto : patient.getInsurances()) {
-            insuranceService.save(insuranceDto);
-        }
+//        for (InsuranceDto insuranceDto : patient.getInsurances()) {
+//            insuranceService.save(insuranceDto);
+//        }
         return "redirect:patient/index";
     }
 
-    @GetMapping("/addPatient")
+    @GetMapping("/add-patient")
     public String newPatient() {
         return "patient/add-patient";
     }
