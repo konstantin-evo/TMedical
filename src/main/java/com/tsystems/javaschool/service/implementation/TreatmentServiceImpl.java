@@ -6,7 +6,9 @@ import com.tsystems.javaschool.model.entity.Treatment;
 import com.tsystems.javaschool.service.api.TreatmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TreatmentServiceImpl extends AbstractServiceImpl<Treatment, TreatmentRepository, TreatmentDto, Integer> implements TreatmentService {
 
     @Autowired
