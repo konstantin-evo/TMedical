@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.82.0">
-  <title>Patient list</title>
+  <title>Treatment list</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" th:href="@{../resources/css/bootstrap.min.css}">
@@ -37,11 +37,11 @@
   <main>
     <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" th:src="@{../resources/img/logo.svg}" alt="" width="72" height="57">
-      <h2>Patient list</h2>
+      <h2>Treatment list</h2>
       <p class="lead">Information about patients being treated</p>
     </div>
 
-      <form action="#" th:action="@{/patient/index}" th:object="${patientList}" method="post">
+      <form action="#" th:action="@{/treatment/all-treatments}" th:object="${treatmentList}" method="post">
         <table class="table table-hover">
           <thead>
           <tr>
@@ -56,44 +56,14 @@
           </tr>
           </thead>
           <tbody>
-    <!--      <tr>-->
-    <!--        <th scope="row">1</th>-->
-    <!--        <td>Mark</td>-->
-    <!--        <td>18.06.1992</td>-->
-    <!--        <td>Ivanov I.I.</td>-->
-    <!--        <td>common cold</td>-->
-    <!--        <td>01.04.2021</td>-->
-    <!--        <td> </td>-->
-    <!--        <td>Is being treated</td>-->
-    <!--      </tr>-->
-    <!--      <tr>-->
-    <!--        <th scope="row">2</th>-->
-    <!--        <td>Konstantin</td>-->
-    <!--        <td>12.01.2001</td>-->
-    <!--        <td>Ivanov I.I.</td>-->
-    <!--        <td>Migraine</td>-->
-    <!--        <td>15.04.2021</td>-->
-    <!--        <td> </td>-->
-    <!--        <td>Is being treated</td>-->
-    <!--      </tr>-->
-    <!--      <tr>-->
-    <!--        <th scope="row">3</th>-->
-    <!--        <td>Olga</td>-->
-    <!--        <td>08.02.1994</td>-->
-    <!--        <td>Ivanov I.I.</td>-->
-    <!--        <td>Stomach ache</td>-->
-    <!--        <td>01.04.2021</td>-->
-    <!--        <td>20.04.2021</td>-->
-    <!--        <td>Treatment over</td>-->
-    <!--      </tr>-->
-            <tr th:each="patient: ${patientList}">
-              <td th:text="${patient.userDto.first_name}">N/A</td>
-                <td th:text="${patient.userDto.dbirth}">N/A</td>
-                <td th:text="${patient.userDto.dbirth}">N/A</td>
-                <td th:text="${patient.treatments.diagnosis}">N/A</td>
-                <td th:text="${patient.treatments.startDate}">N/A</td>
-                <td th:text="${patient.treatments.endDate}">N/A</td>
-                <td th:text="${patient.treatments.status}">N/A</td>
+            <tr th:each="treatment: ${treatmentList}">
+              <td th:text="${treatment.patientDto.userDto.first_name}">N/A</td>
+                <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
+                <td th:text="${treatment.doctor}">N/A</td>
+                <td th:text="${treatment.diagnosis}">N/A</td>
+                <td th:text="${treatment.startDate}">N/A</td>
+                <td th:text="${treatment.endDate}">N/A</td>
+                <td th:text="${treatment.status}">N/A</td>
             </tr>
           </tbody>
         </table>
@@ -104,7 +74,6 @@
     <p class="mb-1">&copy; T-Medical</p>
   </footer>
 </div>
-
 
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="form-validation.js"></script>
