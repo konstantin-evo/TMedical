@@ -65,7 +65,8 @@ public class PatientRepositoryImpl implements PatientRepository {
 
     @Override
     public Patient save(Patient patient) {
-        return (Patient) session.getCurrentSession().save(patient);
+        int id = (Integer) session.getCurrentSession().save(patient);
+        return null;
     }
 
     @Override
