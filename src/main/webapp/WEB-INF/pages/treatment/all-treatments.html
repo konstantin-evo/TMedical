@@ -12,7 +12,7 @@
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" th:href="@{../resources/css/bootstrap.min.css}">
-  <link rel="stylesheet" th:href="@{../resources/css/patient.css}"/>
+  <link rel="stylesheet" th:href="@{../resources/css/header.css}">
 
   <style>
     .bd-placeholder-img {
@@ -29,9 +29,35 @@
       }
     }
   </style>
-
 </head>
+
 <body class="bg-light">
+<header class="p-3 mb-3 border-bottom">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-end justify-content-end justify-content-lg-end">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+            </a>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <input type="search" class="form-control" placeholder="Search...">
+            </form>
+
+            <div class="dropdown text-end">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img th:src="@{../resources/img/logo.svg}" alt="mdo" height="32" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href="#">Home</a></li>
+                    <li><a class="dropdown-item" href="#">New Patient</a></li>
+                    <li><a class="dropdown-item" href="#">New Treatment</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
 
 <div class="container">
   <main>
@@ -57,7 +83,7 @@
           </thead>
           <tbody>
             <tr th:each="treatment: ${treatmentList}">
-              <td th:text="${treatment.patientDto.userDto.first_name}">N/A</td>
+              <td th:text="${treatment.patientDto.userDto.fullName}">N/A</td>
                 <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
                 <td th:text="${treatment.doctor}">N/A</td>
                 <td th:text="${treatment.diagnosis}">N/A</td>
@@ -75,8 +101,7 @@
   </footer>
 </div>
 
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-<script src="form-validation.js"></script>
+<script th:src="@{../resources/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 </html>
