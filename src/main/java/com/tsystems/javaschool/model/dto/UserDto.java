@@ -13,8 +13,9 @@ import java.time.LocalDate;
 public class UserDto implements Serializable {
     private int id;
     private String surname;
-    private String first_name;
-    private String middle_name;
+    private String firstName;
+    private String middleName;
+    private String fullName;
     private String dbirth;
     private Gender gender;
     private String address;
