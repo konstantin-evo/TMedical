@@ -30,7 +30,7 @@ public class WebAppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public ThymeleafViewResolver viewResolver(){
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
-        viewResolver.setContentType("text/html");
+        viewResolver.setContentType("text/html; charset=UTF-8");
         viewResolver.setCharacterEncoding("UTF-8");
         return viewResolver;
     }
@@ -48,6 +48,7 @@ public class WebAppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
+        templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setPrefix("/WEB-INF/pages/");
         templateResolver.setSuffix(".html");
         templateResolver.setCacheable(false);
