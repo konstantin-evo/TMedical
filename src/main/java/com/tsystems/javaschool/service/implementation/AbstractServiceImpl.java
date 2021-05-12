@@ -41,8 +41,8 @@ public abstract class AbstractServiceImpl<Entity, DAO extends AbstractRepository
 
     @Override
     @Transactional
-    public DTO save(DTO dto) {
-        return convertToDTO(dao.save(convertToEntity(dto)));
+    public void save(DTO dto) {
+         dao.save(convertToEntity(dto));
     }
 
     @Override
