@@ -13,7 +13,7 @@ public class HomePageController {
     public String homePage() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("DOCTOR"))) {
-            return "redirect:/patient/index";
+            return "redirect:/treatment/all";
         } else if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("NURSE"))) {
             return "redirect:/treatment/info";
         } else {
