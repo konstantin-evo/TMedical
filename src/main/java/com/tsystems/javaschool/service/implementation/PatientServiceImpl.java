@@ -33,12 +33,13 @@ public class PatientServiceImpl extends AbstractServiceImpl<Patient, PatientRepo
 
         UserDto user = new UserDto();
         user.setSurname(patientEntity.getUser().getSurname());
-        user.setFirst_name(patientEntity.getUser().getFirstName());
-        user.setMiddle_name(patientEntity.getUser().getMiddleName());
+        user.setFirstName(patientEntity.getUser().getFirstName());
+        user.setMiddleName(patientEntity.getUser().getMiddleName());
         user.setDbirth(String.valueOf(patientEntity.getUser().getDbirth()));
         user.setGender(patientEntity.getUser().getGender());
         user.setAddress(patientEntity.getUser().getAddress());
         user.setEmail(patientEntity.getUser().getEmail());
+        user.setFullName(new StringBuilder().append(patientEntity.getUser().getSurname()).append(" ").append(patientEntity.getUser().getFirstName().substring(0, 1).toUpperCase()).append(". ").append(patientEntity.getUser().getMiddleName().substring(0, 1).toUpperCase()).append(".").toString());
 
         List<InsuranceDto> insuranceDtos = patientEntity.getInsurances().stream().map(this::convertInsuranceToDto).collect(Collectors.toList());
 
@@ -82,9 +83,9 @@ public class PatientServiceImpl extends AbstractServiceImpl<Patient, PatientRepo
         Patient patient = new Patient();
 
         UserEntity user = new UserEntity();
-        user.setFirstName(dto.getUserDto().getFirst_name());
+        user.setFirstName(dto.getUserDto().getFirstName());
         user.setSurname(dto.getUserDto().getSurname());
-        user.setMiddleName(dto.getUserDto().getMiddle_name());
+        user.setMiddleName(dto.getUserDto().getMiddleName());
         user.setGender(dto.getUserDto().getGender());
         user.setAddress(dto.getUserDto().getAddress());
         user.setEmail(dto.getUserDto().getEmail());
