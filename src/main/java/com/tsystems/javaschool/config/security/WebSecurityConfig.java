@@ -18,6 +18,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -69,8 +71,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/").permitAll()
                     .antMatchers("/patient/**").permitAll()
+                     .antMatchers("/treatment/**").permitAll()
                     //.antMatchers("/patient").hasAnyRole("NURSE", "DOCTOR")
-                    .antMatchers("/treatment/**").hasRole("DOCTOR")
+                    //.antMatchers("/treatment/**").hasRole("DOCTOR")
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .and()
                 .formLogin()
@@ -87,6 +90,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .exceptionHandling()
                     .accessDeniedPage("/access-denied");
+
+        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        filter.setEncoding("UTF-8"); // another forcing UTF-8
+        filter.setForceEncoding(true);
+        http.addFilterBefore(filter, CsrfFilter.class);
     }
 
 }
