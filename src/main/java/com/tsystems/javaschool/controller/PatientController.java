@@ -23,7 +23,7 @@ public class PatientController {
     private final PatientService patientService;
 
     @Autowired
-    public PatientController(PatientService patientService, InsuranceService insuranceService,UserService userService) {
+    public PatientController(PatientService patientService) {
         this.patientService = patientService;
     }
 
@@ -35,7 +35,7 @@ public class PatientController {
     @PostMapping(value = "/add-patient")
     public String addPatient(@ModelAttribute("patient") @Valid PatientDto patient) {
         patientService.save(patient);
-        return "redirect:patient/index";
+        return "redirect:index";
     }
 
     @GetMapping("/add-patient")
