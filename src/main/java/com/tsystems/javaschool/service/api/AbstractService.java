@@ -5,7 +5,7 @@ import java.util.List;
 public interface AbstractService<Entity, DTO, ID> {
     DTO findById(ID id);
     List<DTO> findAll();
-    DTO save(DTO dto);
+    void save(DTO dto);
     DTO update(DTO dto);
 
     DTO convertToDTO(Entity entity);
