@@ -4,7 +4,6 @@ import com.tsystems.javaschool.dao.api.TreatmentRepository;
 import com.tsystems.javaschool.model.dto.PatientDto;
 import com.tsystems.javaschool.model.dto.TreatmentDto;
 import com.tsystems.javaschool.model.dto.UserDto;
-import com.tsystems.javaschool.model.entity.Patient;
 import com.tsystems.javaschool.model.entity.Treatment;
 import com.tsystems.javaschool.service.api.TreatmentService;
 import org.modelmapper.ModelMapper;
@@ -28,23 +27,24 @@ public class TreatmentServiceImpl extends AbstractServiceImpl<Treatment, Treatme
         String diagnosis = treatment.getDiagnosis();
         LocalDate startDate = treatment.getStartDate();
         LocalDate endDate = treatment.getEndDate();
-        String status = String.valueOf(treatment.isStatus());
+        String status = ((treatment.isStatus()) ? "On treatment" : "Is discharged");
 
         PatientDto patient = new PatientDto();
         patient.setId(treatment.getPatient().getId());
 
         UserDto user = new UserDto();
         user.setSurname(treatment.getPatient().getUser().getSurname());
-        user.setFirst_name(treatment.getPatient().getUser().getFirst_name());
-        user.setMiddle_name(treatment.getPatient().getUser().getMiddle_name());
-        user.setDbirth(treatment.getPatient().getUser().getDbirth());
+        user.setFirstName(treatment.getPatient().getUser().getFirstName());
+        user.setMiddleName(treatment.getPatient().getUser().getMiddleName());
+        user.setFullName(new StringBuilder().append(treatment.getPatient().getUser().getSurname()).append(" ").append(treatment.getPatient().getUser().getFirstName().substring(0, 1).toUpperCase()).append(". ").append(treatment.getPatient().getUser().getMiddleName().substring(0, 1).toUpperCase()).append(".").toString());
+        user.setDbirth(String.valueOf(treatment.getPatient().getUser().getDbirth()));
         user.setGender(treatment.getPatient().getUser().getGender());
         user.setAddress(treatment.getPatient().getUser().getAddress());
         user.setEmail(treatment.getPatient().getUser().getEmail());
 
         patient.setUserDto(user);
 
-        String doctor = treatment.getDoctor().getFirst_name() + " " + treatment.getDoctor().getSurname();
+        String doctor = treatment.getDoctor().getFirstName() + " " + treatment.getDoctor().getSurname();
 
         TreatmentDto treatmentDto = new TreatmentDto();
         treatmentDto.setPatientDto(patient);
