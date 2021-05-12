@@ -44,11 +44,11 @@
     <div class="row g-5"> <!-- Начало данных -->
       <div class="col-md-12" style="width: 50%; margin-left: auto; margin-right: auto">
 
-        <form th:action="@{/patient/add-patient}" th:object="${patient}" method="post" class="needs-validation" novalidate>
+        <form th:action="@{/patient/add-patient}" th:object="${patient}" method="post" class="needs-validation">
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
-              <input type="text" th:field="*{userDto.first_name}" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="text" th:field="*{userDto.firstName}" class="form-control" id="firstName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid first name is required.
               </div>
@@ -64,7 +64,7 @@
 
             <div class="col-sm-6">
               <label for="middleName" class="form-label">Middle name <span class="text-muted">(Optional)</span></label>
-              <input type="text" th:field="*{userDto.middle_name}" class="form-control" id="middleName" placeholder="" value="" required>
+              <input type="text" th:field="*{userDto.middleName}" class="form-control" id="middleName" placeholder="" value="" required>
             </div>
 
             <div class="col-sm-6">
@@ -82,9 +82,11 @@
 
             <div class="col-sm-6">
               <label for="gender" class="form-label">Gender</label>
-              <select name="gender" class="form-select" id="gender" required>
+              <select name="gender" class="form-select" id="gender" th:field="*{userDto.gender}" required>
                 <option th:each="genderOpt : ${T(com.tsystems.javaschool.model.entity.enums.Gender).values()}"
-                        th:value="${genderOpt}" th:text="${genderOpt.displayValue}"></option>
+                        th:value="${genderOpt}"
+                        th:text="${genderOpt.displayValue}">
+                </option>
               </select>
 
               <div class="invalid-feedback">
