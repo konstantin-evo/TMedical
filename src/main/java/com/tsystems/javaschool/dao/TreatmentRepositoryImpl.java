@@ -44,10 +44,10 @@ public class TreatmentRepositoryImpl implements TreatmentRepository {
     }
 
     @Override
-    public Collection<Treatment> findTreatmentByPatientId(int patient_id) {
+    public Collection<Treatment> findTreatmentByPatientId(int id) {
         Query query = (Query) session.getCurrentSession()
-                .createQuery("FROM Treatment AS t WHERE t.patient = :patient_id")
-                .setParameter("patient_id", patient_id);
+                .createQuery("FROM Treatment AS t WHERE t.patient.id = :id")
+                .setParameter("id", id);
 
         return query.list();
     }
