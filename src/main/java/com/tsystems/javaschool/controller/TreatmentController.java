@@ -1,10 +1,10 @@
 package com.tsystems.javaschool.controller;
 
-import com.tsystems.javaschool.model.dto.PatientDto;
 import com.tsystems.javaschool.model.dto.TreatmentDto;
 import com.tsystems.javaschool.service.api.TreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,9 +41,9 @@ public class TreatmentController {
     }
 
     @GetMapping("/{id}")
-    public String patientTreatments(@PathVariable("id") int id,
-                                    @ModelAttribute("treatmentList") @Valid List<TreatmentDto> treatmentList) {
-        treatmentList = treatmentService.findByPatientId(id);
-        return "treatment/all-treatments";
+    public String patientTreatments(@PathVariable("id") int id, Model model) {
+        List<TreatmentDto> treatmentList = treatmentService.findByPatientId(id);
+        model.addAttribute("treatmentList", treatmentList);
+        return "treatment/patient-treatment";
     }
 }
