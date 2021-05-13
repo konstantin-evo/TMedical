@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .usernameParameter("email")
                     .loginProcessingUrl("/authenticate-user")
-                    .defaultSuccessUrl("/patient/index")
+                    .defaultSuccessUrl("/homePage")
                     .permitAll()
                 .and()
                     .logout()
