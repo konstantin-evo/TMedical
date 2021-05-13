@@ -9,8 +9,10 @@ import com.tsystems.javaschool.service.api.TreatmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,5 +62,12 @@ public class TreatmentServiceImpl extends AbstractServiceImpl<Treatment, Treatme
     @Override
     public List<TreatmentDto> convertToDTO(List<Treatment> entities) {
         return entities.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public List<TreatmentDto> findByPatientId(int id) {
+        Collection<Treatment> list = super.getDao().findTreatmentByPatientId(id);
+        return convertToDTO((List<Treatment>) list);
     }
 }
