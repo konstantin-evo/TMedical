@@ -40,12 +40,9 @@
             <h2>Treatment list</h2>
             <p class="lead">Information about patients being treated</p>
         </div>
-
-        <form action="#" th:action="@{/treatment/all-treatments}" th:object="${treatmentList}" method="post">
-            <table class="table table-hover">
+         <table class="table table-hover">
                 <thead>
                 <tr>
-                    <!--        <th scope="col">#</th>-->
                     <th scope="col">Patient name</th>
                     <th scope="col">Date of Birth</th>
                     <th scope="col">Doctor</th>
@@ -57,7 +54,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="treatment: ${treatmentList}">
-                    <td th:text="${treatment.patientDto.userDto.first_name}">N/A</td>
+                    <td th:text="${treatment.patientDto.userDto.firstName}">N/A</td>
                     <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
                     <td th:text="${treatment.doctor}">N/A</td>
                     <td th:text="${treatment.diagnosis}">N/A</td>
@@ -67,7 +64,6 @@
                 </tr>
                 </tbody>
             </table>
-        </form>
     </main>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
