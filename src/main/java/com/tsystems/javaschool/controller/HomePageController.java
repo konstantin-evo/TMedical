@@ -20,9 +20,4 @@ public class HomePageController {
             throw new NoSuchRoleException("Invalid user role");
         }
     }
-
-//    @GetMapping(value = "/profile")
-//    public String profile() {
-//        return "auth/profile";
-//    }
 }
