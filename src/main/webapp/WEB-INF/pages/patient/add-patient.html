@@ -29,6 +29,8 @@
 </head>
 <body class="bg-light">
 
+<header th:insert="templates/header.html :: header"> </header>
+
 <div class="container">
   <main>
     <div class="py-5 text-center">
@@ -40,7 +42,7 @@
     <div class="row g-5"> <!-- Начало данных -->
       <div class="col-md-12" style="width: 50%; margin-left: auto; margin-right: auto">
 
-        <form th:action="@{/patient/add-patient}" th:object="${patient}" method="post" >
+        <form th:action="@{/patient/add}" th:object="${patient}" method="post" >
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
