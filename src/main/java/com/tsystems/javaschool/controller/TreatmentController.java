@@ -40,7 +40,7 @@ public class TreatmentController {
         return "treatment/all-treatments";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/patient/{id}")
     public String patientTreatments(@PathVariable("id") int id, Model model) {
         List<TreatmentDto> treatmentList = treatmentService.findByPatientId(id);
         model.addAttribute("treatmentList", treatmentList);
