@@ -32,22 +32,22 @@ public class PatientController {
         return new PatientDto();
     }
 
-    @PostMapping(value = "/add-patient")
+    @PostMapping(value = "/add")
     public String addPatient(@ModelAttribute("patient") @Valid PatientDto patient) {
         patientService.save(patient);
-        return "redirect:index";
+        return "redirect:all";
     }
 
-    @GetMapping("/add-patient")
+    @GetMapping("/add")
     public String newPatient() {
         return "patient/add-patient";
     }
 
-    @GetMapping("/index")
+    @GetMapping("/all")
     public String index(Model model) {
         List<PatientDto> patientList = patientService.findAll();
         model.addAttribute("patientList", patientList);
-        return "patient/index";
+        return "patient/all-patient";
     }
 
 }
