@@ -8,7 +8,7 @@
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" th:href="@{../resources/css/bootstrap.min.css}">
-  <link rel="stylesheet" th:href="@{../resources/css/patient.css}"/>
+  <link rel="stylesheet" th:href="@{../resources/css/header.css}"/>
 
   <style>
     .bd-placeholder-img {
@@ -28,6 +28,8 @@
 
 </head>
 <body class="bg-light">
+
+<header th:insert="templates/header.html :: header"> </header>
 
 <div class="container">
   <main>
@@ -67,9 +69,8 @@
   </footer>
 </div>
 
-
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-<script src="form-validation.js"></script>
+<script th:src="@{../resources/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{../resources/js/form-validation.js}"></script>
 
 </body>
 </html>
