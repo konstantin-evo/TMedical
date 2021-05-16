@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.82.0">
     <title>Treatment list</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" th:href="@{../resources/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{../resources/css/patient.css}"/>
+    <link rel="stylesheet" th:href="@{../../resources/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{../../resources/css/patient.css}"/>
 
     <style>
         .bd-placeholder-img {
@@ -33,10 +31,12 @@
 </head>
 <body class="bg-light">
 
+<header th:insert="templates/header.html :: header"> </header>
+
 <div class="container">
     <main>
         <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4" th:src="@{../resources/img/logo.svg}" alt="" width="72" height="57">
+            <img class="d-block mx-auto mb-4" th:src="@{../../resources/img/logo.svg}" alt="" width="72" height="57">
             <h2>Treatment list</h2>
             <p class="lead">Information about patients being treated</p>
         </div>
@@ -54,7 +54,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="treatment: ${treatmentList}">
-                    <td th:text="${treatment.patientDto.userDto.firstName}">N/A</td>
+                    <td th:text="${treatment.patientDto.userDto.fullName}">N/A</td>
                     <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
                     <td th:text="${treatment.doctor}">N/A</td>
                     <td th:text="${treatment.diagnosis}">N/A</td>
@@ -71,8 +71,7 @@
     </footer>
 </div>
 
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-<script src="form-validation.js"></script>
+<script th:src="@{../../resources/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 </html>
