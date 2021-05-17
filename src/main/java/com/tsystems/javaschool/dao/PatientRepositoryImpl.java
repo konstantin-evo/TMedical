@@ -53,7 +53,7 @@ public class PatientRepositoryImpl implements PatientRepository {
     @Override
     public Patient findById(Integer id) {
         return (Patient) session.getCurrentSession()
-                .createQuery("FROM Patient WHERE Patient.id = :id")
+                .createQuery("FROM Patient AS p WHERE p.id = :id")
                 .setParameter("id", id).getSingleResult();
     }
 
