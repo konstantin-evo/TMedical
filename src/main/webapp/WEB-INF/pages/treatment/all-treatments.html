@@ -9,7 +9,7 @@
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" th:href="@{../resources/css/bootstrap.min.css}">
-  <link rel="stylesheet" th:href="@{../resources/css/header.css}">
+  <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
 
   <style>
     .bd-placeholder-img {
@@ -40,6 +40,8 @@
       <p class="lead">Information about patients being treated</p>
     </div>
 
+    <input class="form-control" id="myInput" type="text" placeholder="Search...">
+    <br>
         <table class="table table-hover">
           <thead>
           <tr>
@@ -52,7 +54,7 @@
             <th scope="col">Status</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody id="myTable">
             <tr th:each="treatment: ${treatmentList}">
               <td th:text="${treatment.patientDto.userDto.fullName}">N/A</td>
                 <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
@@ -72,6 +74,7 @@
 </div>
 
 <script th:src="@{../resources/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{../resources/js/table-search.js}"></script>
 
 </body>
 </html>
