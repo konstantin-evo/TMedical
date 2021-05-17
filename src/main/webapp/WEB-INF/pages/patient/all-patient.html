@@ -47,7 +47,6 @@
         <table class="table table-hover">
           <thead>
           <tr>
-    <!--        <th scope="col">#</th>-->
             <th scope="col">Surname</th>
             <th scope="col">First Name</th>
             <th scope="col">Middle name</th>
@@ -63,7 +62,7 @@
                 <td th:text="${patient.userDto.middleName}">N/A</td>
                 <td th:text="${patient.userDto.dbirth}">N/A</td>
                 <td>N/A</td>
-                <td><a class="nav-link" href="#"
+                <td><a class="btn btn-light" role="button" href="#"
                        th:href="@{'/treatment/add/' + ${patient.id}}">Add treatment</a></td>
             </tr>
           </tbody>
