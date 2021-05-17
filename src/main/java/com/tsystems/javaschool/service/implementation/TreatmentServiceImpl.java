@@ -55,6 +55,7 @@ public class TreatmentServiceImpl extends AbstractServiceImpl<Treatment, Treatme
         treatmentDto.setStartDate(startDate);
         treatmentDto.setEndDate(endDate);
         treatmentDto.setDoctor(doctor);
+        treatmentDto.setId(treatment.getId());
 
         return treatmentDto;
     }

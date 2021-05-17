@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class TreatmentDto implements Serializable {
+
+    private Integer id;
     private PatientDto patientDto;
     private String doctor;
     private String diagnosis;
