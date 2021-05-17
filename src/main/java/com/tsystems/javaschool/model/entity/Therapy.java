@@ -21,13 +21,13 @@ public class Therapy {
 
     @Column(name = "time pattern", nullable = false)
     @Size(min = 1, max = 45)
-    private String time_pattern;
+    private String timePattern;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDate start_date;
+    private LocalDate startDate;
 
     @Column(name = "end_date", nullable = false)
-    private LocalDate end_date;
+    private LocalDate endDate;
 
     @Column(name = "dose")
     @Size(min = 1, max = 25)
@@ -37,7 +37,7 @@ public class Therapy {
     @Min(0)
     private int number;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "treat_id")
     private Treatment treatment;
 
