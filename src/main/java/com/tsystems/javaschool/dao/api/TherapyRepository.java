@@ -4,7 +4,7 @@ import com.tsystems.javaschool.model.entity.Therapy;
 
 import java.util.Collection;
 
-public interface TherapyRepository {
+public interface TherapyRepository  extends AbstractRepository<Therapy, Integer> {
     /**
      * Find Therapies by Treatment id.
      * @param treat_id the treatment_id
@@ -25,12 +25,5 @@ public interface TherapyRepository {
      * @return the List<Therapy> entities
      */
     Collection<Therapy> findTherapyByDoctorId(int doctor_id);
-
-    /**
-     * Add treatment entity.
-     * @param therapy the treatment entity
-     * @return the treatment entity
-     */
-    void add(Therapy therapy);
 
 }
