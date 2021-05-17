@@ -44,7 +44,6 @@
       <input class="form-control" id="myInput" type="text" placeholder="Search...">
       <br>
 
-      <form action="#" th:action="@{/patient/index}" th:object="${patientList}" method="post">
         <table class="table table-hover">
           <thead>
           <tr>
@@ -54,6 +53,7 @@
             <th scope="col">Middle name</th>
             <th scope="col">Date of Birth</th>
             <th scope="col">Status</th>
+            <th scope="col"></th>
           </tr>
           </thead>
           <tbody id="myTable">
@@ -63,10 +63,16 @@
                 <td th:text="${patient.userDto.middleName}">N/A</td>
                 <td th:text="${patient.userDto.dbirth}">N/A</td>
                 <td>N/A</td>
+                <td><a class="nav-link" href="#"
+                       th:href="@{'/treatment/add/' + ${patient.id}}">Add treatment</a></td>
             </tr>
           </tbody>
         </table>
-      </form>
+
+      <div class="text-center">
+      <a role="button" class="w-25 btn btn-primary" th:href="@{'/patient/add'}">Add new patient</a>
+      </div>
+
   </main>
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
