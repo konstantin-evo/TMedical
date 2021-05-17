@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.List;
 
 @Repository
 public class TherapyRepositoryImpl implements TherapyRepository {
@@ -41,8 +42,28 @@ public class TherapyRepositoryImpl implements TherapyRepository {
         return null;
     }
 
+
     @Override
-    public void add(Therapy therapy) {
-        session.getCurrentSession().save(therapy);
+    public Therapy findById(Integer id) {
+        return (Therapy) session.getCurrentSession()
+                .createQuery("FROM Therapy AS t WHERE t.id = :id")
+                .setParameter("id", id).getSingleResult();
+    }
+
+    @Override
+    public List<Therapy> findAll() {
+        Query query = session.getCurrentSession().createQuery("from Therapy ");
+        return query.list();
+    }
+
+    @Override
+    public Therapy save(Therapy therapy) {
+        int id = (Integer) session.getCurrentSession().save(therapy);
+        return null;
+    }
+
+    @Override
+    public Therapy update(Therapy therapy) {
+        return (Therapy) session.getCurrentSession().merge(therapy);
     }
 }
