@@ -1,6 +1,8 @@
 package com.tsystems.javaschool.controller;
 
+import com.tsystems.javaschool.model.dto.PatientDto;
 import com.tsystems.javaschool.model.dto.TreatmentDto;
+import com.tsystems.javaschool.service.api.PatientService;
 import com.tsystems.javaschool.service.api.TreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +20,12 @@ import java.util.List;
 public class TreatmentController {
 
     private final TreatmentService treatmentService;
+    private final PatientService patientService;
 
     @Autowired
-    public TreatmentController(TreatmentService treatmentService) {
+    public TreatmentController(TreatmentService treatmentService, PatientService patientService) {
         this.treatmentService = treatmentService;
+        this.patientService = patientService;
     }
 
     @ModelAttribute("treatment")
@@ -46,4 +50,12 @@ public class TreatmentController {
         model.addAttribute("treatmentList", treatmentList);
         return "treatment/patient-treatment";
     }
+
+    @GetMapping("/add/{id}")
+    public String newTreatment(@PathVariable("id") int id, Model model) {
+        PatientDto patient = patientService.findById(id);
+        model.addAttribute("patient", patient);
+        return "treatment/add-treatment";
+    }
+
 }
