@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Treatment</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" th:href="@{../resources/css/bootstrap.min.css}">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+
+<header th:insert="templates/header.html :: header"> </header>
+
+<div class="container">
+  <main>
+    <div class="py-5 text-center pb-0">
+      <img class="d-block mx-auto mb-4" th:src="@{../resources/img/logo.svg}" alt="" width="72" height="57">
+      <h2>Treatment</h2>
+      <p class="lead">Information about treatment</p>
+    </div>
+
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Patient name</th>
+        <th scope="col">Date of Birth</th>
+        <th scope="col">Doctor</th>
+        <th scope="col">Diagnosis</th>
+        <th scope="col">Start of treatment</th>
+        <th scope="col">End of treatment</th>
+        <th scope="col">Status</th>
+      </tr>
+      </thead>
+      <tbody id="myTable">
+      <tr>
+        <td th:text="${treatment.patientDto.userDto.fullName}">N/A</td>
+        <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
+        <td th:text="${treatment.doctor}">N/A</td>
+        <td th:text="${treatment.diagnosis}">N/A</td>
+        <td th:text="${treatment.startDate}">N/A</td>
+        <td th:text="${treatment.endDate}">N/A</td>
+        <td th:text="${treatment.status}">N/A</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="py-5 text-center pb-0">
+      <h3>Therapy List</h3>
+    </div>
+
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Pattern</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Dose</th>
+        <th scope="col">Number of days</th>
+      </tr>
+      </thead>
+      <tbody id="myTable">
+      <tr th:each="treatment: ${treatment.}">
+        <td th:text="${treatment.patientDto.userDto.fullName}">N/A</td>
+        <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
+        <td th:text="${treatment.doctor}">N/A</td>
+        <td th:text="${treatment.diagnosis}">N/A</td>
+        <td th:text="${treatment.startDate}">N/A</td>
+        <td th:text="${treatment.endDate}">N/A</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </main>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; T-Medical</p>
+  </footer>
+</div>
+
+<script th:src="@{../resources/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+</html>
