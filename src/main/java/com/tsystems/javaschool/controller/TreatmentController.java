@@ -61,4 +61,11 @@ public class TreatmentController {
         return "redirect:all";
     }
 
+    @GetMapping("/{id}")
+    public String showTreatment(@PathVariable("id") int id, Model model) {
+        TreatmentDto treatment = treatmentService.findById(id);
+        model.addAttribute("treatment", treatment);
+        return "treatment/show";
+    }
+
 }
