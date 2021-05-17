@@ -52,6 +52,7 @@
             <th scope="col">Start of treatment</th>
             <th scope="col">End of treatment</th>
             <th scope="col">Status</th>
+            <th scope="col"></th>
           </tr>
           </thead>
           <tbody id="myTable">
@@ -63,6 +64,8 @@
                 <td th:text="${treatment.startDate}">N/A</td>
                 <td th:text="${treatment.endDate}">N/A</td>
                 <td th:text="${treatment.status}">N/A</td>
+              <td><a class="btn btn-light" role="button" href="#"
+                     th:href="@{'/treatment/' + ${treatment.id}}">Info</a></td>
             </tr>
           </tbody>
         </table>
