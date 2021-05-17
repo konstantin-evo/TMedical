@@ -23,11 +23,11 @@ public class UserEntity {
     private String surname;
 
     @Column(name = "first_name", nullable = false)
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     private String firstName;
 
     @Column(name = "middle_name")
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     private String middleName;
 
     @Column(name = "dbirth", nullable = false)
@@ -39,11 +39,11 @@ public class UserEntity {
     private Gender gender;
 
     @Column(name = "addr")
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     private String address;
 
     @Column(name = "email", unique=true)
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     private String email;
 
     @Column(name = "password")
