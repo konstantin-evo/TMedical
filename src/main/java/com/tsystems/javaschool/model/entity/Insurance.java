@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Getter @Setter @NoArgsConstructor @EqualsAndHashCode
 public class Insurance {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
