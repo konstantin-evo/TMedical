@@ -55,7 +55,7 @@
             <th scope="col"></th>
           </tr>
           </thead>
-          <tbody id="myTable">
+          <tbody id="myTable" style="vertical-align: middle">
             <tr th:each="treatment: ${treatmentList}">
               <td th:text="${treatment.patientDto.userDto.fullName}">N/A</td>
                 <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
