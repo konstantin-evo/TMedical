@@ -61,33 +61,26 @@
         </div>
 
         <div class="col-md-12" style="width: 50%; margin-left: auto; margin-right: auto">
-        <form th:action="@{/treatment/add}" th:object="${treatment}" method="post" >
+        <form th:action="@{'/treatment/add/'+${patient.id}}" th:object="${treatment}" method="post" >
             <div class="row g-3">
 
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <label for="firstName" class="form-label">Diagnosis</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="" required>
+                    <input type="text" th:field="*{diagnosis}" class="form-control" id="firstName" placeholder="" required>
                     <div class="invalid-feedback">
                         Valid Diagnosis is required.
                     </div>
                 </div>
 
-                <div class="col-sm-6">
-                    <label for="doctor" class="form-label">Doctor</label>
-                    <input type="text" class="form-control" id="doctor" placeholder="" required>
-                    <div class="invalid-feedback">
-                        Valid Doctor is required.
-                    </div>
-                </div>
 
                 <div class="col-sm-6">
                     <label for="startDate" class="form-label">Star Date</label>
-                    <input type="date" id="startDate" class="form-control" required/>
+                    <input type="date" th:field="*{startDate}" id="startDate" class="form-control" required/>
                 </div>
 
                 <div class="col-sm-6">
                     <label for="endDate" class="form-label">End Date</label>
-                    <input type="date" id="endDate" class="form-control" required/>
+                    <input type="date" th:field="*{endDate}" id="endDate" class="form-control" required/>
                 </div>
 
                 <button class="w-50 btn btn-primary btn-lg" type="submit" style="margin-left: auto; margin-right: auto">
