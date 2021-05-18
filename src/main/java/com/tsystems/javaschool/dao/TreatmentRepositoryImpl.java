@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.dao;
 
+import com.tsystems.javaschool.model.entity.Therapy;
 import com.tsystems.javaschool.model.entity.Treatment;
 import com.tsystems.javaschool.dao.api.TreatmentRepository;
 import org.hibernate.SessionFactory;
@@ -35,7 +36,8 @@ public class TreatmentRepositoryImpl implements TreatmentRepository {
 
     @Override
     public Treatment save(Treatment treatment) {
-        return (Treatment) session.getCurrentSession().save(treatment);
+        int id = (Integer) session.getCurrentSession().save(treatment);
+        return null;
     }
 
     @Override
@@ -57,6 +59,14 @@ public class TreatmentRepositoryImpl implements TreatmentRepository {
         Query query = (Query) session.getCurrentSession()
                 .createQuery("FROM Treatment AS t WHERE t.doctor = :doctor_id")
                 .setParameter("doctor_id", doctor_id);
+        return query.list();
+    }
+
+    @Override
+    public List<Therapy> findTherapiesByTreatmentId(int id) {
+        Query query = (Query) session.getCurrentSession()
+                .createQuery("FROM Treatment AS tr JOIN Therapy as th ON tr.id = th.treatment.id WHERE tr.id = :id")
+                .setParameter("id", id);
         return query.list();
     }
 
