@@ -15,6 +15,7 @@ import java.util.List;
 @Getter @Setter @NoArgsConstructor @EqualsAndHashCode
 public class UserEntity {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
