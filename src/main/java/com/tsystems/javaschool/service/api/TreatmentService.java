@@ -9,4 +9,5 @@ public interface TreatmentService extends AbstractService<Treatment, TreatmentDt
 
     List<TreatmentDto> findByPatientId(int id);
 
+    void save(TreatmentDto dto, String email);
 }
