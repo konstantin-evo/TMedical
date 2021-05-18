@@ -1,10 +1,10 @@
 package com.tsystems.javaschool.service.implementation;
 
+import com.tsystems.javaschool.dao.api.PatientRepository;
 import com.tsystems.javaschool.dao.api.TreatmentRepository;
-import com.tsystems.javaschool.model.dto.PatientDto;
-import com.tsystems.javaschool.model.dto.TreatmentDto;
-import com.tsystems.javaschool.model.dto.UserDto;
-import com.tsystems.javaschool.model.entity.Treatment;
+import com.tsystems.javaschool.dao.api.UserRepository;
+import com.tsystems.javaschool.model.dto.*;
+import com.tsystems.javaschool.model.entity.*;
 import com.tsystems.javaschool.service.api.TreatmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +19,20 @@ import java.util.stream.Collectors;
 @Service
 public class TreatmentServiceImpl extends AbstractServiceImpl<Treatment, TreatmentRepository, TreatmentDto, Integer> implements TreatmentService {
 
+    public final UserRepository userRepository;
+    public final PatientRepository patientRepository;
+
     @Autowired
-    public TreatmentServiceImpl(TreatmentRepository dao, ModelMapper mapper) {
+    public TreatmentServiceImpl(TreatmentRepository dao, ModelMapper mapper, UserRepository userRepository, PatientRepository patientRepository) {
         super(dao, mapper, TreatmentDto.class, Treatment.class);
+        this.userRepository = userRepository;
+        this.patientRepository = patientRepository;
     }
+
+
 
     @Override
     public TreatmentDto convertToDTO(Treatment treatment) {
-        String diagnosis = treatment.getDiagnosis();
-        LocalDate startDate = treatment.getStartDate();
-        LocalDate endDate = treatment.getEndDate();
-        String status = ((treatment.isStatus()) ? "On treatment" : "Is discharged");
 
         PatientDto patient = new PatientDto();
         patient.setId(treatment.getPatient().getId());
@@ -50,19 +53,46 @@ public class TreatmentServiceImpl extends AbstractServiceImpl<Treatment, Treatme
 
         TreatmentDto treatmentDto = new TreatmentDto();
         treatmentDto.setPatientDto(patient);
-        treatmentDto.setStatus(status);
-        treatmentDto.setDiagnosis(diagnosis);
-        treatmentDto.setStartDate(startDate);
-        treatmentDto.setEndDate(endDate);
+        treatmentDto.setStatus(((treatment.isStatus()) ? "On treatment" : "Is discharged"));
+        treatmentDto.setDiagnosis(treatment.getDiagnosis());
+        treatmentDto.setStartDate(String.valueOf(treatment.getStartDate()));
+        treatmentDto.setEndDate(String.valueOf(treatment.getEndDate()));
         treatmentDto.setDoctor(doctor);
         treatmentDto.setId(treatment.getId());
+        //treatmentDto.setTherapies(treatment.getTherapies().stream().map(therapy -> convertToDTO(therapy)).collect(Collectors.toList()));
 
         return treatmentDto;
     }
 
+//    private TherapyDto convertToDTO(Therapy therapy) {
+//        TherapyDto therapyDto = new TherapyDto();
+//        therapyDto.setType(therapy.getMedication().getType());
+//        therapyDto.setPattern(therapy.getTimePattern());
+//        therapyDto.setStartDate(String.valueOf(therapy.getStartDate()));
+//        therapyDto.setEndDate(String.valueOf(therapy.getEndDate()));
+//        therapyDto.setDose(therapy.getDose());
+//        therapyDto.setNumberOfDays(therapy.getNumber());
+//
+//        return therapyDto;
+//    }
+
     @Override
     public List<TreatmentDto> convertToDTO(List<Treatment> entities) {
         return entities.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public Treatment convertToEntity(TreatmentDto dto){
+
+        Treatment treatment = new Treatment();
+
+        treatment.setDiagnosis(dto.getDiagnosis());
+        treatment.setStatus(true);
+        treatment.setStartDate(LocalDate.parse(dto.getStartDate()));
+        treatment.setEndDate(LocalDate.parse(dto.getEndDate()));
+        treatment.setPatient(patientRepository.findById(dto.getPatientDto().getId()));
+
+        return treatment;
     }
 
     @Override
@@ -71,4 +101,13 @@ public class TreatmentServiceImpl extends AbstractServiceImpl<Treatment, Treatme
         Collection<Treatment> list = super.getDao().findTreatmentByPatientId(id);
         return convertToDTO((List<Treatment>) list);
     }
+
+    @Override
+    @Transactional
+    public void save(TreatmentDto dto, String email) {
+        Treatment treatment = convertToEntity(dto);
+        treatment.setDoctor(userRepository.findByEmail(email));
+        super.getDao().save(treatment);
+    }
+
 }
