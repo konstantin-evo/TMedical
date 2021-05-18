@@ -66,8 +66,8 @@ public class PatientServiceImpl extends AbstractServiceImpl<Patient, PatientRepo
     private TreatmentDto convertTreatmentToDto(Treatment treatment) {
         TreatmentDto treatmentDto = new TreatmentDto();
         treatmentDto.setDiagnosis(treatment.getDiagnosis());
-        treatmentDto.setStartDate(treatment.getStartDate());
-        treatmentDto.setEndDate(treatment.getEndDate());
+        treatmentDto.setStartDate(String.valueOf(treatment.getStartDate()));
+        treatmentDto.setEndDate(String.valueOf(treatment.getEndDate()));
         treatmentDto.setStatus(String.valueOf(treatment.isStatus()));
         return treatmentDto;
     }
