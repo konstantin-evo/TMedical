@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.dao.api;
 
+import com.tsystems.javaschool.model.entity.Therapy;
 import com.tsystems.javaschool.model.entity.Treatment;
 
 import java.util.Collection;
@@ -21,4 +22,6 @@ public interface TreatmentRepository extends AbstractRepository<Treatment, Integ
      * @return the List<Treatment> entities
      */
     Collection<Treatment> findTreatmentByDoctorId(int doctor_id);
+
+    List<Therapy> findTherapiesByTreatmentId(int id);
 }
