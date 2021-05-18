@@ -15,8 +15,8 @@ public class TreatmentDto implements Serializable {
     private PatientDto patientDto;
     private String doctor;
     private String diagnosis;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
     private String status;
 
     private List<TherapyDto> therapies;
