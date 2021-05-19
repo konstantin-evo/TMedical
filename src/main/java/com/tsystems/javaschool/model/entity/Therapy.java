@@ -20,8 +20,8 @@ public class Therapy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "time pattern", nullable = false)
-    @Size(min = 1, max = 45)
+    @Column(name = "time_pattern", nullable = false)
+    @Size(min = 1, max = 100)
     private String timePattern;
 
     @Column(name = "start_date", nullable = false)
@@ -41,7 +41,7 @@ public class Therapy {
     @JoinColumn(name = "treat_id")
     private Treatment treatment;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "medication_id")
     private Medication medication;
 
