@@ -6,10 +6,12 @@ import com.tsystems.javaschool.model.entity.Therapy;
 import com.tsystems.javaschool.service.api.TherapyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class TherapyServiceImpl extends AbstractServiceImpl<Therapy, TherapyRepository, TherapyDto, Integer> implements TherapyService {
 
     @Autowired
