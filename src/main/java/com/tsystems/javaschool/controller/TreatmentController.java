@@ -76,14 +76,15 @@ public class TreatmentController {
         List<TherapyDto> therapy = treatment.getTherapies();
         model.addAttribute("treatment", treatment);
         model.addAttribute("therapy", therapy);
+        TherapyDto dto = new TherapyDto();
+        model.addAttribute("therapyPost", dto);
         return "treatment/treatment-show";
     }
 
     @PostMapping(value = "/{id}")
-    public String addTherapy(@PathVariable("id") int id, @ModelAttribute("therapy") TherapyDto dto) {
-        dto.setTreatment(treatmentService.findById(id));
-        therapyService.save(dto);
-        return "redirect:/treatment/all";
+    public String addTherapy(@PathVariable("id") int id, @ModelAttribute("therapyPost") TherapyDto dto) {
+       treatmentService.addTherapy(id, dto);
+       return "redirect:/treatment/all";
     }
 
 }
