@@ -22,7 +22,7 @@ public class TherapyCase {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Column(name = "time", nullable = false)
+    @Column(name = "timeCase", nullable = false)
     private LocalTime time;
 
     @Column(name = "status", nullable = false)
