@@ -41,6 +41,6 @@ public class Treatment {
     @JoinColumn(name = "doctor_id")
     private UserEntity doctor;
 
-    @OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "treatment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Therapy> therapies;
 }
