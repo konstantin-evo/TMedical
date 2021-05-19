@@ -1,10 +1,12 @@
 package com.tsystems.javaschool.service.implementation;
 
 import com.tsystems.javaschool.dao.api.PatientRepository;
+import com.tsystems.javaschool.dao.api.TherapyRepository;
 import com.tsystems.javaschool.dao.api.TreatmentRepository;
 import com.tsystems.javaschool.dao.api.UserRepository;
 import com.tsystems.javaschool.model.dto.*;
 import com.tsystems.javaschool.model.entity.*;
+import com.tsystems.javaschool.service.api.TherapyService;
 import com.tsystems.javaschool.service.api.TreatmentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,12 +24,17 @@ public class TreatmentServiceImpl extends AbstractServiceImpl<Treatment, Treatme
 
     public final UserRepository userRepository;
     public final PatientRepository patientRepository;
+    public final TherapyService therapyService;
+    public final TherapyRepository therapyRepo;
 
     @Autowired
-    public TreatmentServiceImpl(TreatmentRepository dao, ModelMapper mapper, UserRepository userRepository, PatientRepository patientRepository) {
+    public TreatmentServiceImpl(TreatmentRepository dao, ModelMapper mapper, UserRepository userRepository, PatientRepository patientRepository, TherapyService therapyService, TherapyRepository therapyRepo) {
         super(dao, mapper, TreatmentDto.class, Treatment.class);
         this.userRepository = userRepository;
         this.patientRepository = patientRepository;
+        this.therapyService = therapyService;
+        this.therapyRepo = therapyRepo;
+
     }
 
 
@@ -91,7 +99,7 @@ public class TreatmentServiceImpl extends AbstractServiceImpl<Treatment, Treatme
         treatment.setStartDate(LocalDate.parse(dto.getStartDate()));
         treatment.setEndDate(LocalDate.parse(dto.getEndDate()));
         treatment.setPatient(patientRepository.findById(dto.getPatientDto().getId()));
-
+        //treatment.setTherapies(con(dto.getTherapies()));
         return treatment;
     }
 
@@ -110,4 +118,13 @@ public class TreatmentServiceImpl extends AbstractServiceImpl<Treatment, Treatme
         super.getDao().save(treatment);
     }
 
+    @Override
+    @Transactional
+    public void addTherapy(int id, TherapyDto dto) {
+        Therapy therapy = therapyService.convertToEntity(dto);
+        Treatment treatment = super.getDao().findById(id);
+        therapy.setTreatment(treatment);
+       // treatment.setTherapies(Collections.singletonList(therapy));
+         therapyRepo.save(therapy);
+    }
 }
