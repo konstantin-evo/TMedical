@@ -25,6 +25,6 @@ public class Medication {
     @Size(min = 1, max = 25)
     private String name;
 
-    @OneToMany(mappedBy = "medication")
+    @OneToMany(mappedBy = "medication", fetch = FetchType.LAZY)
     private List<Therapy> therapies;
 }
