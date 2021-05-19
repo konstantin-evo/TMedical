@@ -78,7 +78,7 @@
     <table class="table table-hover">
       <thead>
       <tr>
-        <th scope="col">Type</th>
+        <th scope="col">Medicine</th>
         <th scope="col">Pattern</th>
         <th scope="col">Start Date</th>
         <th scope="col">End Date</th>
@@ -88,7 +88,7 @@
       </thead>
       <tbody id="myTable">
       <tr th:each="therapy: ${therapy}">
-        <td th:text="${therapy.type}">N/A</td>
+        <td th:text="${therapy.medication}">N/A</td>
         <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
         <td th:text="${treatment.doctor}">N/A</td>
         <td th:text="${treatment.diagnosis}">N/A</td>
@@ -110,26 +110,49 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form method="post" >
+            <form th:action="@{'/treatment/'+${treatment.id}}" th:object="${therapyPost}" method="post" >
               <div class="row g-3">
 
                 <div class="col-sm-12">
-                  <label for="firstName" class="form-label">Diagnosis</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="" required>
+                  <label for="timePattern" class="form-label">Time Pattern</label>
+                  <input type="text" th:field="*{pattern}" class="form-control" id="timePattern" placeholder="" required>
                   <div class="invalid-feedback">
-                    Valid Diagnosis is required.
+                    Valid Time Pattern is required.
                   </div>
                 </div>
 
+                <div class="col-sm-12">
+                  <label for="medicine" class="form-label">Medicine</label>
+                  <input type="text" th:field="*{medication}" class="form-control" id="medicine" placeholder="" required>
+                  <div class="invalid-feedback">
+                    Valid Medicine is required.
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="dose" class="form-label">Dose at a time</label>
+                  <input type="text" th:field="*{dose}" class="form-control" id="dose" placeholder="Two pills per dose" required>
+                  <div class="invalid-feedback">
+                    Valid Medicine is required.
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="number" class="form-label">Number of times</label>
+                  <input type="text" th:field="*{numberOfDays}" class="form-control" id="number" placeholder="" required>
+                  <div class="invalid-feedback">
+                    Valid Medicine is required.
+                  </div>
+                </div>
 
                 <div class="col-sm-6">
                   <label for="startDate" class="form-label">Star Date</label>
-                  <input type="date" id="startDate" class="form-control" required/>
+                  <input type="date" th:field="*{startDate}" id="startDate" class="form-control" required/>
                 </div>
 
                 <div class="col-sm-6">
                   <label for="endDate" class="form-label">End Date</label>
-                  <input type="date" id="endDate" class="form-control" required/>
+                  <input type="date" th:field="*{endDate}" id="endDate" class="form-control" required/>
                 </div>
 
                 <button class="w-25 btn btn-primary btn-lg" type="submit" style="margin-left: auto; margin-right: auto">
