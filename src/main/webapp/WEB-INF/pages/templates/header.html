@@ -17,12 +17,14 @@
 
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img th:src="@{../resources/img/logo.svg}" alt="mdo" height="32" class="rounded-circle">
+            <img th:src="@{/resources/img/logo.svg}" alt="mdo" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
             <li><a class="dropdown-item" href="#" th:href="@{/homePage}">Home</a></li>
-            <li><a class="dropdown-item" href="#" th:href="@{/patient/add}">New Patient</a></li>
-            <li><a class="dropdown-item" href="#" th:href="@{/patient/all}">New Treatment</a></li>
+            <li sec:authorize="hasAuthority('DOCTOR')"><a class="dropdown-item" href="#" th:href="@{/patient/add}">New Patient</a></li>
+            <li sec:authorize="hasAuthority('DOCTOR')"><a class="dropdown-item" href="#" th:href="@{/patient/all}">New Treatment</a></li>
+            <li sec:authorize="hasAuthority('DOCTOR')"><a class="dropdown-item" href="#" th:href="@{/treatment/all}">All Treatments</a></li>
+
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" th:href="@{/logout}">Sign out</a></li>
           </ul>
