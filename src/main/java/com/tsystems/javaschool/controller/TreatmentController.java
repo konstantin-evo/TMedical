@@ -76,7 +76,7 @@ public class TreatmentController {
         List<TherapyDto> therapy = treatment.getTherapies();
         model.addAttribute("treatment", treatment);
         model.addAttribute("therapy", therapy);
-        return "treatment/show";
+        return "treatment/treatment-show";
     }
 
     @PostMapping(value = "/{id}")
