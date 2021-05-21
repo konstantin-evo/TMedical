@@ -9,8 +9,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class TherapyDto implements Serializable {
-    private TreatmentDto treatment;
-    private TreatmentType type;
+    private String medication;
     private String pattern;
     private String startDate;
     private String endDate;
