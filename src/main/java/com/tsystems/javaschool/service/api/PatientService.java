@@ -1,7 +1,13 @@
 package com.tsystems.javaschool.service.api;
 
 import com.tsystems.javaschool.model.dto.PatientDto;
-import com.tsystems.javaschool.model.entity.Patient;
+import org.springframework.stereotype.Service;
 
-public interface PatientService extends AbstractService<Patient, PatientDto, Integer> {
+import java.util.List;
+
+@Service
+public interface PatientService {
+    List<PatientDto> findAll();
+    PatientDto findById(int id);
+    void save(PatientDto patientDto);
 }
