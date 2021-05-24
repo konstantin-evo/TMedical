@@ -2,7 +2,9 @@ package com.tsystems.javaschool.service.api;
 
 import com.tsystems.javaschool.model.entity.UserEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface UserDetailService extends UserDetailsService {
 
     /**
