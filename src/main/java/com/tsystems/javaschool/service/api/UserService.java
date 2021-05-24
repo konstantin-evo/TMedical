@@ -1,8 +1,8 @@
 package com.tsystems.javaschool.service.api;
 
-import com.tsystems.javaschool.model.dto.UserDto;
-import com.tsystems.javaschool.model.entity.UserEntity;
+import org.springframework.stereotype.Service;
 
-public interface UserService extends AbstractService<UserEntity, UserDto, Integer> {
+@Service
+public interface UserService {
 
 }
