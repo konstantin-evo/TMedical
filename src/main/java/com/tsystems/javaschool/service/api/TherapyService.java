@@ -1,8 +1,8 @@
 package com.tsystems.javaschool.service.api;
 
-import com.tsystems.javaschool.model.dto.TherapyDto;
-import com.tsystems.javaschool.model.entity.Therapy;
+import org.springframework.stereotype.Service;
 
-public interface TherapyService extends AbstractService<Therapy, TherapyDto, Integer> {
+@Service
+public interface TherapyService {
 
 }
