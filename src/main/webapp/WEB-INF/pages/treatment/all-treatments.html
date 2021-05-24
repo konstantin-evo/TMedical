@@ -57,8 +57,8 @@
           </thead>
           <tbody id="myTable" style="vertical-align: middle">
             <tr th:each="treatment: ${treatmentList}">
-              <td th:text="${treatment.patientDto.userDto.fullName}">N/A</td>
-                <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
+              <td th:text="${treatment.patientName}">N/A</td>
+                <td th:text="${treatment.patientDbirth}">N/A</td>
                 <td th:text="${treatment.doctor}">N/A</td>
                 <td th:text="${treatment.diagnosis}">N/A</td>
                 <td th:text="${treatment.startDate}">N/A</td>

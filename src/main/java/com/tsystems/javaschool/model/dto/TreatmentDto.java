@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -12,7 +11,8 @@ import java.util.List;
 public class TreatmentDto implements Serializable {
 
     private Integer id;
-    private PatientDto patientDto;
+    private String patientName;
+    private String patientDbirth;
     private String doctor;
     private String diagnosis;
     private String startDate;
