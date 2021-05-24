@@ -74,7 +74,6 @@ public class MapperServiceImpl implements MapperService {
     }
 
     @Override
-    @Transactional
     public UserDto convertToDto(UserEntity userEntity) {
         UserDto user = new UserDto();
         user.setSurname(userEntity.getSurname());
@@ -117,7 +116,6 @@ public class MapperServiceImpl implements MapperService {
     }
 
     @Override
-    @Transactional
     public TreatmentDto convertToDto(Treatment treatment) {
 
         String doctor = treatment.getDoctor().getFirstName() + " " + treatment.getDoctor().getSurname();
