@@ -14,10 +14,10 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Insurance> insurances;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "patient")
     private List<Treatment> treatments;
 
     @OneToOne(cascade = CascadeType.ALL)
