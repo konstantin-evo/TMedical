@@ -1,7 +1,7 @@
 package com.tsystems.javaschool.service.api;
 
-import com.tsystems.javaschool.model.dto.InsuranceDto;
-import com.tsystems.javaschool.model.entity.Insurance;
+import org.springframework.stereotype.Service;
 
-public interface InsuranceService extends AbstractService<Insurance, InsuranceDto, Integer> {
+@Service
+public interface InsuranceService {
 }
