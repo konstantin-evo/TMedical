@@ -1,10 +1,7 @@
 package com.tsystems.javaschool.controller;
 
-import com.tsystems.javaschool.model.dto.InsuranceDto;
 import com.tsystems.javaschool.model.dto.PatientDto;
-import com.tsystems.javaschool.service.api.InsuranceService;
 import com.tsystems.javaschool.service.api.PatientService;
-import com.tsystems.javaschool.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,8 +30,8 @@ public class PatientController {
     }
 
     @PostMapping(value = "/add")
-    public String addPatient(@ModelAttribute("patient") @Valid PatientDto patient) {
-        patientService.save(patient);
+    public String addPatient(@ModelAttribute("patient") @Valid PatientDto patientDto) {
+        patientService.save(patientDto);
         return "redirect:all";
     }
 
