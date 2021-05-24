@@ -2,15 +2,17 @@ package com.tsystems.javaschool.service.api;
 
 import com.tsystems.javaschool.model.dto.TherapyDto;
 import com.tsystems.javaschool.model.dto.TreatmentDto;
-import com.tsystems.javaschool.model.entity.Treatment;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface TreatmentService extends AbstractService<Treatment, TreatmentDto, Integer> {
+@Service
+public interface TreatmentService {
 
     List<TreatmentDto> findByPatientId(int id);
+    TreatmentDto findById(int id);
+    List<TreatmentDto> findAll();
 
-    void save(TreatmentDto dto, String email);
-
+    void save(TreatmentDto dto, String email, int id);
     void addTherapy(int id, TherapyDto dto);
 }
