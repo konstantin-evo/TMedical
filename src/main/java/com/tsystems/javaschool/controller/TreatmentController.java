@@ -4,7 +4,6 @@ import com.tsystems.javaschool.model.dto.PatientDto;
 import com.tsystems.javaschool.model.dto.TherapyDto;
 import com.tsystems.javaschool.model.dto.TreatmentDto;
 import com.tsystems.javaschool.service.api.PatientService;
-import com.tsystems.javaschool.service.api.TherapyService;
 import com.tsystems.javaschool.service.api.TreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,13 +21,11 @@ public class TreatmentController {
 
     private final TreatmentService treatmentService;
     private final PatientService patientService;
-    private final TherapyService therapyService;
 
     @Autowired
-    public TreatmentController(TreatmentService treatmentService, PatientService patientService, TherapyService therapyService) {
+    public TreatmentController(TreatmentService treatmentService, PatientService patientService) {
         this.treatmentService = treatmentService;
         this.patientService = patientService;
-        this.therapyService = therapyService;
     }
 
     @ModelAttribute("treatment")
@@ -43,7 +40,6 @@ public class TreatmentController {
 
     @GetMapping("/all")
     public String index(@ModelAttribute("treatmentList") @Valid List<TreatmentDto> treatmentList) {
-        treatmentList = treatmentService.findAll();
         return "treatment/all-treatments";
     }
 
@@ -63,10 +59,9 @@ public class TreatmentController {
 
     @PostMapping(value = "/add/{id}")
     public String addTreatment(@PathVariable("id") int id, @ModelAttribute("treatment") TreatmentDto treatment) {
-        treatment.setPatientDto(patientService.findById(id));
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email =  authentication.getName();
-        treatmentService.save(treatment, email);
+        treatmentService.save(treatment, email, id);
         return "redirect:/treatment/all";
     }
 
