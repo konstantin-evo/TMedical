@@ -15,6 +15,8 @@ public interface MapperService {
         TherapyDto convertToDto(Therapy therapy);
         Therapy convertToEntity(TherapyDto dto);
 
+        TherapyCase convertToEntity(TherapyCaseDto dto);
+
         InsuranceDto convertToDto(Insurance insurance);
 
         UserDto convertToDto(UserEntity userEntity);

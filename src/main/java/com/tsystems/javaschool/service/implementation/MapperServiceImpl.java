@@ -6,11 +6,13 @@ import com.tsystems.javaschool.dao.api.TreatmentRepository;
 import com.tsystems.javaschool.model.dto.*;
 import com.tsystems.javaschool.model.entity.*;
 import com.tsystems.javaschool.model.entity.enums.Role;
+import com.tsystems.javaschool.model.entity.enums.TherapyStatus;
 import com.tsystems.javaschool.service.api.MapperService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -92,13 +94,14 @@ public class MapperServiceImpl implements MapperService {
     public Therapy convertToEntity(TherapyDto dto){
 
         Therapy therapy = new Therapy();
+        LocalDate startDate = LocalDate.parse(dto.getStartDate());
 
         therapy.setDose(dto.getDose());
         therapy.setTimePattern(dto.getPattern());
-        therapy.setStartDate(LocalDate.parse(dto.getStartDate()));
-        therapy.setEndDate(LocalDate.parse(dto.getEndDate()));
+        therapy.setStartDate(startDate);
         therapy.setNumber(dto.getNumberOfDays());
         therapy.setMedication(medicamentationRepository.findMedicationByName(dto.getMedication()));
+
         return therapy;
     }
 
@@ -108,7 +111,6 @@ public class MapperServiceImpl implements MapperService {
         therapyDto.setMedication(String.valueOf(therapy.getMedication()));
         therapyDto.setPattern(therapy.getTimePattern());
         therapyDto.setStartDate(String.valueOf(therapy.getStartDate()));
-        therapyDto.setEndDate(String.valueOf(therapy.getEndDate()));
         therapyDto.setDose(therapy.getDose());
         therapyDto.setNumberOfDays(therapy.getNumber());
 
@@ -144,6 +146,18 @@ public class MapperServiceImpl implements MapperService {
         treatment.setStartDate(LocalDate.parse(dto.getStartDate()));
         treatment.setEndDate(LocalDate.parse(dto.getEndDate()));
         return treatment;
+    }
+
+    @Override
+    public TherapyCase convertToEntity(TherapyCaseDto dto){
+
+        TherapyCase therapyCase = new TherapyCase();
+
+        therapyCase.setStatus(TherapyStatus.valueOf("PLANNED"));
+        therapyCase.setDate(LocalDate.parse(dto.getDate()));
+        therapyCase.setTime(LocalTime.parse(dto.getTime()));
+
+        return therapyCase;
     }
 
 }
