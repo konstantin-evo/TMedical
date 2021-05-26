@@ -1,9 +1,8 @@
 package com.tsystems.javaschool.controller;
 
-import com.tsystems.javaschool.model.dto.PatientDto;
-import com.tsystems.javaschool.model.dto.TherapyDto;
-import com.tsystems.javaschool.model.dto.TreatmentDto;
+import com.tsystems.javaschool.model.dto.*;
 import com.tsystems.javaschool.service.api.PatientService;
+import com.tsystems.javaschool.service.api.TherapyService;
 import com.tsystems.javaschool.service.api.TreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -21,11 +21,13 @@ public class TreatmentController {
 
     private final TreatmentService treatmentService;
     private final PatientService patientService;
+    private final TherapyService therapyService;
 
     @Autowired
-    public TreatmentController(TreatmentService treatmentService, PatientService patientService) {
+    public TreatmentController(TreatmentService treatmentService, PatientService patientService, TherapyService therapyService) {
         this.treatmentService = treatmentService;
         this.patientService = patientService;
+        this.therapyService = therapyService;
     }
 
     @ModelAttribute("treatment")
@@ -69,17 +71,34 @@ public class TreatmentController {
     public String showTreatment(@PathVariable("id") int id, Model model) {
         TreatmentDto treatment = treatmentService.findById(id);
         List<TherapyDto> therapy = treatment.getTherapies();
+
         model.addAttribute("treatment", treatment);
         model.addAttribute("therapy", therapy);
-        TherapyDto dto = new TherapyDto();
-        model.addAttribute("therapyPost", dto);
+
+        List<TherapyDaysDto> therapyDaysDto = new ArrayList<>();
+        therapyDaysDto.add(new TherapyDaysDto("MONDAY", null));
+        therapyDaysDto.add(new TherapyDaysDto("TUESDAY", null));
+        therapyDaysDto.add(new TherapyDaysDto("WEDNESDAY", null));
+        therapyDaysDto.add(new TherapyDaysDto("THURSDAY", null));
+        therapyDaysDto.add(new TherapyDaysDto("FRIDAY", null));
+        therapyDaysDto.add(new TherapyDaysDto("SATURDAY", null));
+        therapyDaysDto.add(new TherapyDaysDto("SUNDAY", null));
+
+        TherapyDto therapyDto = new TherapyDto();
+        DaysWrapper form = new DaysWrapper();
+        form.setDays(therapyDaysDto);
+        therapyDto.setWrapper(form);
+
+        model.addAttribute("therapyPost", therapyDto);
         return "treatment/treatment-show";
     }
 
     @PostMapping(value = "/{id}")
-    public String addTherapy(@PathVariable("id") int id, @ModelAttribute("therapyPost") TherapyDto dto) {
-       treatmentService.addTherapy(id, dto);
-       return "redirect:/treatment/all";
+    public String addTherapy(@PathVariable("id") int id,
+                             @ModelAttribute("therapyPost") TherapyDto therapyDto) {
+        treatmentService.addTherapy(id, therapyDto);
+        therapyDto.getWrapper().getDays();
+        return "redirect:/treatment/all";
     }
 
 }
