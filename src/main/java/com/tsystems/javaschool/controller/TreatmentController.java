@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,6 +98,7 @@ public class TreatmentController {
     public String addTherapy(@PathVariable("id") int id,
                              @ModelAttribute("therapyPost") TherapyDto therapyDto) {
         treatmentService.addTherapy(id, therapyDto);
+        List<LocalDateTime> daysForTherapyCases = treatmentService.createTherapyDays(therapyDto.getWrapper().getDays(), therapyDto.getNumberOfDays());
         therapyDto.getWrapper().getDays();
         return "redirect:/treatment/all";
     }
