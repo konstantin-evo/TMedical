@@ -13,8 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -71,5 +78,28 @@ public class TreatmentServiceImpl implements TreatmentService {
         Treatment treatment = dao.findById(id);
         therapy.setTreatment(treatment);
         therapyRepository.save(therapy);
+    }
+
+    public List<LocalDateTime> createTherapyDays(List<TherapyDaysDto> therapyDays, int count) {
+        List<LocalDateTime> list = new ArrayList<>();
+        LocalDate currentDay = LocalDate.now();
+        DayOfWeek currentDayOfWeek = currentDay.getDayOfWeek();
+        int currentCount = 0;
+
+        therapyDays = therapyDays.stream().filter(therapyDaysDto -> therapyDaysDto.getTime() != "").collect(Collectors.toList());
+
+        while (currentCount < count) {
+            for (TherapyDaysDto therapyDaysDto : therapyDays) {
+                String nameOfDay = therapyDaysDto.getDay().getDisplayValue();
+
+                if ((currentCount < count) && (currentDayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH).equalsIgnoreCase(nameOfDay))) {
+                    list.add(currentDay.atTime(LocalTime.parse(therapyDaysDto.getTime())));
+                    currentCount++;
+                }
+            }
+            currentDay = currentDay.plusDays(1);
+            currentDayOfWeek = currentDay.getDayOfWeek();
+        }
+        return list;
     }
 }
