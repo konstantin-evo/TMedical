@@ -59,7 +59,7 @@ public class TherapyRepositoryImpl implements TherapyRepository {
     @Override
     public Therapy save(Therapy therapy) {
         int id = (Integer) session.getCurrentSession().save(therapy);
-        return null;
+        return findById(id);
     }
 
     @Override
