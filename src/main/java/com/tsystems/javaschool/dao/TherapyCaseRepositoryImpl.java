@@ -1,6 +1,7 @@
 package com.tsystems.javaschool.dao;
 
 import com.tsystems.javaschool.dao.api.TherapyCaseRepository;
+import com.tsystems.javaschool.model.entity.Therapy;
 import com.tsystems.javaschool.model.entity.TherapyCase;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -12,17 +13,12 @@ import java.util.List;
 
 @Repository
 public class TherapyCaseRepositoryImpl implements TherapyCaseRepository {
+
     private SessionFactory session;
 
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.session = sessionFactory;
-    }
-
-    @Override
-    public List<TherapyCase> findAllTherapyCase() {
-        Query query = session.getCurrentSession().createQuery("from TherapyCase");
-        return query.list();
     }
 
     @Override
@@ -70,5 +66,30 @@ public class TherapyCaseRepositoryImpl implements TherapyCaseRepository {
                 .setParameter("status", status);
 
         return query.list();
+    }
+
+
+    @Override
+    public TherapyCase findById(Integer id) {
+        return (TherapyCase) session.getCurrentSession()
+                .createQuery("FROM TherapyCase AS t WHERE t.id = :id")
+                .setParameter("id", id).getSingleResult();
+    }
+
+    @Override
+    public List<TherapyCase> findAll() {
+        Query query = session.getCurrentSession().createQuery("FROM TherapyCase");
+        return query.list();
+    }
+
+    @Override
+    public TherapyCase save(TherapyCase therapyCase) {
+        int id = (Integer) session.getCurrentSession().save(therapyCase);
+        return null;
+    }
+
+    @Override
+    public TherapyCase update(TherapyCase therapyCase) {
+        return (TherapyCase) session.getCurrentSession().merge(therapyCase);
     }
 }

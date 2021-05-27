@@ -5,9 +5,7 @@ import com.tsystems.javaschool.model.entity.TherapyCase;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface TherapyCaseRepository {
-
-    List<TherapyCase> findAllTherapyCase();
+public interface TherapyCaseRepository extends AbstractRepository<TherapyCase, Integer> {
 
     List<TherapyCase> findTherapyCaseByNurse(String surname);
 
