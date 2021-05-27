@@ -27,7 +27,7 @@ public class Therapy {
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @Column(name = "end_date", nullable = false)
+    @Column(name = "end_date")
     private LocalDate endDate;
 
     @Column(name = "dose")
@@ -37,14 +37,14 @@ public class Therapy {
     @Column(name = "number", nullable = false)
     private int number;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "treat_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "treat_id", nullable = false)
     private Treatment treatment;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "medication_id")
     private Medication medication;
 
-    @OneToMany(mappedBy = "therapy")
-    private List<TherapyCase> TherapyCases;
+    @OneToMany(mappedBy = "therapy",cascade = CascadeType.ALL)
+    private List<TherapyCase> therapyCases;
 }
