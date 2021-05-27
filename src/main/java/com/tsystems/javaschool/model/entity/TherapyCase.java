@@ -32,7 +32,7 @@ public class TherapyCase {
     @JoinColumn(name = "nurse_id")
     private UserEntity nurse;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "therapy_id", nullable = false)
     private Therapy therapy;
 }
