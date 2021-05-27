@@ -1,11 +1,9 @@
 package com.tsystems.javaschool.service.implementation;
 
-import com.tsystems.javaschool.dao.api.PatientRepository;
-import com.tsystems.javaschool.dao.api.TherapyRepository;
-import com.tsystems.javaschool.dao.api.TreatmentRepository;
-import com.tsystems.javaschool.dao.api.UserRepository;
+import com.tsystems.javaschool.dao.api.*;
 import com.tsystems.javaschool.model.dto.*;
 import com.tsystems.javaschool.model.entity.*;
+import com.tsystems.javaschool.model.entity.enums.TherapyStatus;
 import com.tsystems.javaschool.service.api.MapperService;
 import com.tsystems.javaschool.service.api.TherapyService;
 import com.tsystems.javaschool.service.api.TreatmentService;
@@ -18,10 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,15 +27,17 @@ public class TreatmentServiceImpl implements TreatmentService {
     public final PatientRepository patientRepository;
     public final TherapyService therapyService;
     public final TherapyRepository therapyRepository;
+    public final TherapyCaseRepository therapyCaseRepository;
     public final MapperService mapper;
 
     @Autowired
-    public TreatmentServiceImpl(TreatmentRepository dao, UserRepository userRepository, PatientRepository patientRepository, TherapyService therapyService, TherapyRepository therapyRepository, MapperService mapper) {
+    public TreatmentServiceImpl(TreatmentRepository dao, UserRepository userRepository, PatientRepository patientRepository, TherapyService therapyService, TherapyRepository therapyRepository, TherapyCaseRepository therapyCaseRepository, MapperService mapper) {
         this.dao = dao;
         this.userRepository = userRepository;
         this.patientRepository = patientRepository;
         this.therapyService = therapyService;
         this.therapyRepository = therapyRepository;
+        this.therapyCaseRepository = therapyCaseRepository;
         this.mapper = mapper;
     }
 
@@ -76,8 +73,22 @@ public class TreatmentServiceImpl implements TreatmentService {
     public void addTherapy(int id, TherapyDto dto) {
         Therapy therapy = mapper.convertToEntity(dto);
         Treatment treatment = dao.findById(id);
+
+        List<LocalDateTime> times = createTherapyDays(dto.getWrapper().getDays(), dto.getNumberOfDays());
+        List<TherapyCase> therapyCases = new ArrayList<>();
+
+        for(LocalDateTime time : times) {
+           TherapyCase therapyCase = new TherapyCase();
+           therapyCase.setStatus(TherapyStatus.valueOf("PLANNED"));
+           therapyCase.setTime(time.toLocalTime());
+           therapyCase.setDate(time.toLocalDate());
+           therapyCase.setTherapy(therapy);
+           therapyCases.add(therapyCase);
+        }
+        therapy.setTherapyCases(therapyCases);
         therapy.setTreatment(treatment);
         therapyRepository.save(therapy);
+        dao.update(treatment);
     }
 
     public List<LocalDateTime> createTherapyDays(List<TherapyDaysDto> therapyDays, int count) {
