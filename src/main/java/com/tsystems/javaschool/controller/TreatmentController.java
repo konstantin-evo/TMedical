@@ -98,8 +98,6 @@ public class TreatmentController {
     public String addTherapy(@PathVariable("id") int id,
                              @ModelAttribute("therapyPost") TherapyDto therapyDto) {
         treatmentService.addTherapy(id, therapyDto);
-        List<LocalDateTime> daysForTherapyCases = treatmentService.createTherapyDays(therapyDto.getWrapper().getDays(), therapyDto.getNumberOfDays());
-        therapyDto.getWrapper().getDays();
         return "redirect:/treatment/all";
     }
 
