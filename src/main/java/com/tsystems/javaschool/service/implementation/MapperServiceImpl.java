@@ -100,7 +100,7 @@ public class MapperServiceImpl implements MapperService {
         therapy.setTimePattern(dto.getPattern());
         therapy.setStartDate(startDate);
         therapy.setNumber(dto.getNumberOfDays());
-        therapy.setMedication(medicamentationRepository.findMedicationByName(dto.getMedication()));
+        therapy.setMedication(medicamentationRepository.findMedicationByName(dto.getMedicationName()));
 
         return therapy;
     }
@@ -108,11 +108,18 @@ public class MapperServiceImpl implements MapperService {
     @Override
     public TherapyDto convertToDto(Therapy therapy) {
         TherapyDto therapyDto = new TherapyDto();
-        therapyDto.setMedication(String.valueOf(therapy.getMedication()));
-        therapyDto.setPattern(therapy.getTimePattern());
+        therapyDto.setMedicationName(String.valueOf(therapy.getMedication().getName()));
+        therapyDto.setPattern(therapy.getTimePattern().toLowerCase());
         therapyDto.setStartDate(String.valueOf(therapy.getStartDate()));
-        therapyDto.setDose(therapy.getDose());
+
+        if (!therapy.getDose().equals("")) {
+            String dose = " (" + therapy.getDose() + ")";
+            therapyDto.setDose(dose);} else {
+            therapyDto.setDose("");
+        }
+
         therapyDto.setNumberOfDays(therapy.getNumber());
+        therapyDto.setTherapyCaseDtos(therapy.getTherapyCases().stream().map(this::converToDto).collect(Collectors.toList()));
 
         return therapyDto;
     }
@@ -150,14 +157,20 @@ public class MapperServiceImpl implements MapperService {
 
     @Override
     public TherapyCase convertToEntity(TherapyCaseDto dto){
-
         TherapyCase therapyCase = new TherapyCase();
-
         therapyCase.setStatus(TherapyStatus.valueOf("PLANNED"));
         therapyCase.setDate(LocalDate.parse(dto.getDate()));
         therapyCase.setTime(LocalTime.parse(dto.getTime()));
-
         return therapyCase;
+    }
+
+    @Override
+    public TherapyCaseDto converToDto(TherapyCase therapyCase){
+        TherapyCaseDto dto = new TherapyCaseDto();
+        dto.setDate(String.valueOf(therapyCase.getDate()));
+        dto.setStatus(String.valueOf(therapyCase.getStatus().getDisplayValue()));
+        dto.setTime(String.valueOf(therapyCase.getTime()));
+        return dto;
     }
 
 }
