@@ -73,37 +73,42 @@
 
     <div class="py-5 text-center pb-0">
       <h3>Therapy List</h3>
+      <p class="lead">Information about therapies prescribed as part of treatment</p>
     </div>
 
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th scope="col">Medicine</th>
-        <th scope="col">Pattern</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-        <th scope="col">Dose</th>
-        <th scope="col">Number of days</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="therapy: ${therapy}">
-        <td th:text="${therapy.medication}">N/A</td>
-        <td th:text="${treatment.patientDto.userDto.dbirth}">N/A</td>
-        <td th:text="${treatment.doctor}">N/A</td>
-        <td th:text="${treatment.diagnosis}">N/A</td>
-        <td th:text="${treatment.startDate}">N/A</td>
-        <td th:text="${treatment.endDate}">N/A</td>
-      </tr>
-      </tbody>
-    </table>
+    <!-- Block containing therapy cases - start -->
+      <div class="card-columns">
+        <div class="card pb-2" style="margin-top: 20px" th:each="therapy: ${therapies}">
+          <!-- Содержание панели по умолчанию -->
+          <div class="card-header bg-primary text-white" th:text="${therapy.medicationName} + ': ' + ${therapy.pattern} + ${therapy.dose}">N/A</div>
+          <div class="card-body">
+            <!-- Таблица -->
+            <div class="row">
+              <div class="col-sm-3 pb-3" th:each="case, stat : ${therapy.therapyCaseDtos}">
+                <div class="card">
+                  <div class="card-body">
+                    <!--                <h5 class="card-title" th:text="${therapy.therapyCaseDtos[__${stat.index}__].day}"></h5>-->
+                    <!--                <p class="card-text" th:text="${therapy.therapyCaseDtos[__${stat.index}__].day}"></p>-->
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item" th:text="'Status: ' + ${therapy.therapyCaseDtos[__${stat.index}__].status}"></li>
+                      <li class="list-group-item" th:text="'Date: ' + ${therapy.therapyCaseDtos[__${stat.index}__].date}"></li>
+                      <li class="list-group-item" th:text="'Date: ' + ${therapy.therapyCaseDtos[__${stat.index}__].time}"></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Таблица конец-->
+          </div>
+        </div>
+      </div>
+    <!-- Block containing therapy cases - end -->
 
     <!-- The Modal -->
     <div class="modal" id="myModal">
       <div class="modal-dialog">
         <div class="modal-content">
 
-          <!-- Modal Header -->
           <div class="modal-header text-center d-block ">
             <h5 class="modal-title">Add Therapy</h5>
           </div>
@@ -136,7 +141,7 @@
 
                 <div class="col-sm-6">
                   <label for="medicine" class="form-label">Name</label>
-                  <input type="text" th:field="*{medication}" class="form-control" id="medicine" placeholder="" required>
+                  <input type="text" th:field="*{medicationName}" class="form-control" id="medicine" placeholder="" required>
                   <div class="invalid-feedback">
                     Valid Medicine is required.
                   </div>
@@ -144,7 +149,7 @@
 
                 <div class="col-sm-12">
                   <label for="dose" class="form-label">Dose at a time</label>
-                  <input type="text" th:field="*{dose}" class="form-control" id="dose" placeholder="Two pills per dose" required>
+                  <input type="text" th:field="*{dose}" class="form-control" id="dose" placeholder="Two pills per dose">
                   <div class="invalid-feedback">
                     Valid Medicine is required.
                   </div>
@@ -165,31 +170,27 @@
               </div>
 
               <!-- Date and time selection form (start) -->
-                <div th:each="therapyDay, stat : ${therapyPost.wrapper.days}">
-                  <div class="col-sm-3" style="vertical-align: middle">
-                    <label th:for="${therapyDay.day}" th:text="${therapyDay.day.displayValue}"></label>
-                  </div>
-                  <div class="col-sm-6">
-                    <input type="time" th:field="*{wrapper.days[__${stat.index}__].time}" th:id="${therapyDay.day}" class="form-control">
-                    <input type="text" th:field="*{wrapper.days[__${stat.index}__].day}" class="invisible">
-                  </div>
-                  <div class="col-sm-3">
-                    <button type="button" class="btn btn-light btn-block">
-                      Clear
-                    </button>
-                  </div>
+              <div th:each="therapyDay, stat : ${therapyPost.wrapper.days}">
+                <div class="col-sm-3" style="vertical-align: middle">
+                  <label th:for="${therapyDay.day}" th:text="${therapyDay.day.displayValue}"></label>
                 </div>
+                <div class="col-sm-6">
+                  <input type="time" th:field="*{wrapper.days[__${stat.index}__].time}" th:id="${therapyDay.day}" class="form-control">
+                  <input type="text" th:field="*{wrapper.days[__${stat.index}__].day}" class="invisible">
+                </div>
+                <div class="col-sm-3">
+                  <button type="button" class="btn btn-light btn-block">
+                    Clear
+                  </button>
+                </div>
+              </div>
               <!-- Date and time selection form (end) -->
               <button class="w-25 btn btn-primary btn-lg" style="margin-left: auto; margin-right: auto" type="submit">
                 Confirm
               </button>
             </form>
-
-
-
           </div>
           <!-- Modal body end -->
-
         </div>
       </div>
     </div>
