@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TherapyServiceImpl implements TherapyService {
@@ -24,4 +25,10 @@ public class TherapyServiceImpl implements TherapyService {
         this.mapper = mapper;
     }
 
+    @Override
+    @Transactional
+    public List<TherapyDto> findByTreatmentId(int id) {
+        Collection<Therapy> list = dao.findTherapyByTreatmentId(id);
+        return list.stream().map(therapy -> mapper.convertToDto(therapy)).collect(Collectors.toList());
+    }
 }
