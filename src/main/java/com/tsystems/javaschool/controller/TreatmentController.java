@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,10 +70,10 @@ public class TreatmentController {
     @GetMapping("/{id}")
     public String showTreatment(@PathVariable("id") int id, Model model) {
         TreatmentDto treatment = treatmentService.findById(id);
-        List<TherapyDto> therapy = treatment.getTherapies();
+        List<TherapyDto> therapies = therapyService.findByTreatmentId(id);
 
         model.addAttribute("treatment", treatment);
-        model.addAttribute("therapy", therapy);
+        model.addAttribute("therapies", therapies);
 
         List<TherapyDaysDto> therapyDaysDto = new ArrayList<>();
         therapyDaysDto.add(new TherapyDaysDto("MONDAY", null));
