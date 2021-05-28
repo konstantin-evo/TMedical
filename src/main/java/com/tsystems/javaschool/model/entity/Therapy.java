@@ -31,7 +31,7 @@ public class Therapy {
     private LocalDate endDate;
 
     @Column(name = "dose")
-    @Size(min = 1, max = 25)
+    @Size(max = 100)
     private String dose;
 
     @Column(name = "number", nullable = false)
