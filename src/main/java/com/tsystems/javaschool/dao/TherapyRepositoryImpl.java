@@ -22,7 +22,7 @@ public class TherapyRepositoryImpl implements TherapyRepository {
     @Override
     public Collection<Therapy> findTherapyByTreatmentId(int treat_id) {
         Query query = (Query) session.getCurrentSession()
-                .createQuery("FROM Therapy AS t WHERE t.treatment = :treat_id")
+                .createQuery("FROM Therapy AS t WHERE t.treatment.id = :treat_id")
                 .setParameter("treat_id", treat_id);
 
         return query.list();
