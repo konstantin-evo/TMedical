@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class TherapyDto implements Serializable {
-    private String medication;
+    private String medicationName;
     private String pattern;
     private String startDate;
     private String dose;
