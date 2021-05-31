@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.service.api;
 
+import com.tsystems.javaschool.model.dto.TherapyCaseDto;
 import com.tsystems.javaschool.model.dto.TherapyDto;
 import org.springframework.stereotype.Service;
 
@@ -9,5 +10,6 @@ import java.util.List;
 public interface TherapyService {
 
     List<TherapyDto> findByTreatmentId(int id);
+    List<TherapyCaseDto> findCasesByDay(String day);
 
 }
