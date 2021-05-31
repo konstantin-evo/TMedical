@@ -170,6 +170,14 @@ public class MapperServiceImpl implements MapperService {
         dto.setDate(String.valueOf(therapyCase.getDate()));
         dto.setStatus(String.valueOf(therapyCase.getStatus().getDisplayValue()));
         dto.setTime(String.valueOf(therapyCase.getTime()));
+
+        String patient = therapyCase.getTherapy().getTreatment().getPatient().getUser().getSurname() + " " + therapyCase.getTherapy().getTreatment().getPatient().getUser().getFirstName().substring(0,1) + ".";
+        String doctor = therapyCase.getTherapy().getTreatment().getDoctor().getSurname() + " " + therapyCase.getTherapy().getTreatment().getDoctor().getFirstName().substring(0,1) + ".";
+        dto.setPatient(patient);
+        dto.setDoctor(doctor);
+        dto.setMedical(therapyCase.getTherapy().getMedication().getName());
+        dto.setId(therapyCase.getId());
+
         return dto;
     }
 
