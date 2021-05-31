@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Treatment</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" th:href="@{../resources/css/bootstrap.min.css}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+
+<header th:insert="templates/header.html :: header"> </header>
+
+<div class="container">
+  <main>
+
+  </main>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; T-Medical</p>
+  </footer>
+</div>
+
+<script th:src="@{../resources/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{../resources/js/bootstrap.min.js}"></script>
+<script th:src="@{../resources/js/popper.min.js}"></script>
+
+</body>
+</html>
