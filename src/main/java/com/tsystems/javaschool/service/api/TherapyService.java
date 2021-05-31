@@ -11,5 +11,8 @@ public interface TherapyService {
 
     List<TherapyDto> findByTreatmentId(int id);
     List<TherapyCaseDto> findCasesByDay(String day);
+    TherapyCaseDto findCaseById(int id);
+
+    void setStatus(int id, String email, String status);
 
 }
