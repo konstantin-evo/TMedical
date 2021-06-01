@@ -63,7 +63,11 @@ public class MapperServiceImpl implements MapperService {
         UserEntity user = new UserEntity();
         user.setFirstName(dto.getUserDto().getFirstName());
         user.setSurname(dto.getUserDto().getSurname());
-        user.setMiddleName(dto.getUserDto().getMiddleName());
+
+        if (dto.getUserDto().getMiddleName() != "") {
+            user.setMiddleName(dto.getUserDto().getMiddleName());
+        }
+
         user.setGender(dto.getUserDto().getGender());
         user.setAddress(dto.getUserDto().getAddress());
         user.setEmail(dto.getUserDto().getEmail());
@@ -77,17 +81,28 @@ public class MapperServiceImpl implements MapperService {
 
     @Override
     public UserDto convertToDto(UserEntity userEntity) {
-        UserDto user = new UserDto();
-        user.setSurname(userEntity.getSurname());
-        user.setFirstName(userEntity.getFirstName());
-        user.setMiddleName(userEntity.getMiddleName());
-        user.setDbirth(String.valueOf(userEntity.getDbirth()));
-        user.setGender(userEntity.getGender());
-        user.setAddress(userEntity.getAddress());
-        user.setEmail(userEntity.getEmail());
-        user.setFullName(new StringBuilder().append(userEntity.getSurname()).append(" ").append(userEntity.getFirstName().substring(0, 1).toUpperCase()).append(". ").append(userEntity.getMiddleName().substring(0, 1).toUpperCase()).append(".").toString());
+        UserDto dto = new UserDto();
+        dto.setSurname(userEntity.getSurname());
+        dto.setFirstName(userEntity.getFirstName());
 
-        return user;
+        if (userEntity.getMiddleName() != null) {
+            dto.setMiddleName(userEntity.getMiddleName());
+        } else {
+            dto.setMiddleName(" ");
+        }
+
+        dto.setDbirth(String.valueOf(userEntity.getDbirth()));
+        dto.setGender(userEntity.getGender());
+        dto.setAddress(userEntity.getAddress());
+        dto.setEmail(userEntity.getEmail());
+
+        if (userEntity.getMiddleName() != null) {
+            dto.setFullName(new StringBuilder().append(userEntity.getSurname()).append(" ").append(userEntity.getFirstName().substring(0, 1).toUpperCase()).append(". ").append(userEntity.getMiddleName().substring(0, 1).toUpperCase()).append(".").toString());
+        } else {
+            dto.setFullName(new StringBuilder().append(userEntity.getSurname()).append(" ").append(userEntity.getFirstName().substring(0, 1).toUpperCase()).append(". ").toString());
+        }
+
+        return dto;
     }
 
     @Override
@@ -126,9 +141,14 @@ public class MapperServiceImpl implements MapperService {
 
     @Override
     public TreatmentDto convertToDto(Treatment treatment) {
-
+        String patietnName;
         String doctor = treatment.getDoctor().getFirstName() + " " + treatment.getDoctor().getSurname();
-        String patietnName = treatment.getPatient().getUser().getSurname() + " " + treatment.getPatient().getUser().getFirstName().substring(0, 1).toUpperCase() + ". " + treatment.getPatient().getUser().getMiddleName().substring(0, 1).toUpperCase() + ".";
+
+        if(treatment.getPatient().getUser().getMiddleName() != null) {
+            patietnName = treatment.getPatient().getUser().getSurname() + " " + treatment.getPatient().getUser().getFirstName().substring(0, 1).toUpperCase() + ". " + treatment.getPatient().getUser().getMiddleName().substring(0, 1).toUpperCase() + ".";
+        } else {
+            patietnName = treatment.getPatient().getUser().getSurname() + " " + treatment.getPatient().getUser().getFirstName().substring(0, 1).toUpperCase() + ". ";
+        }
 
         TreatmentDto treatmentDto = new TreatmentDto();
         treatmentDto.setPatientName(patietnName);
