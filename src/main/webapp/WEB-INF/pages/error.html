@@ -1,16 +1,53 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kpriluch
-  Date: 23.04.2021
-  Time: 11:11
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
 <head>
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Treatment list</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
 </head>
-<body>
-<p>Error page</p>
+
+<body class="bg-light">
+
+<header th:insert="templates/header.html :: header"> </header>
+
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-4" th:src="@{/resources/img/logo.svg}" alt="" width="72" height="57">
+            <h2>Error page</h2>
+            <p class="lead" th:text="${errorMessage}"></p>
+            <p th:text="'Exception: ' + ${exception}"></p>
+        </div>
+
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; T-Medical</p>
+    </footer>
+</div>
+
+<script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>
