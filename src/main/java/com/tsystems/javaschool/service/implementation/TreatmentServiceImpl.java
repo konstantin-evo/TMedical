@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.service.implementation;
 
+import com.tsystems.javaschool.controller.exception.ExceptionTreatmentNotFound;
 import com.tsystems.javaschool.dao.api.*;
 import com.tsystems.javaschool.model.dto.*;
 import com.tsystems.javaschool.model.entity.*;
@@ -7,6 +8,7 @@ import com.tsystems.javaschool.model.entity.enums.TherapyStatus;
 import com.tsystems.javaschool.service.api.MapperService;
 import com.tsystems.javaschool.service.api.TherapyService;
 import com.tsystems.javaschool.service.api.TreatmentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class TreatmentServiceImpl implements TreatmentService {
 
     public final TreatmentRepository dao;
@@ -50,8 +53,17 @@ public class TreatmentServiceImpl implements TreatmentService {
 
     @Override
     @Transactional
-    public TreatmentDto findById(int id) {
-        return mapper.convertToDto(dao.findById(id));
+    public TreatmentDto findById(int id) throws ExceptionTreatmentNotFound {
+        log.info("Finding contact by id", id);
+        Treatment found = null;
+        try {
+             found = dao.findById(id);
+        } catch (Exception e){
+            log.info("No contact found with id: {}", id);
+            throw new ExceptionTreatmentNotFound("No contact found with id:" + id);
+        }
+
+        return mapper.convertToDto(found);
     }
 
     @Override
@@ -97,7 +109,7 @@ public class TreatmentServiceImpl implements TreatmentService {
         DayOfWeek currentDayOfWeek = currentDay.getDayOfWeek();
         int currentCount = 0;
 
-        therapyDays = therapyDays.stream().filter(therapyDaysDto -> therapyDaysDto.getTime() != "").collect(Collectors.toList());
+        therapyDays = therapyDays.stream().filter(therapyDaysDto -> !therapyDaysDto.getTime().equals("")).collect(Collectors.toList());
 
         while (currentCount < count) {
             for (TherapyDaysDto therapyDaysDto : therapyDays) {
