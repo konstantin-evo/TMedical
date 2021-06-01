@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.controller;
 
+import com.tsystems.javaschool.controller.exception.ExceptionTreatmentNotFound;
 import com.tsystems.javaschool.model.dto.*;
 import com.tsystems.javaschool.service.api.PatientService;
 import com.tsystems.javaschool.service.api.TherapyService;
@@ -68,8 +69,11 @@ public class TreatmentController {
     }
 
     @GetMapping("/{id}")
-    public String showTreatment(@PathVariable("id") int id, Model model) {
-        TreatmentDto treatment = treatmentService.findById(id);
+    public String showTreatment(@PathVariable("id") int id, Model model) throws ExceptionTreatmentNotFound {
+        TreatmentDto treatment = null;
+
+        treatment = treatmentService.findById(id);
+
         List<TherapyDto> therapies = therapyService.findByTreatmentId(id);
 
         model.addAttribute("treatment", treatment);
