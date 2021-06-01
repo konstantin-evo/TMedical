@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.service.api;
 
+import com.tsystems.javaschool.controller.exception.ExceptionTreatmentNotFound;
 import com.tsystems.javaschool.model.dto.TherapyDaysDto;
 import com.tsystems.javaschool.model.dto.TherapyDto;
 import com.tsystems.javaschool.model.dto.TreatmentDto;
@@ -12,7 +13,7 @@ import java.util.List;
 public interface TreatmentService {
 
     List<TreatmentDto> findByPatientId(int id);
-    TreatmentDto findById(int id);
+    TreatmentDto findById(int id) throws ExceptionTreatmentNotFound;
     List<TreatmentDto> findAll();
     List<LocalDateTime> createTherapyDays(List<TherapyDaysDto> days, int count);
 
