@@ -3,9 +3,11 @@ import com.tsystems.javaschool.model.entity.enums.Week;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
-public class TherapyDaysDto {
+public class TherapyDaysDto implements Serializable {
     Week day;
     String time;
 
