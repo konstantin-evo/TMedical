@@ -27,13 +27,15 @@ public class TherapyServiceImpl implements TherapyService {
     public final TherapyRepository dao;
     public final TherapyCaseRepository therapyCaseRepository;
     public final UserRepository userRepository;
+    public final MessageSender messageSender;
 
     @Autowired
-    public TherapyServiceImpl (TherapyRepository dao, TherapyCaseRepository therapyCaseRepository, UserRepository userRepository, MapperService mapper) {
+    public TherapyServiceImpl (TherapyRepository dao, TherapyCaseRepository therapyCaseRepository, UserRepository userRepository, MessageSender messageSender, MapperService mapper) {
         this.dao = dao;
         this.mapper = mapper;
         this.therapyCaseRepository = therapyCaseRepository;
         this.userRepository = userRepository;
+        this.messageSender = messageSender;
     }
 
     @Override
@@ -45,7 +47,9 @@ public class TherapyServiceImpl implements TherapyService {
     @Override
     public List<TherapyCaseDto> findCasesByDay(String day) {
         List<TherapyCase> list = therapyCaseRepository.findTherapyCaseByDate(LocalDate.parse(day));
-        return list.stream().map(therapyCase -> mapper.converToDto(therapyCase)).collect(Collectors.toList());
+        List<TherapyCaseDto> listDto = list.stream().map(therapyCase -> mapper.converToDto(therapyCase)).collect(Collectors.toList());
+        messageSender.sendMessage(listDto);
+        return listDto;
     }
 
     @Override
