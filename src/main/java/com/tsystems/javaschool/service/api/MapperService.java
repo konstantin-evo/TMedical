@@ -1,8 +1,11 @@
 package com.tsystems.javaschool.service.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tsystems.javaschool.model.dto.*;
 import com.tsystems.javaschool.model.entity.*;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface MapperService {
@@ -21,4 +24,6 @@ public interface MapperService {
         InsuranceDto convertToDto(Insurance insurance);
 
         UserDto convertToDto(UserEntity userEntity);
+
+        String converToJson(List<TherapyCaseDto> dto) throws JsonProcessingException;
 }
