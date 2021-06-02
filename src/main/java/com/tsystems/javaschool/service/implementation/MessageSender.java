@@ -9,7 +9,6 @@ import org.apache.activemq.command.ActiveMQTextMessage;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-
 import javax.jms.*;
 import java.util.List;
 
