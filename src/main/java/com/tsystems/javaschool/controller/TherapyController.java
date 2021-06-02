@@ -31,11 +31,11 @@ public class TherapyController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateStatus(@PathVariable("id") int id, @ModelAttribute("casePost") TherapyCaseDto therapyCaseDto) {
+    public String updateStatus(@PathVariable("id") int id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email =  authentication.getName();
         therapyService.setStatus(id, email, "DONE");
-        return "redirect:/home";
+        return "redirect:/homePage";
     }
 
 }
