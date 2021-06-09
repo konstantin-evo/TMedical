@@ -25,11 +25,10 @@ public class MessageSender {
         try {
             Connection connection = connectionFactory.createQueueConnection();
             connection.start();
-            System.out.println("Successfully connected");
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            System.out.println("Session created");
+            log.info("Session created > " + session.toString());
             Queue queue = session.createQueue(environment.getProperty("queue.name"));
-            System.out.println("Queue created");
+            log.info("Queue created > " + queue.getQueueName());
 
             MessageProducer messageProducer = session.createProducer(queue);
             messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
@@ -38,7 +37,7 @@ public class MessageSender {
             String textMessage = mapper.converToJson(standDto);
             mqTextMessage.setText(textMessage);
             messageProducer.send(mqTextMessage);
-            System.out.println("Message sent");
+            log.info("Message sent > " + textMessage);
             session.close();
             connection.close();
         }
