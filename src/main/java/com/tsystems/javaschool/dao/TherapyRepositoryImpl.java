@@ -66,4 +66,12 @@ public class TherapyRepositoryImpl implements TherapyRepository {
     public Therapy update(Therapy therapy) {
         return (Therapy) session.getCurrentSession().merge(therapy);
     }
+
+    @Override
+    public void deleteTherapy(int id){
+        Therapy therapy = findById(id);
+        session.getCurrentSession().delete(therapy);
+    }
+
+
 }
