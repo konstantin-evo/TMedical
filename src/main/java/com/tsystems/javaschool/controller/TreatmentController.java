@@ -70,9 +70,7 @@ public class TreatmentController {
 
     @GetMapping("/{id}")
     public String showTreatment(@PathVariable("id") int id, Model model) throws ExceptionTreatmentNotFound {
-        TreatmentDto treatment = null;
-
-        treatment = treatmentService.findById(id);
+        TreatmentDto treatment = treatmentService.findById(id);
 
         List<TherapyDto> therapies = therapyService.findByTreatmentId(id);
 
@@ -101,7 +99,7 @@ public class TreatmentController {
     public String addTherapy(@PathVariable("id") int id,
                              @ModelAttribute("therapyPost") TherapyDto therapyDto) {
         treatmentService.addTherapy(id, therapyDto);
-        return "redirect:/treatment/all";
+        return "redirect:/treatment/"+id;
     }
 
 }
