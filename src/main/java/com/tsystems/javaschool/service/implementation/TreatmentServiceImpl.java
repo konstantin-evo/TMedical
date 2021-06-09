@@ -54,7 +54,6 @@ public class TreatmentServiceImpl implements TreatmentService {
     @Override
     @Transactional
     public TreatmentDto findById(int id) throws ExceptionTreatmentNotFound {
-        log.info("Finding contact by id", id);
         Treatment found = null;
         try {
              found = dao.findById(id);
@@ -64,6 +63,13 @@ public class TreatmentServiceImpl implements TreatmentService {
         }
 
         return mapper.convertToDto(found);
+    }
+
+    @Override
+    @Transactional
+    public TreatmentDto findByTherapyId(int id) throws ExceptionTreatmentNotFound {
+        Therapy therapy = therapyRepository.findById(id);
+        return findById(therapy.getTreatment().getId());
     }
 
     @Override

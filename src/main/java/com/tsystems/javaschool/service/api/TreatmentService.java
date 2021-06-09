@@ -14,6 +14,7 @@ public interface TreatmentService {
 
     List<TreatmentDto> findByPatientId(int id);
     TreatmentDto findById(int id) throws ExceptionTreatmentNotFound;
+    TreatmentDto findByTherapyId(int id) throws ExceptionTreatmentNotFound;
     List<TreatmentDto> findAll();
     List<LocalDateTime> createTherapyDays(List<TherapyDaysDto> days, int count);
 
