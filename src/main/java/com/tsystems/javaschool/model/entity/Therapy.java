@@ -37,11 +37,11 @@ public class Therapy {
     @Column(name = "number", nullable = false)
     private int number;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "treat_id", nullable = false)
     private Treatment treatment;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "medication_id")
     private Medication medication;
 
