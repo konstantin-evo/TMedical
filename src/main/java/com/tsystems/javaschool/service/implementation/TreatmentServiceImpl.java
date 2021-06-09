@@ -31,16 +31,18 @@ public class TreatmentServiceImpl implements TreatmentService {
     public final TherapyService therapyService;
     public final TherapyRepository therapyRepository;
     public final TherapyCaseRepository therapyCaseRepository;
+    public final MessageSender messageSender;
     public final MapperService mapper;
 
     @Autowired
-    public TreatmentServiceImpl(TreatmentRepository dao, UserRepository userRepository, PatientRepository patientRepository, TherapyService therapyService, TherapyRepository therapyRepository, TherapyCaseRepository therapyCaseRepository, MapperService mapper) {
+    public TreatmentServiceImpl(TreatmentRepository dao, UserRepository userRepository, PatientRepository patientRepository, TherapyService therapyService, TherapyRepository therapyRepository, TherapyCaseRepository therapyCaseRepository, MessageSender messageSender, MapperService mapper) {
         this.dao = dao;
         this.userRepository = userRepository;
         this.patientRepository = patientRepository;
         this.therapyService = therapyService;
         this.therapyRepository = therapyRepository;
         this.therapyCaseRepository = therapyCaseRepository;
+        this.messageSender = messageSender;
         this.mapper = mapper;
     }
 
@@ -107,6 +109,7 @@ public class TreatmentServiceImpl implements TreatmentService {
         therapy.setTreatment(treatment);
         therapyRepository.save(therapy);
         dao.update(treatment);
+        messageSender.sendMessage(therapy.getTherapyCases().stream().map(therapyCase -> mapper.converToDto(therapyCase)).collect(Collectors.toList()));
     }
 
     public List<LocalDateTime> createTherapyDays(List<TherapyDaysDto> therapyDays, int count) {

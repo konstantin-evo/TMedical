@@ -73,11 +73,28 @@ public class TherapyServiceImpl implements TherapyService {
 
     @Override
     public void deleteTherapy(int id, String email) {
-        dao.deleteTherapy(id);
+        Therapy therapy = dao.findById(id);
+        Boolean condition = therapy.getTherapyCases().stream().
+                anyMatch(therapyCase -> therapyCase.getStatus().toString().equals("DONE"));
+        if (condition) {
+            cancelTherapyCases(id);
+        } else {
+            dao.deleteTherapy(id);
+        }
     }
 
     public void sendMessageByDay(String day) {
         List<TherapyCaseDto> listDto = findCasesByDay(day);
         messageSender.sendMessage(listDto);
+    }
+
+    public void cancelTherapyCases(int id){
+        List<TherapyCase> listDto = dao.findById(id).getTherapyCases();
+
+        for (TherapyCase therapyCase : listDto) {
+            if(therapyCase.getStatus().toString().equals("PLANNED")){
+                therapyCase.setStatus(TherapyStatus.valueOf("CANCELED"));
+            }
+        }
     }
 }
