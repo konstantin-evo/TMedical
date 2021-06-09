@@ -12,7 +12,10 @@ public interface TherapyService {
     List<TherapyDto> findByTreatmentId(int id);
     List<TherapyCaseDto> findCasesByDay(String day);
     TherapyCaseDto findCaseById(int id);
+    TherapyDto findById(int id);
 
     void setStatus(int id, String email, String status);
+    void deleteTherapy(int id, String email);
+    void sendMessageByDay(String day);
 
 }

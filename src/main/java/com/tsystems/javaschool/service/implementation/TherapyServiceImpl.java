@@ -48,7 +48,6 @@ public class TherapyServiceImpl implements TherapyService {
     public List<TherapyCaseDto> findCasesByDay(String day) {
         List<TherapyCase> list = therapyCaseRepository.findTherapyCaseByDate(LocalDate.parse(day));
         List<TherapyCaseDto> listDto = list.stream().map(therapyCase -> mapper.converToDto(therapyCase)).collect(Collectors.toList());
-        messageSender.sendMessage(listDto);
         return listDto;
     }
 
@@ -59,6 +58,12 @@ public class TherapyServiceImpl implements TherapyService {
     }
 
     @Override
+    public TherapyDto findById(int id) {
+        Therapy therapy = dao.findById(id);
+        return mapper.convertToDto(therapy);
+    }
+
+    @Override
     public void setStatus(int id, String email, String status) {
         TherapyCase therapyCase = therapyCaseRepository.findById(id);
         therapyCase.setStatus(TherapyStatus.valueOf(status));
@@ -66,5 +71,13 @@ public class TherapyServiceImpl implements TherapyService {
         therapyCaseRepository.update(therapyCase);
     }
 
+    @Override
+    public void deleteTherapy(int id, String email) {
+        dao.deleteTherapy(id);
+    }
 
+    public void sendMessageByDay(String day) {
+        List<TherapyCaseDto> listDto = findCasesByDay(day);
+        messageSender.sendMessage(listDto);
+    }
 }
