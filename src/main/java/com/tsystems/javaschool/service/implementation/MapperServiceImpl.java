@@ -133,6 +133,7 @@ public class MapperServiceImpl implements MapperService {
     @Override
     public TherapyDto convertToDto(Therapy therapy) {
         TherapyDto therapyDto = new TherapyDto();
+        therapyDto.setId(therapy.getId());
         therapyDto.setMedicationName(String.valueOf(therapy.getMedication().getName()));
         therapyDto.setPattern(therapy.getTimePattern().toLowerCase());
         therapyDto.setStartDate(String.valueOf(therapy.getStartDate()));
