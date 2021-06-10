@@ -50,13 +50,13 @@ public class TreatmentServiceImpl implements TreatmentService {
     @Transactional
     public List<TreatmentDto> findByPatientId(int id) {
         Collection<Treatment> list = dao.findTreatmentByPatientId(id);
-        return list.stream().map(treatment -> mapper.convertToDto(treatment)).collect(Collectors.toList());
+        return list.stream().map(mapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public TreatmentDto findById(int id) throws ExceptionTreatmentNotFound {
-        Treatment found = null;
+        Treatment found;
         try {
              found = dao.findById(id);
         } catch (Exception e){
@@ -77,7 +77,7 @@ public class TreatmentServiceImpl implements TreatmentService {
     @Override
     @Transactional
     public List<TreatmentDto> findAll() {
-        return dao.findAll().stream().map(treatment -> mapper.convertToDto(treatment)).collect(Collectors.toList());
+        return dao.findAll().stream().map(mapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
@@ -106,10 +106,11 @@ public class TreatmentServiceImpl implements TreatmentService {
            therapyCases.add(therapyCase);
         }
         therapy.setTherapyCases(therapyCases);
+        therapy.setStatus(TherapyStatus.valueOf("PLANNED"));
         therapy.setTreatment(treatment);
         therapyRepository.save(therapy);
         dao.update(treatment);
-        messageSender.sendMessage(therapy.getTherapyCases().stream().map(therapyCase -> mapper.converToDto(therapyCase)).collect(Collectors.toList()));
+        messageSender.sendMessage(therapy.getTherapyCases().stream().map(mapper::converToDto).collect(Collectors.toList()));
     }
 
     public List<LocalDateTime> createTherapyDays(List<TherapyDaysDto> therapyDays, int count) {
