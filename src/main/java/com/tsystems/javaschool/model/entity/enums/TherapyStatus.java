@@ -3,7 +3,9 @@ package com.tsystems.javaschool.model.entity.enums;
 public enum TherapyStatus {
     PLANNED ("Planned"),
     DONE ("Done"),
-    CANCELED ("Canceled");
+    CANCELED ("Canceled"),
+    INPROGRESS("In progress"),
+    PARTIALLYCOMPLETED("Partially completed (canceled)");
 
     private final String displayValue;
 
