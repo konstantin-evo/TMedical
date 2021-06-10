@@ -43,21 +43,21 @@ public class TreatmentController {
 
     @GetMapping("/all")
     public String index(@ModelAttribute("treatmentList") @Valid List<TreatmentDto> treatmentList) {
-        return "treatment/all-treatments";
+        return "treatment/treatment-all";
     }
 
     @GetMapping("/patient/{id}")
     public String patientTreatments(@PathVariable("id") int id, Model model) {
         List<TreatmentDto> treatmentList = treatmentService.findByPatientId(id);
         model.addAttribute("treatmentList", treatmentList);
-        return "treatment/patient-treatment";
+        return "treatment/treatment-patient";
     }
 
     @GetMapping("/add/{id}")
     public String newTreatment(@PathVariable("id") int id, Model model) {
         PatientDto patient = patientService.findById(id);
         model.addAttribute("patient", patient);
-        return "treatment/add-treatment";
+        return "treatment/treatment-add";
     }
 
     @PostMapping(value = "/add/{id}")

@@ -37,14 +37,14 @@ public class PatientController {
 
     @GetMapping("/add")
     public String newPatient() {
-        return "patient/add-patient";
+        return "patient/patient-add";
     }
 
     @GetMapping("/all")
     public String index(Model model) {
         List<PatientDto> patientList = patientService.findAll();
         model.addAttribute("patientList", patientList);
-        return "patient/all-patient";
+        return "patient/patient-all";
     }
 
 }
