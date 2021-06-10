@@ -36,10 +36,10 @@ public class TherapyController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateStatus(@PathVariable("id") int id) throws ExceptionTreatmentNotFound {
+    public String updateStatus(@PathVariable("id") int id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email =  authentication.getName();
-        therapyService.setStatus(id, email, "DONE");
+        therapyService.setCaseStatus(id, email, "DONE");
         therapyService.sendMessageByDay(therapyService.findCaseById(id).getDate());
         String treatmentId = String.valueOf(therapyService.findTreatmentByCaseId(id).getId());
         return "redirect:/treatment/"+treatmentId;
