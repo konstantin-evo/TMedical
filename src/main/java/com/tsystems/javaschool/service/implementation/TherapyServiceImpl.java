@@ -5,8 +5,10 @@ import com.tsystems.javaschool.dao.api.TherapyRepository;
 import com.tsystems.javaschool.dao.api.UserRepository;
 import com.tsystems.javaschool.model.dto.TherapyCaseDto;
 import com.tsystems.javaschool.model.dto.TherapyDto;
+import com.tsystems.javaschool.model.dto.TreatmentDto;
 import com.tsystems.javaschool.model.entity.Therapy;
 import com.tsystems.javaschool.model.entity.TherapyCase;
+import com.tsystems.javaschool.model.entity.Treatment;
 import com.tsystems.javaschool.model.entity.enums.TherapyStatus;
 import com.tsystems.javaschool.service.api.MapperService;
 import com.tsystems.javaschool.service.api.TherapyService;
@@ -41,14 +43,13 @@ public class TherapyServiceImpl implements TherapyService {
     @Override
     public List<TherapyDto> findByTreatmentId(int id) {
         Collection<Therapy> list = dao.findTherapyByTreatmentId(id);
-        return list.stream().map(therapy -> mapper.convertToDto(therapy)).collect(Collectors.toList());
+        return list.stream().map(mapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
     public List<TherapyCaseDto> findCasesByDay(String day) {
         List<TherapyCase> list = therapyCaseRepository.findTherapyCaseByDate(LocalDate.parse(day));
-        List<TherapyCaseDto> listDto = list.stream().map(therapyCase -> mapper.converToDto(therapyCase)).collect(Collectors.toList());
-        return listDto;
+        return list.stream().map(mapper::converToDto).collect(Collectors.toList());
     }
 
     @Override
@@ -64,6 +65,12 @@ public class TherapyServiceImpl implements TherapyService {
     }
 
     @Override
+    public TreatmentDto findTreatmentByCaseId(int id){
+        Treatment treatment = therapyCaseRepository.findById(id).getTherapy().getTreatment();
+        return mapper.convertToDto(treatment);
+    }
+
+    @Override
     public void setStatus(int id, String email, String status) {
         TherapyCase therapyCase = therapyCaseRepository.findById(id);
         therapyCase.setStatus(TherapyStatus.valueOf(status));
@@ -74,7 +81,7 @@ public class TherapyServiceImpl implements TherapyService {
     @Override
     public void deleteTherapy(int id, String email) {
         Therapy therapy = dao.findById(id);
-        Boolean condition = therapy.getTherapyCases().stream().
+        boolean condition = therapy.getTherapyCases().stream().
                 anyMatch(therapyCase -> therapyCase.getStatus().toString().equals("DONE"));
         if (condition) {
             cancelTherapyCases(id);
@@ -88,7 +95,7 @@ public class TherapyServiceImpl implements TherapyService {
         messageSender.sendMessage(listDto);
     }
 
-    public void cancelTherapyCases(int id){
+    private void cancelTherapyCases(int id){
         List<TherapyCase> listDto = dao.findById(id).getTherapyCases();
 
         for (TherapyCase therapyCase : listDto) {
