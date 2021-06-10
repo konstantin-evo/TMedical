@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.model.entity;
 
+import com.tsystems.javaschool.model.entity.enums.TherapyStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,9 @@ public class Therapy {
 
     @Column(name = "number", nullable = false)
     private int number;
+
+    @Column(name = "status", nullable = false)
+    private TherapyStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "treat_id", nullable = false)
