@@ -75,7 +75,9 @@
     <div class="card-columns">
       <div class="card pb-2" style="margin-top: 20px" th:each="therapy: ${therapies}">
         <!-- Содержание панели по умолчанию -->
-        <div class="card-header bg-primary text-white" th:text="${therapy.medicationName} + ': ' + ${therapy.pattern} + ${therapy.dose}"></div>
+        <div class="card-header bg-primary text-white">
+          <div th:text="${therapy.medicationName} + ': ' + ${therapy.pattern} + ${therapy.dose}"></div>
+          <div th:text="' Status: '+ ${therapy.status}"></div></div>
         <div class="card-body">
           <!-- therapy case start -->
           <div class="row">
