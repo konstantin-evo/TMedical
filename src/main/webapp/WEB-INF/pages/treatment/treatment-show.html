@@ -110,7 +110,7 @@
             </div>
           </div>
           <!-- therapy case start end-->
-          <div class="text-center mt-3">
+          <div class="text-center mt-3" th:if="${therapy.status == 'Planned' or therapy.status == 'In progress'}">
             <form th:action="@{'/therapy/delete/' + ${therapy.id}}" method="post">
               <button type="submit" class="btn btn-light w-25">
                 Cancel Therapy
