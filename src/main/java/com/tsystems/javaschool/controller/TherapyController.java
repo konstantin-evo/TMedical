@@ -41,7 +41,7 @@ public class TherapyController {
         String email =  authentication.getName();
         therapyService.setStatus(id, email, "DONE");
         therapyService.sendMessageByDay(therapyService.findCaseById(id).getDate());
-        String treatmentId = String.valueOf(treatmentService.findByTherapyId(id).getId());
+        String treatmentId = String.valueOf(therapyService.findTreatmentByCaseId(id).getId());
         return "redirect:/treatment/"+treatmentId;
     }
 
