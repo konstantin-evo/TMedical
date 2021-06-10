@@ -11,7 +11,7 @@ public enum Week {
 
     private final String displayValue;
 
-    private Week(String displayValue) {
+    Week(String displayValue) {
         this.displayValue = displayValue;
     }
 

@@ -7,7 +7,7 @@ public enum TherapyStatus {
 
     private final String displayValue;
 
-    private TherapyStatus(String displayValue) {
+    TherapyStatus(String displayValue) {
         this.displayValue = displayValue;
     }
 
