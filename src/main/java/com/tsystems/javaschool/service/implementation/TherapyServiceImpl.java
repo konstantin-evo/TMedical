@@ -90,7 +90,9 @@ public class TherapyServiceImpl implements TherapyService {
 
     private TherapyStatus getTherapyStatus(List<TherapyCase> therapyCases) {
 
-        if (therapyCases.stream().allMatch(therapyCase -> therapyCase.getStatus().toString().equals("CANCELED"))) {
+        if (therapyCases.stream().allMatch(therapyCase -> therapyCase.getStatus().toString().equals("PLANNED"))) {
+            return TherapyStatus.valueOf("PLANNED");
+        } else if (therapyCases.stream().allMatch(therapyCase -> therapyCase.getStatus().toString().equals("CANCELED"))) {
             return TherapyStatus.valueOf("CANCELED");
         } else if (therapyCases.stream().allMatch(therapyCase -> therapyCase.getStatus().toString().equals("DONE"))) {
             return TherapyStatus.valueOf("DONE");
