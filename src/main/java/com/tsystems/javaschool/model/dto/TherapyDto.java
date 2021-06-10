@@ -14,6 +14,7 @@ public class TherapyDto implements Serializable {
     private String pattern;
     private String startDate;
     private String dose;
+    private String status;
     private Integer numberOfDays;
     private List<TherapyCaseDto> therapyCaseDtos;
     private DaysWrapper wrapper;
