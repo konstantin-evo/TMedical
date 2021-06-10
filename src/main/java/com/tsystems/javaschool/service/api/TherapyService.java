@@ -16,7 +16,8 @@ public interface TherapyService {
     TherapyDto findById(int id);
     TreatmentDto findTreatmentByCaseId(int id);
 
-    void setStatus(int id, String email, String status);
+    void setCaseStatus(int id, String email, String status);
+    void changeTherapyStatus(int id);
     void deleteTherapy(int id, String email);
     void sendMessageByDay(String day);
 

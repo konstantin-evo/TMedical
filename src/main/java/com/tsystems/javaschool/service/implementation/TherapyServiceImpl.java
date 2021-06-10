@@ -43,6 +43,7 @@ public class TherapyServiceImpl implements TherapyService {
     @Override
     public List<TherapyDto> findByTreatmentId(int id) {
         Collection<Therapy> list = dao.findTherapyByTreatmentId(id);
+        list.forEach(therapy -> changeTherapyStatus(therapy.getId()));
         return list.stream().map(mapper::convertToDto).collect(Collectors.toList());
     }
 
@@ -71,11 +72,38 @@ public class TherapyServiceImpl implements TherapyService {
     }
 
     @Override
-    public void setStatus(int id, String email, String status) {
+    public void setCaseStatus(int id, String email, String status) {
         TherapyCase therapyCase = therapyCaseRepository.findById(id);
         therapyCase.setStatus(TherapyStatus.valueOf(status));
         therapyCase.setNurse(userRepository.findByEmail(email));
+        changeTherapyStatus(therapyCase.getTherapy().getId());
         therapyCaseRepository.update(therapyCase);
+    }
+
+    @Override
+    public void changeTherapyStatus(int id){
+        Therapy therapy = dao.findById(id);
+        List<TherapyCase> therapyCases = therapy.getTherapyCases();
+        TherapyStatus status = getTherapyStatus(therapyCases);
+        therapy.setStatus(status);
+    }
+
+    private TherapyStatus getTherapyStatus(List<TherapyCase> therapyCases) {
+
+        if (therapyCases.stream().allMatch(therapyCase -> therapyCase.getStatus().toString().equals("CANCELED"))) {
+            return TherapyStatus.valueOf("CANCELED");
+        } else if (therapyCases.stream().allMatch(therapyCase -> therapyCase.getStatus().toString().equals("DONE"))) {
+            return TherapyStatus.valueOf("DONE");
+        } else if ((therapyCases.stream().anyMatch(therapyCase -> therapyCase.getStatus().toString().equals("DONE")))
+                    && (therapyCases.stream().noneMatch(therapyCase -> therapyCase.getStatus().toString().equals("PLANNED")))) {
+            return TherapyStatus.valueOf("PARTIALLYCOMPLETED");
+        } else if ((therapyCases.stream().anyMatch(therapyCase -> therapyCase.getStatus().toString().equals("PLANNED")))
+                    && (therapyCases.stream().noneMatch(therapyCase -> therapyCase.getStatus().toString().equals("CANCELED")))) {
+            return TherapyStatus.valueOf("INPROGRESS");
+        }
+        else {
+            return TherapyStatus.valueOf("PLANNED");
+        }
     }
 
     @Override
