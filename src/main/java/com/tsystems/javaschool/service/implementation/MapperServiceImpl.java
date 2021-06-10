@@ -67,7 +67,7 @@ public class MapperServiceImpl implements MapperService {
         user.setFirstName(dto.getUserDto().getFirstName());
         user.setSurname(dto.getUserDto().getSurname());
 
-        if (dto.getUserDto().getMiddleName() != "") {
+        if (!dto.getUserDto().getMiddleName().equals("")) {
             user.setMiddleName(dto.getUserDto().getMiddleName());
         }
 
@@ -125,6 +125,7 @@ public class MapperServiceImpl implements MapperService {
         therapy.setTimePattern(dto.getPattern());
         therapy.setStartDate(startDate);
         therapy.setNumber(dto.getNumberOfDays());
+        therapy.setStatus(TherapyStatus.valueOf("PLANNED"));
         therapy.setMedication(medicamentationRepository.findMedicationByName(dto.getMedicationName()));
 
         return therapy;
@@ -137,6 +138,7 @@ public class MapperServiceImpl implements MapperService {
         therapyDto.setMedicationName(String.valueOf(therapy.getMedication().getName()));
         therapyDto.setPattern(therapy.getTimePattern().toLowerCase());
         therapyDto.setStartDate(String.valueOf(therapy.getStartDate()));
+        therapyDto.setStatus(String.valueOf(therapy.getStatus().getDisplayValue()));
 
         if (!therapy.getDose().equals("")) {
             String dose = " (" + therapy.getDose() + ")";
@@ -202,8 +204,8 @@ public class MapperServiceImpl implements MapperService {
         dto.setStatus(String.valueOf(therapyCase.getStatus().getDisplayValue()));
         dto.setTime(String.valueOf(therapyCase.getTime()));
 
-        String patient = therapyCase.getTherapy().getTreatment().getPatient().getUser().getSurname() + " " + therapyCase.getTherapy().getTreatment().getPatient().getUser().getFirstName().substring(0,1) + ".";
-        String doctor = therapyCase.getTherapy().getTreatment().getDoctor().getSurname() + " " + therapyCase.getTherapy().getTreatment().getDoctor().getFirstName().substring(0,1) + ".";
+        String patient = therapyCase.getTherapy().getTreatment().getPatient().getUser().getSurname() + " " + therapyCase.getTherapy().getTreatment().getPatient().getUser().getFirstName().charAt(0) + ".";
+        String doctor = therapyCase.getTherapy().getTreatment().getDoctor().getSurname() + " " + therapyCase.getTherapy().getTreatment().getDoctor().getFirstName().charAt(0) + ".";
         dto.setPatient(patient);
         dto.setDoctor(doctor);
         dto.setMedical(therapyCase.getTherapy().getMedication().getName());
