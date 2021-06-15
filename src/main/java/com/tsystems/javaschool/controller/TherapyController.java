@@ -2,6 +2,7 @@ package com.tsystems.javaschool.controller;
 
 import com.tsystems.javaschool.controller.exception.ExceptionTreatmentNotFound;
 import com.tsystems.javaschool.model.dto.TherapyCaseDto;
+import com.tsystems.javaschool.model.dto.TherapyDto;
 import com.tsystems.javaschool.service.api.TherapyService;
 import com.tsystems.javaschool.service.api.TreatmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class TherapyController {
         return "therapy/therapy-day";
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/update/status/{id}")
     public String updateStatus(@PathVariable("id") int id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email =  authentication.getName();
@@ -45,13 +46,22 @@ public class TherapyController {
         return "redirect:/treatment/"+treatmentId;
     }
 
-    @PostMapping("/delete/{id}")
-    public String deleteTherapy(@PathVariable("id") int id) throws ExceptionTreatmentNotFound {
+    @PostMapping("/update/date/{id}")
+    public String updateDate(@PathVariable("id") int id,
+                             @ModelAttribute("therapy") TherapyDto therapyDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        treatmentService.updateTherapy(therapyDto, email);
+        String treatmentId = String.valueOf(therapyService.findTreatmentByCaseId(id).getId());
+        return "redirect:/treatment/"+treatmentId;
+    }
+
+    @PostMapping("/cancel/{id}")
+    public String cancelTherapy(@PathVariable("id") int id) throws ExceptionTreatmentNotFound {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email =  authentication.getName();
         String treatmentId = String.valueOf(treatmentService.findByTherapyId(id).getId());
         therapyService.deleteTherapy(id, email);
-        therapyService.sendMessageByDay(String.valueOf(LocalDate.now()));
         return "redirect:/treatment/"+treatmentId;
     }
 
