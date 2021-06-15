@@ -118,6 +118,7 @@ public class TherapyServiceImpl implements TherapyService {
         } else {
             dao.deleteTherapy(id);
         }
+        sendMessageByDay(String.valueOf(LocalDate.now()));
     }
 
     public void sendMessageByDay(String day) {
