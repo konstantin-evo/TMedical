@@ -18,4 +18,5 @@ public class TherapyDto implements Serializable {
     private Integer numberOfDays;
     private List<TherapyCaseDto> therapyCaseDtos;
     private DaysWrapper wrapper;
+    private CaseWrapper caseWrapper;
 }
