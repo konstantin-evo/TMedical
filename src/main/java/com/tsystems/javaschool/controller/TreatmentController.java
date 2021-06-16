@@ -47,20 +47,15 @@ public class TreatmentController {
     }
 
     @GetMapping("/patient/{id}")
-    public String patientTreatments(@PathVariable("id") int id, Model model) {
-        List<TreatmentDto> treatmentList = treatmentService.findByPatientId(id);
-        model.addAttribute("treatmentList", treatmentList);
+    public String newTreatment(@PathVariable("id") int id, Model model) {
+        PatientDto patient = patientService.findById(id);
+        List<TreatmentDto> treatments = treatmentService.findByPatientId(id);
+        model.addAttribute("patient", patient);
+        model.addAttribute("treatments", treatments);
         return "treatment/treatment-patient";
     }
 
-    @GetMapping("/add/{id}")
-    public String newTreatment(@PathVariable("id") int id, Model model) {
-        PatientDto patient = patientService.findById(id);
-        model.addAttribute("patient", patient);
-        return "treatment/treatment-add";
-    }
-
-    @PostMapping(value = "/add/{id}")
+    @PostMapping(value = "/patient/{id}")
     public String addTreatment(@PathVariable("id") int id, @ModelAttribute("treatment") TreatmentDto treatment) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email =  authentication.getName();
@@ -86,7 +81,7 @@ public class TreatmentController {
         therapyDaysDto.add(new TherapyDaysDto("SATURDAY", null));
         therapyDaysDto.add(new TherapyDaysDto("SUNDAY", null));
 
-        TherapyDto therapyDto = new TherapyDto();
+        TherapyDto therapyDto = new TherapyDto(); //TherapyDto to send new therapy data
         DaysWrapper form = new DaysWrapper();
         form.setDays(therapyDaysDto);
         therapyDto.setWrapper(form);
