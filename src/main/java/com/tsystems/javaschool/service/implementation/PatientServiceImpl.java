@@ -26,7 +26,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
     public List<PatientDto> findAll() {
-        return dao.findAll().stream().map(patient -> mapper.convertToDto(patient)).collect(Collectors.toList());
+        return dao.findAll().stream().map(mapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
