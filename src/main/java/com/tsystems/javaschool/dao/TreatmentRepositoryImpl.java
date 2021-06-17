@@ -35,9 +35,8 @@ public class TreatmentRepositoryImpl implements TreatmentRepository {
     }
 
     @Override
-    public Treatment save(Treatment treatment) {
-        int id = (Integer) session.getCurrentSession().save(treatment);
-        return null;
+    public void save(Treatment treatment) {
+        session.getCurrentSession().save(treatment);
     }
 
     @Override

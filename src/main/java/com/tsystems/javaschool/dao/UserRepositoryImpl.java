@@ -41,8 +41,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public UserEntity save(UserEntity user) {
-        return (UserEntity) session.getCurrentSession().save(user);
+    public void save(UserEntity user) {
+        session.getCurrentSession().save(user);
     }
 
     @Override

@@ -26,8 +26,8 @@ public class InsuranceRepositoryImpl implements InsuranceRepository {
     }
 
     @Override
-    public Insurance save(Insurance insurance) {
-        return (Insurance) session.getCurrentSession().save(insurance);
+    public void save(Insurance insurance) {
+        session.getCurrentSession().save(insurance);
     }
 
     @Override

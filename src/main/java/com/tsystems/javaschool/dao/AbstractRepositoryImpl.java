@@ -35,10 +35,9 @@ public abstract class AbstractRepositoryImpl<Entity, ID> implements AbstractRepo
    }
 
    @Override
-   public Entity save(Entity entity) {
+   public void save(Entity entity) {
       session.getCurrentSession().persist(entity);
       session.getCurrentSession().flush();
-      return entity;
    }
 
    @Override

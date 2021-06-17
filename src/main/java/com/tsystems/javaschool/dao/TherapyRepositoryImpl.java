@@ -42,7 +42,6 @@ public class TherapyRepositoryImpl implements TherapyRepository {
         return null;
     }
 
-
     @Override
     public Therapy findById(Integer id) {
         return (Therapy) session.getCurrentSession()
@@ -57,20 +56,13 @@ public class TherapyRepositoryImpl implements TherapyRepository {
     }
 
     @Override
-    public Therapy save(Therapy therapy) {
-        int id = (Integer) session.getCurrentSession().save(therapy);
-        return findById(id);
+    public void save(Therapy therapy) {
+        session.getCurrentSession().save(therapy);
     }
 
     @Override
     public Therapy update(Therapy therapy) {
         return (Therapy) session.getCurrentSession().merge(therapy);
-    }
-
-    @Override
-    public void deleteTherapy(int id){
-        Therapy therapy = findById(id);
-        session.getCurrentSession().delete(therapy);
     }
 
 

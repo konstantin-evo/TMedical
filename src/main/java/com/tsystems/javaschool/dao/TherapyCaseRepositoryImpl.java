@@ -83,9 +83,8 @@ public class TherapyCaseRepositoryImpl implements TherapyCaseRepository {
     }
 
     @Override
-    public TherapyCase save(TherapyCase therapyCase) {
-        int id = (Integer) session.getCurrentSession().save(therapyCase);
-        return null;
+    public void save(TherapyCase therapyCase) {
+        session.getCurrentSession().save(therapyCase);
     }
 
     @Override

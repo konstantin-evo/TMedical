@@ -26,6 +26,4 @@ public interface TherapyRepository  extends AbstractRepository<Therapy, Integer>
      */
     Collection<Therapy> findTherapyByDoctorId(int doctor_id);
 
-    void deleteTherapy(int id);
-
 }

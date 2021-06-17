@@ -29,7 +29,7 @@ public interface UserRepository extends AbstractRepository<UserEntity, Integer> 
      * @param user the user entity
      * @return the user entity
      */
-    UserEntity save(UserEntity user);
+    void save(UserEntity user);
 
     /**
      * Update user entity.
