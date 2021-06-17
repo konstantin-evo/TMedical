@@ -44,7 +44,7 @@ public class TherapyController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email =  authentication.getName();
         therapyService.setCaseStatus(id, email, "DONE");
-        therapyService.sendMessageByDay(therapyService.findCaseById(id).getDate());
+        messageSender.sendMessage(therapyService.findCasesByDay(String.valueOf(LocalDate.now())));
         String treatmentId = String.valueOf(therapyService.findTreatmentByCaseId(id).getId());
         return "redirect:/treatment/"+treatmentId;
     }
