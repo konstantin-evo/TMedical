@@ -50,7 +50,7 @@
         <th scope="col">Start of treatment</th>
         <th scope="col">End of treatment</th>
         <th scope="col">Status</th>
-        <th scope="col"></th>
+        <th scope="col" th:if="${treatment.status == 'On treatment'}"></th>
       </tr>
       </thead>
       <tbody id="myTable" style="vertical-align: middle">
@@ -62,6 +62,13 @@
         <td th:text="${treatment.startDate}">N/A</td>
         <td th:text="${treatment.endDate}">N/A</td>
         <td th:text="${treatment.status}">N/A</td>
+        <td th:if="${treatment.status == 'On treatment'}">
+          <form th:action="@{'/treatment/cancel/' + ${treatment.id}}" method="post">
+            <button type="submit" class="btn btn-light">
+              Discharge
+            </button>
+          </form>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -102,48 +109,48 @@
                 </div>
               </div>
             </div>
-<!--            &lt;!&ndash; The Edit Modal &ndash;&gt;-->
-<!--            <div class="modal" id="editModal">-->
-<!--              <div class="modal-dialog">-->
-<!--                <div class="modal-content">-->
+            <!-- The Edit Modal -->
+            <div class="modal" id="editModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
 
-<!--                  <div class="modal-header text-center d-block ">-->
-<!--                    <h5 class="modal-title">Edit Therapy</h5>-->
-<!--                  </div>-->
+                  <div class="modal-header text-center d-block ">
+                    <h5 class="modal-title">Edit Therapy</h5>
+                  </div>
 
-<!--                  &lt;!&ndash; Edit Modal body &ndash;&gt;-->
-<!--                  <form id="form_edit" th:action="@{'/therapy/update/date/'+${therapy.id}}" th:object="${therapy}" method="post" >-->
-<!--                    <div class="modal-body pb-1">-->
-<!--                      <div class="row pb-2" th:each="case, stat : ${therapy.caseWrapper.cases}">-->
-<!--                        <div class="col-sm">-->
-<!--                          <label>-->
-<!--                            <input type="date" class="form-control" th:value="${therapy.therapyCaseDtos[__${stat.index}__].date}" th:disabled="${therapy.therapyCaseDtos[__${stat.index}__].status != 'Planned'}"/>-->
-<!--&lt;!&ndash;                            <input type="date" class="form-control" th:field="${caseWrapper.cases[__${stat.index}__].date}"/>&ndash;&gt;-->
-<!--                          </label>-->
-<!--                        </div>-->
-<!--                        <div class="col-sm">-->
-<!--                          <label>-->
-<!--                            <input type="time" class="form-control" th:value="${therapy.therapyCaseDtos[__${stat.index}__].time}" th:disabled="${therapy.therapyCaseDtos[__${stat.index}__].status != 'Planned'}"/>-->
-<!--                          </label>-->
-<!--                        </div>-->
-<!--                        <div class="col-sm" th:text="${therapy.therapyCaseDtos[__${stat.index}__].status}">-->
-<!--                        </div>-->
-<!--                      </div>-->
+                  <!-- Edit Modal body -->
+                  <form id="form_edit" th:action="@{'/therapy/update/date/'+${therapy.id}}" th:object="${therapy}" method="post" >
+                    <div class="modal-body pb-1">
+                      <div class="row pb-2" th:each="case, stat : ${therapy.caseWrapper.cases}">
+                        <div class="col-sm">
+                          <label>
+                            <input type="date" class="form-control" th:value="${therapy.therapyCaseDtos[__${stat.index}__].date}" th:disabled="${therapy.therapyCaseDtos[__${stat.index}__].status != 'Planned'}"/>
+                            <!--                            <input type="date" class="form-control" th:field="${caseWrapper.cases[__${stat.index}__].date}"/>-->
+                          </label>
+                        </div>
+                        <div class="col-sm">
+                          <label>
+                            <input type="time" class="form-control" th:value="${therapy.therapyCaseDtos[__${stat.index}__].time}" th:disabled="${therapy.therapyCaseDtos[__${stat.index}__].status != 'Planned'}"/>
+                          </label>
+                        </div>
+                        <div class="col-sm" th:text="${therapy.therapyCaseDtos[__${stat.index}__].status}">
+                        </div>
+                      </div>
 
-<!--                    </div>-->
+                    </div>
 
-<!--                    <div class="text-center pb-2">-->
-<!--                      <button type="submit" class="btn btn-primary w-25">-->
-<!--                        Confirm-->
-<!--                      </button>-->
-<!--                    </div>-->
-<!--                  </form>-->
+                    <div class="text-center pb-2">
+                      <button type="submit" class="btn btn-primary w-25">
+                        Confirm
+                      </button>
+                    </div>
+                  </form>
 
-<!--                  &lt;!&ndash; Modal body end &ndash;&gt;-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; Edit Modal Window end&ndash;&gt;-->
+                  <!-- Modal body end -->
+                </div>
+              </div>
+            </div>
+            <!-- Edit Modal Window end-->
           </div>
           <!-- therapy case start end-->
           <div class="text-center mt-3" th:if="${therapy.status == 'Planned' or therapy.status == 'In progress'}">
@@ -161,7 +168,7 @@
     </div>
     <!-- Block containing therapy cases - end -->
 
-    <div class="text-center mt-3">
+    <div class="text-center mt-3" th:if="${treatment.status == 'On treatment'}">
       <button type="button" class="btn btn-primary w-25" data-toggle="modal" data-target="#myModal">
         Add Therapy
       </button>
