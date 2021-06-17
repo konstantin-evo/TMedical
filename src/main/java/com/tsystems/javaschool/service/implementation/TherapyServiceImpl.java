@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +45,10 @@ public class TherapyServiceImpl implements TherapyService {
     public List<TherapyDto> findByTreatmentId(int id) {
         Collection<Therapy> list = dao.findTherapyByTreatmentId(id);
         list.forEach(therapy -> changeTherapyStatus(therapy.getId()));
-        return list.stream().map(mapper::convertToDto).collect(Collectors.toList());
+        return list.stream()
+                .map(mapper::convertToDto)
+                .sorted(Comparator.comparing(TherapyDto::getStartDate))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -135,4 +139,5 @@ public class TherapyServiceImpl implements TherapyService {
             }
         }
     }
+
 }

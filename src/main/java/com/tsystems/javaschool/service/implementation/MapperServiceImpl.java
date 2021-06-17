@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -147,7 +148,13 @@ public class MapperServiceImpl implements MapperService {
         }
 
         therapyDto.setNumberOfDays(therapy.getNumber());
-        therapyDto.setTherapyCaseDtos(therapy.getTherapyCases().stream().map(this::converToDto).collect(Collectors.toList()));
+        therapyDto.setTherapyCaseDtos(therapy.getTherapyCases().stream()
+                .sorted(Comparator.comparing(TherapyCase::getDate))
+                .map(this::converToDto).collect(Collectors.toList()));
+
+        CaseWrapper caseWrapper = new CaseWrapper();
+        caseWrapper.setCases(therapy.getTherapyCases().stream().map(this::converToDto).collect(Collectors.toList()));
+        therapyDto.setCaseWrapper(caseWrapper);
 
         return therapyDto;
     }
@@ -169,7 +176,11 @@ public class MapperServiceImpl implements MapperService {
         treatmentDto.setStatus(((treatment.isStatus()) ? "On treatment" : "Is discharged"));
         treatmentDto.setDiagnosis(treatment.getDiagnosis());
         treatmentDto.setStartDate(String.valueOf(treatment.getStartDate()));
-        treatmentDto.setEndDate(String.valueOf(treatment.getEndDate()));
+        if ((String.valueOf(treatment.getEndDate())) == null) {
+            treatmentDto.setEndDate("–");
+        } else {
+            treatmentDto.setEndDate(String.valueOf(treatment.getEndDate()));
+        }
         treatmentDto.setDoctor(doctor);
         treatmentDto.setId(treatment.getId());
 
@@ -184,7 +195,13 @@ public class MapperServiceImpl implements MapperService {
         treatment.setDiagnosis(dto.getDiagnosis());
         treatment.setStatus(true);
         treatment.setStartDate(LocalDate.parse(dto.getStartDate()));
-        treatment.setEndDate(LocalDate.parse(dto.getEndDate()));
+
+        if (dto.getEndDate() != null) {
+            treatment.setEndDate(LocalDate.parse(dto.getEndDate()));
+        } else {
+            treatment.setEndDate(null);
+        }
+
         return treatment;
     }
 
