@@ -5,6 +5,7 @@ import com.tsystems.javaschool.model.dto.*;
 import com.tsystems.javaschool.service.api.PatientService;
 import com.tsystems.javaschool.service.api.TherapyService;
 import com.tsystems.javaschool.service.api.TreatmentService;
+import com.tsystems.javaschool.service.implementation.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +25,14 @@ public class TreatmentController {
     private final TreatmentService treatmentService;
     private final PatientService patientService;
     private final TherapyService therapyService;
+    public final MessageSender messageSender;
 
     @Autowired
-    public TreatmentController(TreatmentService treatmentService, PatientService patientService, TherapyService therapyService) {
+    public TreatmentController(TreatmentService treatmentService, PatientService patientService, TherapyService therapyService, MessageSender messageSender) {
         this.treatmentService = treatmentService;
         this.patientService = patientService;
         this.therapyService = therapyService;
+        this.messageSender = messageSender;
     }
 
     @ModelAttribute("treatment")
@@ -56,10 +60,10 @@ public class TreatmentController {
     }
 
     @PostMapping(value = "/patient/{id}")
-    public String addTreatment(@PathVariable("id") int id, @ModelAttribute("treatment") TreatmentDto treatment) {
+    public String addTreatment(@PathVariable("id") int id, @ModelAttribute("treatment") TreatmentDto dto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email =  authentication.getName();
-        treatmentService.save(treatment, email, id);
+        treatmentService.save(dto, email, id);
         return "redirect:/treatment/all";
     }
 
@@ -94,6 +98,7 @@ public class TreatmentController {
     public String addTherapy(@PathVariable("id") int id,
                              @ModelAttribute("therapyPost") TherapyDto therapyDto) {
         treatmentService.addTherapy(id, therapyDto);
+        messageSender.sendMessage(therapyService.findCasesByDay(String.valueOf(LocalDate.now())));
         return "redirect:/treatment/"+id;
     }
 
