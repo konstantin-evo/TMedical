@@ -45,7 +45,9 @@ public class TherapyServiceImpl implements TherapyService {
     public List<TherapyDto> findByTreatmentId(int id) {
         Collection<Therapy> list = dao.findTherapyByTreatmentId(id);
         list.forEach(therapy -> changeTherapyStatus(therapy.getId()));
+
         return list.stream()
+                .filter(therapy -> !therapy.getStatus().toString().equals("DELETED"))
                 .map(mapper::convertToDto)
                 .sorted(Comparator.comparing(TherapyDto::getStartDate))
                 .collect(Collectors.toList());
@@ -70,7 +72,7 @@ public class TherapyServiceImpl implements TherapyService {
     }
 
     @Override
-    public TreatmentDto findTreatmentByCaseId(int id){
+    public TreatmentDto findTreatmentByCaseId(int id) {
         Treatment treatment = therapyCaseRepository.findById(id).getTherapy().getTreatment();
         return mapper.convertToDto(treatment);
     }
@@ -100,6 +102,8 @@ public class TherapyServiceImpl implements TherapyService {
             return TherapyStatus.valueOf("CANCELED");
         } else if (therapyCases.stream().allMatch(therapyCase -> therapyCase.getStatus().toString().equals("DONE"))) {
             return TherapyStatus.valueOf("DONE");
+        } else if (therapyCases.stream().allMatch(therapyCase -> therapyCase.getStatus().toString().equals("DELETED"))) {
+            return TherapyStatus.valueOf("DELETED");
         } else if ((therapyCases.stream().anyMatch(therapyCase -> therapyCase.getStatus().toString().equals("DONE")))
                     && (therapyCases.stream().noneMatch(therapyCase -> therapyCase.getStatus().toString().equals("PLANNED")))) {
             return TherapyStatus.valueOf("PARTIALLYCOMPLETED");
@@ -120,9 +124,9 @@ public class TherapyServiceImpl implements TherapyService {
         if (condition) {
             cancelTherapyCases(id);
         } else {
-            dao.deleteTherapy(id);
+            deleteTherapyCases(id);
         }
-        sendMessageByDay(String.valueOf(LocalDate.now()));
+        findByTreatmentId(id);
     }
 
     public void sendMessageByDay(String day) {
@@ -139,5 +143,13 @@ public class TherapyServiceImpl implements TherapyService {
             }
         }
     }
+
+    private void deleteTherapyCases(int id){
+        List<TherapyCase> listDto = dao.findById(id).getTherapyCases();
+
+        for (TherapyCase therapyCase : listDto) {
+                therapyCase.setStatus(TherapyStatus.valueOf("DELETED"));
+            }
+        }
 
 }
