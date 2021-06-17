@@ -5,7 +5,8 @@ public enum TherapyStatus {
     DONE ("Done"),
     CANCELED ("Canceled"),
     INPROGRESS("In progress"),
-    PARTIALLYCOMPLETED("Partially completed (canceled)");
+    PARTIALLYCOMPLETED("Partially completed (canceled)"),
+    DELETED("Deleted");
 
     private final String displayValue;
 
