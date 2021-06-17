@@ -19,6 +19,5 @@ public interface TherapyService {
     void setCaseStatus(int id, String email, String status);
     void changeTherapyStatus(int id);
     void deleteTherapy(int id, String email);
-    void sendMessageByDay(String day);
 
 }

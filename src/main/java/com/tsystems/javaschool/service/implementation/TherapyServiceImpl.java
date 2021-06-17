@@ -129,11 +129,6 @@ public class TherapyServiceImpl implements TherapyService {
         findByTreatmentId(id);
     }
 
-    public void sendMessageByDay(String day) {
-        List<TherapyCaseDto> listDto = findCasesByDay(day);
-        messageSender.sendMessage(listDto);
-    }
-
     private void cancelTherapyCases(int id){
         List<TherapyCase> listDto = dao.findById(id).getTherapyCases();
 
