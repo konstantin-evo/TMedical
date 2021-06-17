@@ -20,4 +20,6 @@ public interface TreatmentService {
 
     void save(TreatmentDto dto, String email, int id);
     void addTherapy(int id, TherapyDto dto);
+    void updateTherapy(TherapyDto dto, String email);
+    void cancel(int id, String email);
 }
