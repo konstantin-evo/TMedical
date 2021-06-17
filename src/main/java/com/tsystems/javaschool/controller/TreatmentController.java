@@ -102,4 +102,13 @@ public class TreatmentController {
         return "redirect:/treatment/"+id;
     }
 
+    @PostMapping(value = "/cancel/{id}")
+    public String cancelTreatment(@PathVariable("id") int id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email =  authentication.getName();
+        treatmentService.cancel(id,email);
+        messageSender.sendMessage(therapyService.findCasesByDay(String.valueOf(LocalDate.now())));
+        return "redirect:/treatment/"+id;
+    }
+
 }
