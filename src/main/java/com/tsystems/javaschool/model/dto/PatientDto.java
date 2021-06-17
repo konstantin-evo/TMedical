@@ -11,6 +11,7 @@ import java.util.List;
 public class PatientDto implements Serializable {
     private int id;
     private UserDto userDto;
+    private String status;
     private List<InsuranceDto> insurances;
     private List<TreatmentDto> treatments;
 }

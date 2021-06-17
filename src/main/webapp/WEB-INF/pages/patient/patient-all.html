@@ -61,7 +61,7 @@
                 <td th:text="${patient.userDto.firstName}">N/A</td>
                 <td th:text="${patient.userDto.middleName}">N/A</td>
                 <td th:text="${patient.userDto.dbirth}">N/A</td>
-                <td>N/A</td>
+                <td th:text="${patient.status}">N/A</td>
                 <td>
                   <a class="btn btn-light" role="button" href="#"
                        th:href="@{'/treatment/patient/' + ${patient.id}}">Patient Card

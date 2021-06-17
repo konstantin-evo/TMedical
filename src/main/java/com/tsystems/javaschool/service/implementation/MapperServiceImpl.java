@@ -46,6 +46,14 @@ public class MapperServiceImpl implements MapperService {
         patientDto.setInsurances(insuranceDtos);
         patientDto.setTreatments(treatmentDtos);
 
+        boolean condition = patientEntity.getTreatments().stream().anyMatch(Treatment::isStatus);
+
+        if (condition) {
+            patientDto.setStatus("On treatment");
+        } else {
+            patientDto.setStatus("Not on treatment");
+        }
+
         return patientDto;
     }
 
@@ -176,11 +184,13 @@ public class MapperServiceImpl implements MapperService {
         treatmentDto.setStatus(((treatment.isStatus()) ? "On treatment" : "Is discharged"));
         treatmentDto.setDiagnosis(treatment.getDiagnosis());
         treatmentDto.setStartDate(String.valueOf(treatment.getStartDate()));
-        if ((String.valueOf(treatment.getEndDate())) == null) {
-            treatmentDto.setEndDate("–");
+
+        if (treatment.getEndDate() == null) {
+            treatmentDto.setEndDate("");
         } else {
             treatmentDto.setEndDate(String.valueOf(treatment.getEndDate()));
         }
+
         treatmentDto.setDoctor(doctor);
         treatmentDto.setId(treatment.getId());
 
