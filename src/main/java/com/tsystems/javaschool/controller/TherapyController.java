@@ -5,6 +5,7 @@ import com.tsystems.javaschool.model.dto.TherapyCaseDto;
 import com.tsystems.javaschool.model.dto.TherapyDto;
 import com.tsystems.javaschool.service.api.TherapyService;
 import com.tsystems.javaschool.service.api.TreatmentService;
+import com.tsystems.javaschool.service.implementation.MessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -20,11 +22,13 @@ public class TherapyController {
 
     private final TherapyService therapyService;
     private final TreatmentService treatmentService;
+    public final MessageSender messageSender;
 
     @Autowired
-    public TherapyController(TherapyService therapyService, TreatmentService treatmentService) {
+    public TherapyController(TherapyService therapyService, TreatmentService treatmentService, MessageSender messageSender) {
         this.therapyService = therapyService;
         this.treatmentService = treatmentService;
+        this.messageSender = messageSender;
     }
 
     @GetMapping("/{day}")
@@ -61,6 +65,7 @@ public class TherapyController {
         String email =  authentication.getName();
         String treatmentId = String.valueOf(treatmentService.findByTherapyId(id).getId());
         therapyService.deleteTherapy(id, email);
+        messageSender.sendMessage(therapyService.findCasesByDay(String.valueOf(LocalDate.now())));
         return "redirect:/treatment/"+treatmentId;
     }
 
