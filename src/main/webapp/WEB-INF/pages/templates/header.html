@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+  <header class="p-3 mb-3 border-bottom" th:fragment="header">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-end justify-content-end justify-content-lg-end">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        </a>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control" placeholder="Search...">
+        </form>
+
+        <div class="dropdown text-end">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <img th:src="@{/resources/img/logo.svg}" alt="mdo" height="32" class="rounded-circle">
+          </a>
+          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="#" th:href="@{/homePage}">Home</a></li>
+            <li sec:authorize="hasAuthority('DOCTOR')"><a class="dropdown-item" href="#" th:href="@{/patient/add}">New Patient</a></li>
+            <li sec:authorize="hasAuthority('DOCTOR')"><a class="dropdown-item" href="#" th:href="@{/patient/all}">All Patients</a></li>
+            <li sec:authorize="hasAuthority('DOCTOR')"><a class="dropdown-item" href="#" th:href="@{/treatment/all}">All Treatments</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" th:href="@{/logout}">Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+</body>
+</html>

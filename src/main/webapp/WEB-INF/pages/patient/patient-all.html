@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Patient list</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" th:href="@{../resources/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{../resources/css/header.css}"/>
+  <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+
+
+    <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+</head>
+<body class="bg-light">
+
+<header th:insert="templates/header.html :: header"> </header>
+
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" th:src="@{../resources/img/logo.svg}" alt="" width="72" height="57">
+      <h2>Patient list</h2>
+      <p class="lead">Information about patients being treated</p>
+    </div>
+
+      <input class="form-control w-75 mx-auto" id="myInput" type="text" placeholder="Search...">
+      <br>
+
+        <table class="table table-hover w-75 mx-auto">
+          <thead>
+          <tr>
+            <th scope="col">Surname</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Middle name</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody id="myTable" style="vertical-align: middle">
+            <tr th:each="patient: ${patientList}">
+              <td th:text="${patient.userDto.surname}">N/A</td>
+                <td th:text="${patient.userDto.firstName}">N/A</td>
+                <td th:text="${patient.userDto.middleName}">N/A</td>
+                <td th:text="${patient.userDto.dbirth}">N/A</td>
+                <td th:text="${patient.status}">N/A</td>
+                <td>
+                  <a class="btn btn-light" role="button" href="#"
+                       th:href="@{'/treatment/patient/' + ${patient.id}}">Patient Card
+                  </a>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+
+      <div class="text-center">
+      <a role="button" class="w-25 btn btn-primary" th:href="@{'/patient/add'}">Add new patient</a>
+      </div>
+
+  </main>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; T-Medical</p>
+  </footer>
+</div>
+
+<script th:src="@{../resources/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{../resources/js/form-validation.js}"></script>
+<script th:src="@{../resources/js/table-search.js}"></script>
+
+</body>
+</html>

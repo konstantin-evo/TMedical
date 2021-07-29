@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Treatment list</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{../../resources/css/bootstrap.min.css}">
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+<header th:insert="templates/header.html :: header"> </header>
+
+<div class="container">
+    <main>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Surname</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Middle name</th>
+                <th scope="col">Date of Birth</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody id="myTable" style="vertical-align: middle">
+            <tr>
+                <td th:text="${patient.userDto.surname}">N/A</td>
+                <td th:text="${patient.userDto.firstName}">N/A</td>
+                <td th:text="${patient.userDto.middleName}">N/A</td>
+                <td th:text="${patient.userDto.dbirth}">N/A</td>
+                <td>N/A</td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#therapyModal">
+                        Add Treatment
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="py-5 text-center mb-0 pb-0">
+            <h2>Treatment List</h2>
+            <p class="lead">Information about the patient's diagnosis, status and start date of treatment</p>
+        </div>
+
+        <div class="card-columns">
+            <div class="row">
+                <div class="col-sm-4" th:each="treatment: ${treatments}">
+                    <div class="card-body" >
+                        <ul class="list-group">
+                            <li class="list-group-item bg-primary text-white" th:text="'Diagnosis: ' + ${treatment.diagnosis}"></li>
+                            <li class="list-group-item" th:text="'Status: ' + ${treatment.status}"></li>
+                            <li class="list-group-item" th:text="'Doctor: ' + ${treatment.doctor}"></li>
+                            <li class="list-group-item" th:text="'Start date: ' + ${treatment.startDate}"></li>
+                            <li class="list-group-item" th:text="'End Date: ' + ${treatment.endDate}"></li>
+                            <li class="list-group-item text-center">
+                                <a class="btn btn-primary" th:href="@{'/treatment/' + ${treatment.id}}" href="#" role="button">More info</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-12" style="width: 50%; margin-left: auto; margin-right: auto">
+
+        </div>
+
+        <!-- The Add treatment Modal -->
+        <div class="modal" id="therapyModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header text-center d-block">
+                        <h5 class="modal-title">Add Treatment</h5>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form th:action="@{'/treatment/patient/'+${patient.id}}" th:object="${treatment}" method="post" >
+                            <div class="row g-3">
+
+                                <div class="col-sm-12">
+                                    <label for="firstName" class="form-label">Diagnosis</label>
+                                    <input type="text" th:field="*{diagnosis}" class="form-control" id="firstName" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Valid Diagnosis is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <label for="startDate" class="form-label">Star Date</label>
+                                    <input type="date" th:field="*{startDate}" id="startDate" class="form-control" required/>
+                                </div>
+
+                                <button class="w-50 btn btn-primary btn-lg" type="submit" style="margin-left: auto; margin-right: auto">
+                                    Confirm
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Modal body end -->
+                </div>
+            </div>
+        </div>
+        <!-- Modal Window end-->
+
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; T-Medical</p>
+    </footer>
+</div>
+
+<script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/resources/js/bootstrap.min.js}"></script>
+<script th:src="@{/resources/js/popper.min.js}"></script>
+
+</body>
+</html>
